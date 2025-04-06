@@ -12,14 +12,25 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                <flux:navlist.group :heading="__('Platform')" class="grid">         
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Hoje') }}</flux:navlist.item>
+                    {{-- <flux:navlist.item icon="chart-bar" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Relatórios') }}</flux:navlist.item> --}}
+                    <flux:navlist.item icon="star" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Meus Alimentos') }}</flux:navlist.item>
+                    <flux:navlist.item icon="cake" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Minhas Receitas') }}</flux:navlist.item>
+                    <flux:navlist.item icon="queue-list" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Metas e Perfil') }}</flux:navlist.item>
+                    <flux:navlist.item icon="clock" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Lembretes') }}</flux:navlist.item>
+                    <flux:navlist.item icon="paper-clip" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Integrações') }}</flux:navlist.item>
+                    <flux:navlist.item icon="key" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Atalhos') }}</flux:navlist.item>
+                    <flux:navlist.item icon="arrow-path" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Sugestões') }}</flux:navlist.item>
+                    <flux:navlist.item icon="gift" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Indique um amigo') }}</flux:navlist.item>
+                    <flux:navlist.item icon="shopping-bag" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Clube de Benefícios') }}</flux:navlist.item>
+                    <flux:navlist.item icon="cog-6-tooth" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Preferências') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 
             <flux:spacer />
 
-            <flux:navlist variant="outline">
+            {{-- <flux:navlist variant="outline">
                 <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
                 {{ __('Repository') }}
                 </flux:navlist.item>
@@ -27,7 +38,7 @@
                 <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
                 {{ __('Documentation') }}
                 </flux:navlist.item>
-            </flux:navlist>
+            </flux:navlist> --}}
 
             <!-- Desktop User Menu -->
             <flux:dropdown position="bottom" align="start">
