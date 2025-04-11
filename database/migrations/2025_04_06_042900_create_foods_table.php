@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('foods', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->string('brand')->nullable();
-            $table->string('category')->nullable();
-            $table->string('default_unit')->nullable();
-            $table->float('calories_per_unit')->nullable();
-            $table->float('protein_per_unit')->nullable();
-            $table->float('carbs_per_unit')->nullable();
-            $table->float('fat_per_unit')->nullable();
+            $table->decimal('quantity', 8, 2)->default(1);
+            $table->string('unit')->nullable(); // gramas, ml, etc
+            $table->decimal('protein', 8, 2)->nullable(); // in grams
+            $table->decimal('fat', 8, 2)->nullable(); // in grams (gordura)
+            $table->decimal('carbohydrate', 8, 2)->nullable(); // in grams (carboidrato)
+            $table->decimal('fiber', 8, 2)->nullable(); // in grams (fibras)
+            $table->decimal('calories', 8, 2)->nullable(); // in kcal
+            $table->string('barcode')->nullable(); // código de barras (optional)
+            $table->boolean('is_favorite')->default(false);
             $table->timestamps();
         });
     }
