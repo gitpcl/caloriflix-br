@@ -21,6 +21,9 @@ Route::middleware(['auth'])->group(function () {
     // Preferences route
     Volt::route('preferences', PreferencesIndex::class)->name('preferences.index');
     
+    // Reminders route
+    Route::get('/reminders', App\Livewire\Reminders\Index::class)->name('reminders.index');
+    
     // Food routes
     // Route::get('/foods', MyFoods::class)->name('foods.index');
     Route::get('/foods/create', function () {
