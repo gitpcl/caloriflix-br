@@ -139,8 +139,8 @@
                     </a>
                     
                     <!-- Metas e Perfil Item -->
-                    <a href="{{ route('dashboard') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('metas') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
+                    <a href="{{ route('goals.index') }}" 
+                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('goals.index') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
                             <span class="mr-2 text-indigo-500">
