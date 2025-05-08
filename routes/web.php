@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/recipes', App\Livewire\Recipes\Index::class)->name('recipes.index');
     
     // Food routes
-    // Route::get('/foods', MyFoods::class)->name('foods.index');
+    Route::get('/foods', App\Livewire\Foods\Index::class)->name('foods.index');
     Route::get('/foods/create', function () {
         return view('foods.create');
     })->name('foods.create');
