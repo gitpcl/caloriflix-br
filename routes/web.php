@@ -27,6 +27,9 @@ Route::middleware(['auth'])->group(function () {
     // Reminders route
     Route::get('/reminders', App\Livewire\Reminders\Index::class)->name('reminders.index');
     
+    // Recipes route
+    Route::get('/recipes', App\Livewire\Recipes\Index::class)->name('recipes.index');
+    
     // Food routes
     // Route::get('/foods', MyFoods::class)->name('foods.index');
     Route::get('/foods/create', function () {
