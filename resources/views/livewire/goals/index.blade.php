@@ -1,5 +1,114 @@
-<div>
-    <div class="container max-w-4xl mx-auto px-4 py-8">
+<div
+    x-data="{
+        showNotification: false,
+        notificationMessage: '',
+        notificationType: 'success',
+        init() {
+            this.setupListeners();
+        },
+        setupListeners() {
+            window.addEventListener('notify', (event) => {
+                this.notificationMessage = event.detail.message;
+                this.notificationType = event.detail.type || 'success';
+                this.showNotification = true;
+                
+                // Auto-hide notification after 5 seconds
+                setTimeout(() => {
+                    this.showNotification = false;
+                }, 5000);
+            });
+            
+            Livewire.hook('message.processed', (message, component) => {
+                console.log('Livewire message processed:', message);
+                if (message.response.effects.errors && Object.keys(message.response.effects.errors).length > 0) {
+                    console.log('Validation errors:', message.response.effects.errors);
+                }
+            });
+        }
+    }" 
+    x-cloak
+    class="goals-component"
+>
+    <!-- Notification -->
+    <div 
+        x-show="showNotification" 
+        x-transition:enter="transform ease-out duration-300 transition"
+        x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+        x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0"
+        x-transition:leave="transition ease-in duration-100"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end"
+        style="z-index: 9999;"
+    >
+        <div 
+            :class="{ 
+                'bg-green-50 border-green-500': notificationType === 'success',
+                'bg-red-50 border-red-500': notificationType === 'error',
+                'bg-blue-50 border-blue-500': notificationType === 'info'
+            }"
+            class="max-w-sm w-full border-l-4 shadow-lg rounded-lg pointer-events-auto"
+        >
+            <div class="relative p-4">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg 
+                            x-show="notificationType === 'success'"
+                            class="h-6 w-6 text-green-400" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <svg 
+                            x-show="notificationType === 'error'"
+                            class="h-6 w-6 text-red-400" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <svg 
+                            x-show="notificationType === 'info'"
+                            class="h-6 w-6 text-blue-400" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="ml-3 w-0 flex-1 pt-0.5">
+                        <p 
+                            :class="{ 
+                                'text-green-800': notificationType === 'success',
+                                'text-red-800': notificationType === 'error',
+                                'text-blue-800': notificationType === 'info'
+                            }"
+                            class="text-sm font-medium" 
+                            x-text="notificationMessage"
+                        ></p>
+                    </div>
+                    <div class="ml-4 flex-shrink-0 flex">
+                        <button 
+                            @click="showNotification = false" 
+                            class="inline-flex text-gray-400 hover:text-gray-500 focus:outline-none"
+                        >
+                            <span class="sr-only">Close</span>
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="space-y-6">
         <!-- Profile Section (Accordion) -->
         <div class="mb-6 bg-white rounded-lg border border-gray-200 overflow-hidden">
             <div class="flex justify-between items-center p-4 cursor-pointer" wire:click="toggleProfile">
@@ -17,9 +126,34 @@
                 </div>
             </div>
             
-            <div x-show="$wire.profileExpanded" class="p-4 border-t border-gray-200">
+            <div x-show="$wire.profileExpanded" class="p-4 border-t border-gray-200" style="display: none;">
                 <form wire:submit.prevent="saveProfile">
                     <div class="space-y-4">
+                        <!-- Error messages -->
+                        @if ($errors->any())
+                            <div class="bg-red-50 border border-red-200 rounded-md p-4 mb-4">
+                                <div class="flex">
+                                    <div class="flex-shrink-0">
+                                        <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                                        </svg>
+                                    </div>
+                                    <div class="ml-3">
+                                        <h3 class="text-sm font-medium text-red-800">
+                                            Verifique os erros abaixo:
+                                        </h3>
+                                        <div class="mt-2 text-sm text-red-700">
+                                            <ul class="list-disc pl-5 space-y-1">
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                        
                         <!-- Weight Field -->
                         <div>
                             <label for="weight" class="block text-sm font-medium text-gray-700">Seu peso</label>
@@ -130,7 +264,7 @@
                 </div>
             </div>
             
-            <div x-show="$wire.goalsExpanded" class="p-4 border-t border-gray-200">
+            <div x-show="$wire.goalsExpanded" class="p-4 border-t border-gray-200" style="display: none;">
                 <form wire:submit.prevent="saveGoals">
                     <div class="space-y-4">
                         <!-- Protein Field -->
@@ -317,7 +451,7 @@
                         <!-- PDF upload area -->
                         <div class="border-2 border-dashed border-gray-300 rounded-md p-6 text-center">
                             <div class="flex justify-center">
-                                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                             </div>

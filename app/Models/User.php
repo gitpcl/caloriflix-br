@@ -5,10 +5,14 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use App\Models\UserPreference;
+use App\Models\UserProfile;
+use App\Models\NutritionalGoal;
+use App\Models\UserPlan;
 
 class User extends Authenticatable
 {
@@ -66,5 +70,45 @@ class User extends Authenticatable
     public function preference(): HasOne
     {
         return $this->hasOne(UserPreference::class);
+    }
+    
+    /**
+     * Get the profile associated with the user.
+     */
+    public function profile(): HasOne
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+    
+    /**
+     * Get the nutritional goal associated with the user.
+     */
+    public function nutritionalGoal(): HasOne
+    {
+        return $this->hasOne(NutritionalGoal::class);
+    }
+    
+    /**
+     * Get all the plans associated with the user.
+     */
+    public function plans(): HasMany
+    {
+        return $this->hasMany(UserPlan::class);
+    }
+    
+    /**
+     * Get the diet plan associated with the user.
+     */
+    public function dietPlan()
+    {
+        return $this->plans()->diet()->first();
+    }
+    
+    /**
+     * Get the training plan associated with the user.
+     */
+    public function trainingPlan()
+    {
+        return $this->plans()->training()->first();
     }
 }

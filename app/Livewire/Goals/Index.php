@@ -3,7 +3,11 @@
 namespace App\Livewire\Goals;
 
 use App\Models\User;
+use App\Models\UserProfile;
+use App\Models\NutritionalGoal;
+use App\Models\UserPlan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -41,12 +45,14 @@ class Index extends Component
     public $goalsExpanded = false;
     public $showDietPlanModal = false;
     public $showTrainingPlanModal = false;
+    public $debug = false; // Debug mode toggle
     
     /**
      * Component mount
      */
     public function mount()
     {
+        $this->debug = config('app.debug', false);
         $this->loadUserData();
     }
     
@@ -58,26 +64,39 @@ class Index extends Component
         $user = Auth::user();
         
         // Profile data
-        $this->weight = $user->weight ?? '';
-        $this->height = $user->height ?? '';
-        $this->gender = $user->gender ?? 'Masculino';
-        $this->age = $user->age ?? '';
-        $this->activityLevel = $user->activity_level ?? 'Moderadamente ativo';
-        $this->basalMetabolicRate = $user->basal_metabolic_rate ?? '';
-        $this->useBasalMetabolicRate = $user->use_basal_metabolic_rate ?? true;
+        $profile = UserProfile::where('user_id', $user->id)->first();
+        if ($profile) {
+            $this->weight = $profile->weight;
+            $this->height = $profile->height;
+            $this->gender = $profile->gender ?? 'Masculino';
+            $this->age = $profile->age;
+            $this->activityLevel = $profile->activity_level ?? 'Moderadamente ativo';
+            $this->basalMetabolicRate = $profile->basal_metabolic_rate;
+            $this->useBasalMetabolicRate = $profile->use_basal_metabolic_rate;
+        }
         
         // Nutritional goals
-        $this->protein = $user->protein_goal ?? '';
-        $this->carbs = $user->carbs_goal ?? '';
-        $this->fat = $user->fat_goal ?? '';
-        $this->fiber = $user->fiber_goal ?? '';
-        $this->calories = $user->calorie_goal ?? '';
-        $this->water = $user->water_goal ?? '';
-        $this->objective = $user->objective ?? 'Perder gordura';
+        $goals = NutritionalGoal::where('user_id', $user->id)->first();
+        if ($goals) {
+            $this->protein = $goals->protein;
+            $this->carbs = $goals->carbs;
+            $this->fat = $goals->fat;
+            $this->fiber = $goals->fiber;
+            $this->calories = $goals->calories;
+            $this->water = $goals->water;
+            $this->objective = $goals->objective ?? 'Perder gordura';
+        }
         
         // Plans
-        $this->dietPlan = $user->diet_plan ?? '';
-        $this->trainingPlan = $user->training_plan ?? '';
+        $dietPlan = UserPlan::where('user_id', $user->id)->where('type', 'diet')->first();
+        if ($dietPlan) {
+            $this->dietPlan = $dietPlan->content;
+        }
+        
+        $trainingPlan = UserPlan::where('user_id', $user->id)->where('type', 'training')->first();
+        if ($trainingPlan) {
+            $this->trainingPlan = $trainingPlan->content;
+        }
     }
     
     /**
@@ -129,7 +148,18 @@ class Index extends Component
      */
     public function saveProfile()
     {
-        $this->validate([
+        // Enable debug mode for troubleshooting
+        $this->debug = true;
+        
+        $this->debugLog('Starting saveProfile method', [
+            'weight' => $this->weight,
+            'height' => $this->height,
+            'gender' => $this->gender,
+            'age' => $this->age,
+        ]);
+        
+        // Validate input
+        $validatedData = $this->validate([
             'weight' => 'required|numeric|min:30|max:300',
             'height' => 'required|numeric|min:100|max:250',
             'gender' => 'required|in:Masculino,Feminino',
@@ -138,24 +168,54 @@ class Index extends Component
             'basalMetabolicRate' => 'required|numeric|min:500|max:10000',
         ]);
         
+        $this->debugLog('Validation passed', $validatedData);
+        
         $user = Auth::user();
+        $this->debugLog('Current user', ['id' => $user->id, 'name' => $user->name]);
         
-        // Get an instance of the User model that we can update
-        $userModel = User::find($user->id);
+        // Get or create the user profile
+        $profile = UserProfile::where('user_id', $user->id)->first();
         
-        $userModel->weight = $this->weight;
-        $userModel->height = $this->height;
-        $userModel->gender = $this->gender;
-        $userModel->age = $this->age;
-        $userModel->activity_level = $this->activityLevel;
-        $userModel->basal_metabolic_rate = $this->basalMetabolicRate;
-        $userModel->use_basal_metabolic_rate = $this->useBasalMetabolicRate;
-        $userModel->save();
+        if (!$profile) {
+            // Create new profile
+            $profile = new UserProfile();
+            $profile->user_id = $user->id;
+            $this->debugLog('Creating new profile for user', ['user_id' => $user->id]);
+        } else {
+            $this->debugLog('Updating existing profile', ['profile_id' => $profile->id]);
+        }
         
-        $this->dispatch('notify', [
-            'message' => 'Perfil salvo com sucesso!',
-            'type' => 'success'
-        ]);
+        // Update profile data
+        $profile->weight = $this->weight;
+        $profile->height = $this->height;
+        $profile->gender = $this->gender;
+        $profile->age = $this->age;
+        $profile->activity_level = $this->activityLevel;
+        $profile->basal_metabolic_rate = $this->basalMetabolicRate;
+        $profile->use_basal_metabolic_rate = $this->useBasalMetabolicRate;
+        
+        $this->debugLog('Profile data before save', $profile->toArray());
+        
+        // Save with try/catch to debug
+        try {
+            $profile->saveOrFail();
+            $this->debugLog('Profile saved successfully', ['profile_id' => $profile->id]);
+            
+            $this->dispatch('notify', [
+                'message' => 'Perfil salvo com sucesso!',
+                'type' => 'success'
+            ]);
+        } catch (\Exception $e) {
+            $this->debugLog('Error saving profile', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            $this->dispatch('notify', [
+                'message' => 'Erro: ' . $e->getMessage(),
+                'type' => 'error'
+            ]);
+        }
     }
     
     /**
@@ -163,7 +223,18 @@ class Index extends Component
      */
     public function saveGoals()
     {
-        $this->validate([
+        // Enable debug mode for troubleshooting
+        $this->debug = true;
+        
+        $this->debugLog('Starting saveGoals method', [
+            'protein' => $this->protein,
+            'carbs' => $this->carbs,
+            'fat' => $this->fat,
+            'calories' => $this->calories,
+        ]);
+        
+        // Validate input
+        $validatedData = $this->validate([
             'protein' => 'required|numeric|min:0|max:500',
             'carbs' => 'required|numeric|min:0|max:1000',
             'fat' => 'required|numeric|min:0|max:500',
@@ -173,24 +244,54 @@ class Index extends Component
             'objective' => 'required',
         ]);
         
+        $this->debugLog('Validation passed', $validatedData);
+        
         $user = Auth::user();
+        $this->debugLog('Current user', ['id' => $user->id, 'name' => $user->name]);
         
-        // Get an instance of the User model that we can update
-        $userModel = User::find($user->id);
+        // Get or create the nutritional goals
+        $goals = NutritionalGoal::where('user_id', $user->id)->first();
         
-        $userModel->protein_goal = $this->protein;
-        $userModel->carbs_goal = $this->carbs;
-        $userModel->fat_goal = $this->fat;
-        $userModel->fiber_goal = $this->fiber;
-        $userModel->calorie_goal = $this->calories;
-        $userModel->water_goal = $this->water;
-        $userModel->objective = $this->objective;
-        $userModel->save();
+        if (!$goals) {
+            // Create new goals
+            $goals = new NutritionalGoal();
+            $goals->user_id = $user->id;
+            $this->debugLog('Creating new nutritional goals for user', ['user_id' => $user->id]);
+        } else {
+            $this->debugLog('Updating existing nutritional goals', ['goals_id' => $goals->id]);
+        }
         
-        $this->dispatch('notify', [
-            'message' => 'Metas salvas com sucesso!',
-            'type' => 'success'
-        ]);
+        // Update goals data
+        $goals->protein = $this->protein;
+        $goals->carbs = $this->carbs;
+        $goals->fat = $this->fat;
+        $goals->fiber = $this->fiber;
+        $goals->calories = $this->calories;
+        $goals->water = $this->water;
+        $goals->objective = $this->objective;
+        
+        $this->debugLog('Goals data before save', $goals->toArray());
+        
+        // Save with try/catch to debug
+        try {
+            $goals->saveOrFail();
+            $this->debugLog('Nutritional goals saved successfully', ['goals_id' => $goals->id]);
+            
+            $this->dispatch('notify', [
+                'message' => 'Metas salvas com sucesso!',
+                'type' => 'success'
+            ]);
+        } catch (\Exception $e) {
+            $this->debugLog('Error saving nutritional goals', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            $this->dispatch('notify', [
+                'message' => 'Erro: ' . $e->getMessage(),
+                'type' => 'error'
+            ]);
+        }
     }
     
     /**
@@ -282,13 +383,14 @@ class Index extends Component
      */
     public function saveDietPlan()
     {
+        $filePath = null;
+        
         if ($this->dietPlanFile) {
             $this->validate([
                 'dietPlanFile' => 'file|mimes:pdf|max:2048', // 2MB max
             ]);
             
-            $path = $this->dietPlanFile->store('diet-plans', 'public');
-            $this->dietPlan = $path;
+            $filePath = $this->dietPlanFile->store('diet-plans', 'public');
         } else {
             $this->validate([
                 'dietPlan' => 'nullable|string',
@@ -297,17 +399,63 @@ class Index extends Component
         
         $user = Auth::user();
         
-        // Get an instance of the User model that we can update
-        $userModel = User::find($user->id);
-        $userModel->diet_plan = $this->dietPlan;
-        $userModel->save();
+        // Find existing plan or create new one
+        $plan = UserPlan::where('user_id', $user->id)->where('type', 'diet')->first();
         
-        $this->showDietPlanModal = false;
-        
-        $this->dispatch('notify', [
-            'message' => 'Plano alimentar salvo com sucesso!',
-            'type' => 'success'
-        ]);
+        if ($plan) {
+            // Update existing plan
+            $plan->content = $this->dietPlan;
+            if ($filePath) {
+                $plan->file_path = $filePath;
+            }
+            
+            // Save with try/catch to debug
+            try {
+                $saved = $plan->save();
+                
+                if (!$saved) {
+                    $this->dispatch('notify', [
+                        'message' => 'Erro ao salvar plano alimentar. Tente novamente.',
+                        'type' => 'error'
+                    ]);
+                    return;
+                }
+                
+                $this->showDietPlanModal = false;
+                $this->dispatch('notify', [
+                    'message' => 'Plano alimentar salvo com sucesso!',
+                    'type' => 'success'
+                ]);
+            } catch (\Exception $e) {
+                $this->debugLog('Error saving diet plan', ['error' => $e->getMessage()]);
+                $this->dispatch('notify', [
+                    'message' => 'Erro: ' . $e->getMessage(),
+                    'type' => 'error'
+                ]);
+            }
+        } else {
+            // Create new plan
+            try {
+                UserPlan::create([
+                    'user_id' => $user->id,
+                    'type' => 'diet',
+                    'content' => $this->dietPlan,
+                    'file_path' => $filePath
+                ]);
+                
+                $this->showDietPlanModal = false;
+                $this->dispatch('notify', [
+                    'message' => 'Plano alimentar salvo com sucesso!',
+                    'type' => 'success'
+                ]);
+            } catch (\Exception $e) {
+                $this->debugLog('Error creating diet plan', ['error' => $e->getMessage()]);
+                $this->dispatch('notify', [
+                    'message' => 'Erro ao criar plano: ' . $e->getMessage(),
+                    'type' => 'error'
+                ]);
+            }
+        }
     }
     
     /**
@@ -321,17 +469,74 @@ class Index extends Component
         
         $user = Auth::user();
         
-        // Get an instance of the User model that we can update
-        $userModel = User::find($user->id);
-        $userModel->training_plan = $this->trainingPlan;
-        $userModel->save();
+        // Find existing plan or create new one
+        $plan = UserPlan::where('user_id', $user->id)->where('type', 'training')->first();
         
-        $this->showTrainingPlanModal = false;
-        
-        $this->dispatch('notify', [
-            'message' => 'Plano de treino salvo com sucesso!',
-            'type' => 'success'
-        ]);
+        if ($plan) {
+            // Update existing plan
+            $plan->content = $this->trainingPlan;
+            
+            // Save with try/catch to debug
+            try {
+                $saved = $plan->save();
+                
+                if (!$saved) {
+                    $this->dispatch('notify', [
+                        'message' => 'Erro ao salvar plano de treino. Tente novamente.',
+                        'type' => 'error'
+                    ]);
+                    return;
+                }
+                
+                $this->showTrainingPlanModal = false;
+                $this->dispatch('notify', [
+                    'message' => 'Plano de treino salvo com sucesso!',
+                    'type' => 'success'
+                ]);
+            } catch (\Exception $e) {
+                $this->debugLog('Error saving training plan', ['error' => $e->getMessage()]);
+                $this->dispatch('notify', [
+                    'message' => 'Erro: ' . $e->getMessage(),
+                    'type' => 'error'
+                ]);
+            }
+        } else {
+            // Create new plan
+            try {
+                UserPlan::create([
+                    'user_id' => $user->id,
+                    'type' => 'training',
+                    'content' => $this->trainingPlan
+                ]);
+                
+                $this->showTrainingPlanModal = false;
+                $this->dispatch('notify', [
+                    'message' => 'Plano de treino salvo com sucesso!',
+                    'type' => 'success'
+                ]);
+            } catch (\Exception $e) {
+                $this->debugLog('Error creating training plan', ['error' => $e->getMessage()]);
+                $this->dispatch('notify', [
+                    'message' => 'Erro ao criar plano: ' . $e->getMessage(),
+                    'type' => 'error'
+                ]);
+            }
+        }
+    }
+    
+    /**
+     * Debug log method
+     */
+    private function debugLog($message, $data = [])
+    {
+        if ($this->debug) {
+            try {
+                \Illuminate\Support\Facades\Log::debug('[Goals Component] ' . $message, $data);
+            } catch (\Exception $e) {
+                // Fallback if logging fails
+                error_log('[Goals Component Debug] ' . $message . ' - Error logging: ' . $e->getMessage());
+            }
+        }
     }
     
     /**
