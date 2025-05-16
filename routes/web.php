@@ -47,6 +47,9 @@ Route::middleware(['auth'])->group(function () {
     
     // Reports route
     Route::get('/reports', App\Livewire\Reports\Index::class)->name('reports.index');
+    
+    // Today (Hoje) route
+    Route::get('/today', App\Livewire\Today\Index::class)->name('today.index');
 });
 
 require __DIR__.'/auth.php';
