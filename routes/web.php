@@ -44,6 +44,9 @@ Route::middleware(['auth'])->group(function () {
     
     // Diary route
     Route::get('/diary', App\Livewire\Diary\Index::class)->name('diary.index');
+    
+    // Reports route
+    Route::get('/reports', App\Livewire\Reports\Index::class)->name('reports.index');
 });
 
 require __DIR__.'/auth.php';
