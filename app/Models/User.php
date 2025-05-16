@@ -13,6 +13,7 @@ use App\Models\UserPreference;
 use App\Models\UserProfile;
 use App\Models\NutritionalGoal;
 use App\Models\UserPlan;
+use App\Models\Measurement;
 
 class User extends Authenticatable
 {
@@ -110,5 +111,13 @@ class User extends Authenticatable
     public function trainingPlan()
     {
         return $this->plans()->training()->first();
+    }
+    
+    /**
+     * Get the measurements associated with the user.
+     */
+    public function measurements(): HasMany
+    {
+        return $this->hasMany(Measurement::class);
     }
 }

@@ -30,6 +30,9 @@ Route::middleware(['auth'])->group(function () {
     // Recipes route
     Route::get('/recipes', App\Livewire\Recipes\Index::class)->name('recipes.index');
     
+    // Measurements routes
+    Route::get('/measurements', App\Livewire\Measurements\Index::class)->name('measurements.index');
+    
     // Food routes
     Route::get('/foods', App\Livewire\Foods\Index::class)->name('foods.index');
     Route::get('/foods/create', function () {
