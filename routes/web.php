@@ -41,6 +41,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/foods/{food}', function ($food) {
         return view('foods.show', ['foodId' => $food]);
     })->name('foods.show');
+    
+    // Diary route
+    Route::get('/diary', App\Livewire\Diary\Index::class)->name('diary.index');
 });
 
 require __DIR__.'/auth.php';
