@@ -3,8 +3,8 @@
     <head>
         @include('partials.head')
     </head>
-    <body class="min-h-screen bg-white dark:bg-zinc-800">
-        <flux:sidebar sticky stashable class="border-r border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900">
+    <body class="min-h-screen bg-white dark:bg-neutral-900">
+        <flux:sidebar sticky stashable class="border-r border-neutral-800 bg-neutral-900 text-white">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
             <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
@@ -12,10 +12,10 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid space-y-1">         
+                <flux:navlist.group class="grid space-y-1">         
                     <!-- Hoje Item -->
                     <a href="{{ route('today.index') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('today.index') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('today.index') ? 'bg-neutral-800 text-white' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
                             <span class="mr-2 text-green-500">
@@ -32,7 +32,7 @@
                         <!-- Accordion Header -->
                         <button 
                             @click="open = !open" 
-                            class="flex w-full items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
+                            class="flex w-full items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all group"
                         >
                             <div class="flex items-center">
                                 <span class="mr-2 text-orange-500">
@@ -43,13 +43,15 @@
                                 {{ __('Relatórios') }}
                             </div>
                             <svg 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                class="h-4 w-4 transition-transform duration-200" 
-                                :class="open ? 'rotate-180' : ''" 
-                                viewBox="0 0 20 20" 
-                                fill="currentColor"
+                                fill="none" 
+                                height="16" 
+                                viewBox="0 0 16 16" 
+                                width="16" 
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="transition-transform duration-200" 
+                                :class="open ? 'rotate-180' : ''"
                             >
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                <path d="M4 7L8 11L12 7" stroke="#C4C4CC" stroke-linecap="square" stroke-linejoin="round" stroke-width="1.5"></path>
                             </svg>
                         </button>
                         
@@ -67,7 +69,7 @@
                             <!-- Relatórios Item -->
                             <a 
                                 href="{{ route('reports.index') }}" 
-                                class="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('reports.index') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
+                                class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reports.index') ? 'bg-neutral-800 text-white' : '' }}"
                                 wire:navigate
                             >
                                 <span class="mr-2 text-orange-500">
@@ -81,7 +83,7 @@
                             <!-- Diário Item -->
                             <a 
                                 href="{{ route('diary.index') }}" 
-                                class="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('diary.index') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
+                                class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('diary.index') ? 'bg-neutral-800 text-white' : '' }}"
                                 wire:navigate
                             >
                                 <span class="mr-2 text-red-600">
@@ -95,7 +97,7 @@
                             <!-- Medidas Item -->
                             <a 
                                 href="{{ route('measurements.index') }}" 
-                                class="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
+                                class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('measurements.index') ? 'bg-neutral-800 text-white' : '' }}"
                                 wire:navigate
                             >
                                 <span class="mr-2 text-blue-500">
@@ -111,7 +113,7 @@
                     
                     <!-- Meus Alimentos Item -->
                     <a href="{{ route('foods.index') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('foods.index') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('foods.index') ? 'bg-neutral-800 text-white' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
                             <span class="mr-2 text-yellow-500">
@@ -125,7 +127,7 @@
                     
                     <!-- Minhas Receitas Item -->
                     <a href="{{ route('recipes.index') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('recipes.index') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('recipes.index') ? 'bg-neutral-800 text-white' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
                             <span class="mr-2 text-pink-500">
@@ -140,7 +142,7 @@
                     
                     <!-- Metas e Perfil Item -->
                     <a href="{{ route('goals.index') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('goals.index') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('goals.index') ? 'bg-neutral-800 text-white' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
                             <span class="mr-2 text-indigo-500">
@@ -154,7 +156,7 @@
                     
                     <!-- Lembretes Item -->
                     <a href="{{ route('reminders.index') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('reminders.index') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reminders.index') ? 'bg-neutral-800 text-white' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
                             <span class="mr-2 text-purple-500">
@@ -166,80 +168,9 @@
                         </div>
                     </a>
                     
-                    <!-- Integrações Item -->
-                    {{-- <a href="{{ route('dashboard') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('integracoes') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
-                       wire:navigate>
-                        <div class="flex items-center">
-                            <span class="mr-2 text-blue-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm2 2V5h1v1H5zM3 13a1 1 0 011-1h3a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3zm2 2v-1h1v1H5zM13 3a1 1 0 00-1 1v3a1 1 0 001 1h3a1 1 0 001-1V4a1 1 0 00-1-1h-3zm1 2v1h1V5h-1zM13 12a1 1 0 00-1 1v3a1 1 0 001 1h3a1 1 0 001-1v-3a1 1 0 00-1-1h-3zm1 2v1h1v-1h-1z" clip-rule="evenodd" />
-                                </svg>
-                            </span>
-                            {{ __('Integrações') }}
-                        </div>
-                    </a> --}}
-                    
-                    <!-- Atalhos Item -->
-                    {{-- <a href="{{ route('dashboard') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('atalhos') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
-                       wire:navigate>
-                        <div class="flex items-center">
-                            <span class="mr-2 text-gray-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v-1l1-1 1-1-.257-.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clip-rule="evenodd" />
-                                </svg>
-                            </span>
-                            {{ __('Atalhos') }}
-                        </div>
-                    </a> --}}
-                    
-                    <!-- Sugestões Item -->
-                    {{-- <a href="{{ route('dashboard') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('sugestoes') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
-                       wire:navigate>
-                        <div class="flex items-center">
-                            <span class="mr-2 text-teal-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
-                                </svg>
-                            </span>
-                            {{ __('Sugestões') }}
-                        </div>
-                    </a>
-                     --}}
-                    <!-- Indique um amigo Item -->
-                    {{-- <a href="{{ route('dashboard') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('indique') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
-                       wire:navigate>
-                        <div class="flex items-center">
-                            <span class="mr-2 text-red-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17A3 3 0 015 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clip-rule="evenodd" />
-                                    <path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z" />
-                                </svg>
-                            </span>
-                            {{ __('Indique um amigo') }}
-                        </div>
-                    </a> --}}
-                    
-                    <!-- Clube de Benefícios Item -->
-                    {{-- <a href="{{ route('dashboard') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('clube') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
-                       wire:navigate>
-                        <div class="flex items-center">
-                            <span class="mr-2 text-green-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
-                                </svg>
-                            </span>
-                            {{ __('Clube de Benefícios') }}
-                        </div>
-                    </a> --}}
-                    
                     <!-- Preferências Item -->  
                     <a href="{{ route('preferences.index') }}" 
-                       class="flex items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white {{ request()->routeIs('preferences.index') ? 'bg-gray-100 text-gray-900 dark:bg-gray-800 dark:text-white' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('preferences.index') ? 'bg-neutral-800 text-white' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
                             <span class="mr-2 text-gray-400">
