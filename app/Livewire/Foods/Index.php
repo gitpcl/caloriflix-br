@@ -15,6 +15,11 @@ class Index extends Component
     
     public string $search = '';
     
+    // Mass delete functionality
+    public array $selectedFoods = [];
+    public bool $selectAll = false;
+    public bool $selectionMode = false;
+    
     // Modal visibility control
     public bool $showCreateFoodModal = false;
     public bool $showFoodDetailModal = false;
@@ -302,6 +307,60 @@ class Index extends Component
         session()->flash('message', $food->is_favorite 
             ? 'Alimento adicionado aos favoritos!' 
             : 'Alimento removido dos favoritos!');
+    }
+    
+    /**
+     * Select all foods.
+     *
+     * @return void
+     */
+    public function selectAll(): void
+    {
+        $this->selectAll = !$this->selectAll;
+        
+        if ($this->selectAll) {
+            $this->selectedFoods = $this->foods->pluck('id')->toArray();
+        } else {
+            $this->selectedFoods = [];
+        }
+    }
+    
+    /**
+     * Clear selection.
+     *
+     * @return void
+     */
+    public function clearSelection(): void
+    {
+        $this->selectedFoods = [];
+        $this->selectAll = false;
+        $this->selectionMode = false;
+    }
+    
+    /**
+     * Mass delete foods.
+     *
+     * @return void
+     */
+    public function massDelete(): void
+    {
+        Food::whereIn('id', $this->selectedFoods)->delete();
+        
+        $this->selectedFoods = [];
+        $this->selectAll = false;
+        $this->selectionMode = false;
+        
+        session()->flash('message', 'Alimentos excluídos com sucesso!');
+    }
+    
+    /**
+     * Toggle selection mode.
+     *
+     * @return void
+     */
+    public function toggleSelectionMode(): void
+    {
+        $this->selectionMode = !$this->selectionMode;
     }
     
     /**

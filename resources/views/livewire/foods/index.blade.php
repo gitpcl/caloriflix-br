@@ -19,39 +19,79 @@
                     wire:click="openCreateFoodModal"
                     class="inline-flex items-center p-2 bg-neutral-100 border border-transparent rounded-md font-semibold text-xs text-neutral-900 uppercase tracking-widest hover:bg-neutral-200 focus:bg-neutral-200 active:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-200 transition ease-in-out duration-150"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/><path d="M12 5v14"/></svg>
                 </button>
             </div>
         </div>
         
-        <!-- Filters -->
-        <div class="flex items-center space-x-2 text-sm py-1 px-2">
-            <button class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded hover:bg-green-200 flex items-center">
-                <span>Todos</span>
-            </button>
-            <button class="px-2 py-1 text-xs bg-neutral-100 text-neutral-700 rounded hover:bg-neutral-200 flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-                </svg>
-                <span>Filtrar</span>
-            </button>
-            <button class="px-2 py-1 text-xs bg-neutral-100 text-neutral-700 rounded hover:bg-neutral-200 flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
-                </svg>
-                <span>Ordenar</span>
-            </button>
-            <button class="p-1 text-xs bg-neutral-100 text-neutral-700 rounded hover:bg-neutral-200 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                </svg>
-            </button>
-            <button class="p-1 text-xs bg-neutral-100 text-neutral-700 rounded hover:bg-neutral-200 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                </svg>
-            </button>
-        </div>
+        <!-- Filters and Mass Actions Bar -->
+        @if($selectionMode)
+            <div class="flex items-center justify-between bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg px-4 py-3">
+                <div class="flex items-center space-x-4">
+                    <button wire:click="clearSelection" class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Cancelar
+                    </button>
+                    
+                    <button wire:click="selectAll" class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Selecionar todos
+                    </button>
+                </div>
+                
+                <button 
+                    wire:click="massDelete" 
+                    wire:confirm="Tem certeza que deseja excluir os alimentos selecionados?"
+                    class="text-sm {{ count($selectedFoods) > 0 ? 'text-red-300 hover:text-red-400' : 'text-neutral-400 cursor-not-allowed' }} flex items-center"
+                    {{ count($selectedFoods) == 0 ? 'disabled' : '' }}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H9a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Excluir ({{ count($selectedFoods) }})
+                </button>
+            </div>
+        @else
+            <!-- Filter buttons -->
+            <div class="flex items-center space-x-2 text-sm">
+                
+                <!-- Selection Mode Toggle Button -->
+                <button 
+                    wire:click="toggleSelectionMode" 
+                    class="px-3 py-1 text-xs {{ $selectionMode ? 'bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200' : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400' }} border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Selecionar
+                </button>
+                
+                <button class="px-3 py-1 text-xs bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
+                    </svg>
+                    Filtros
+                </button>
+                
+                <button class="px-3 py-1 text-xs bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                    Atualizar
+                </button>
+                
+                <button class="px-3 py-1 text-xs bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                    </svg>
+                    Exportar
+                </button>
+            </div>
+        @endif
         
         <!-- Food List -->
         <div class="grid grid-cols-1 gap-4">
@@ -65,6 +105,18 @@
                 <div class="bg-white dark:bg-neutral-800 shadow-sm rounded-md border border-neutral-100 dark:border-neutral-700 overflow-hidden cursor-pointer" wire:click="openFoodEditModal({{ $food->id }})">
                     <div class="px-4 py-3 flex justify-between items-center">
                         <div class="flex items-center space-x-3">
+                            <!-- Checkbox for mass selection -->
+                            @if($selectionMode)
+                                <div class="flex-shrink-0" wire:click.stop>
+                                    <input 
+                                        type="checkbox" 
+                                        wire:model.live="selectedFoods" 
+                                        value="{{ $food->id }}" 
+                                        class="h-4 w-4 text-green-600 border-neutral-300 dark:border-neutral-600 rounded focus:ring-green-500"
+                                    >
+                                </div>
+                            @endif
+                            
                             <!-- Food icon based on type -->
                             <div class="flex-shrink-0">
                                 <div class="bg-green-100 rounded p-2"><span class="text-xl">
@@ -194,7 +246,7 @@
                                                 id="quantity" 
                                                 class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
                                             >
-                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
+                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
                                                 g
                                             </span>
                                         </div>
@@ -229,7 +281,7 @@
                                                 id="protein" 
                                                 class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
                                             >
-                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
+                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
                                                 g
                                             </span>
                                         </div>
@@ -246,7 +298,7 @@
                                                 id="fat" 
                                                 class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
                                             >
-                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
+                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
                                                 g
                                             </span>
                                         </div>
@@ -263,7 +315,7 @@
                                                 id="carbohydrate" 
                                                 class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
                                             >
-                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
+                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
                                                 g
                                             </span>
                                         </div>
@@ -280,7 +332,7 @@
                                                 id="calories" 
                                                 class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
                                             >
-                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
+                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
                                                 kcal
                                             </span>
                                         </div>
