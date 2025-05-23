@@ -82,23 +82,36 @@ class Index extends Component
     public function edit($id)
     {
         $this->resetExcept('search');
-        $diary = Diary::findOrFail($id);
         
-        $this->editingId = $diary->id;
-        $this->date = $diary->date->format('Y-m-d');
-        $this->notes = $diary->notes;
-        $this->mood = $diary->mood;
-        $this->water = $diary->water;
-        $this->sleep = $diary->sleep;
-        
-        $this->isEditing = true;
+        try {
+            $diary = Diary::where('id', $id)
+                ->where('user_id', Auth::id())
+                ->firstOrFail();
+            
+            $this->editingId = $diary->id;
+            $this->date = $diary->date ? $diary->date->format('Y-m-d') : Carbon::today()->format('Y-m-d');
+            $this->notes = $diary->notes;
+            $this->mood = $diary->mood;
+            $this->water = $diary->water ?? 0;
+            $this->sleep = $diary->sleep;
+            
+            $this->isEditing = true;
+            
+            // Debug: dispatch an event to confirm the method is being called
+            $this->dispatch('diary-edit-started', 'Edit modal should open now');
+            
+        } catch (\Exception $e) {
+            $this->dispatch('diary-error', 'Error loading diary entry: ' . $e->getMessage());
+        }
     }
     
     public function update()
     {
         $this->validate();
         
-        $diary = Diary::findOrFail($this->editingId);
+        $diary = Diary::where('id', $this->editingId)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
         
         // Check if entry already exists for this date (excluding the current entry)
         $existingEntry = Diary::where('user_id', Auth::id())
@@ -118,7 +131,7 @@ class Index extends Component
             'water' => $this->water,
             'sleep' => $this->sleep,
         ]);
-        
+
         $this->closeModal();
         $this->dispatch('diary-saved', 'Diary entry updated successfully!');
     }

@@ -10,7 +10,7 @@
                             wire:click="openCreateModal"
                             class="inline-flex items-center p-2 bg-neutral-100 border border-transparent rounded-md font-semibold text-xs text-neutral-900 uppercase tracking-widest hover:bg-neutral-200 focus:bg-neutral-200 active:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-200 focus:ring-offset-2 transition ease-in-out duration-150"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-line-icon lucide-pencil-line"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/><path d="m15 5 3 3"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                         </button>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <button 
                             type="button" 
                             wire:click="openCreateModal"
-                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-300 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-300 hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                         >
                             <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -74,7 +74,7 @@
                                 <div class="flex space-x-2">
                                     <button 
                                         wire:click="edit({{ $diary->id }})"
-                                        class="text-gray-400 hover:text-indigo-500 focus:outline-none"
+                                        class="text-gray-400 hover:text-green-500 focus:outline-none"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -126,7 +126,7 @@
                                     <!-- Sleep Section -->
                                     <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 text-center">
                                         <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tempo de Sono</h4>
-                                        <div class="text-2xl font-bold text-green-300 dark:text-indigo-400">
+                                        <div class="text-2xl font-bold text-green-300 dark:text-green-400">
                                             {{ $diary->sleep ? $diary->formatted_sleep : 'Não registrado' }}
                                         </div>
                                         @if($diary->sleep)
@@ -165,7 +165,28 @@
     
     <!-- Create/Edit Diary Modal -->
     <div
-        x-data="{ show: @entangle('isCreating').live || @entangle('isEditing').live }"
+        x-data="{ 
+            isCreating: @entangle('isCreating').live,
+            isEditing: @entangle('isEditing').live,
+            get show() {
+                return this.isCreating || this.isEditing;
+            },
+            init() {
+                console.log('Modal initialized');
+                console.log('isCreating:', this.isCreating);
+                console.log('isEditing:', this.isEditing);
+                console.log('show:', this.show);
+                this.$watch('isCreating', value => {
+                    console.log('isCreating changed:', value);
+                });
+                this.$watch('isEditing', value => {
+                    console.log('isEditing changed:', value);
+                });
+                this.$watch('show', value => {
+                    console.log('Modal show state:', value);
+                });
+            }
+        }"
         x-show="show"
         x-cloak
         class="fixed inset-0 z-50 overflow-y-auto"
@@ -223,7 +244,7 @@
                                                     <button 
                                                         type="button" 
                                                         wire:click="$set('mood', {{ $moodValue }})"
-                                                        class="p-2 {{ $mood == $moodValue ? 'bg-indigo-100 dark:bg-indigo-900 rounded-full ring-2 ring-indigo-500' : '' }} focus:outline-none"
+                                                        class="p-2 {{ $mood == $moodValue ? 'bg-green-100 dark:bg-green-900 rounded-full ring-2 ring-green-500' : '' }} focus:outline-none"
                                                     >
                                                         <span class="text-2xl">
                                                             @if($moodValue == 1) 😞
@@ -289,14 +310,14 @@
                     <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button 
                             type="submit" 
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-300 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-300 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
                         >
                             {{ $isEditing ? 'Atualizar' : 'Salvar' }}
                         </button>
                         <button 
                             type="button" 
                             wire:click="closeModal"
-                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                         >
                             Cancelar
                         </button>
@@ -312,6 +333,29 @@
                 // You can implement toast notifications here if needed
                 console.log(message);
             });
+            
+            // Debug events
+            Livewire.on('diary-edit-started', message => {
+                console.log('Edit started:', message);
+                console.log('isEditing:', @json($isEditing));
+                console.log('isCreating:', @json($isCreating));
+            });
+            
+            Livewire.on('diary-error', message => {
+                console.error('Diary error:', message);
+                alert('Error: ' + message);
+            });
+        });
+        
+        // Debug: Log when Alpine.js modal state changes
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('modalDebug', () => ({
+                init() {
+                    this.$watch('show', value => {
+                        console.log('Modal show state changed:', value);
+                    });
+                }
+            }));
         });
     </script>
 </div>
