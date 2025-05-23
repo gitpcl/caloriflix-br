@@ -19,6 +19,9 @@ class Index extends Component
     public string $custom_start_date = '';
     public string $custom_end_date = '';
     public bool $show_custom_modal = false;
+    public string $date_mode = 'absolute'; // 'absolute' or 'relative'
+    public int $relative_amount = 7;
+    public string $relative_unit = 'days'; // 'days', 'weeks', 'months'
     public array $nutrient_macros = [
         'protein' => 0,
         'carbs' => 0,
@@ -114,6 +117,11 @@ class Index extends Component
     
     public function applyCustomRange()
     {
+        // If using relative mode, calculate the dates first
+        if ($this->date_mode === 'relative') {
+            $this->calculateRelativeDates();
+        }
+        
         // Validate dates
         if (empty($this->custom_start_date) || empty($this->custom_end_date)) {
             session()->flash('error', 'Por favor, selecione ambas as datas.');
@@ -130,7 +138,12 @@ class Index extends Component
         
         $this->show_custom_modal = false;
         $this->loadReportData();
-        session()->flash('message', 'Período personalizado aplicado com sucesso.');
+        
+        if ($this->date_mode === 'relative') {
+            session()->flash('message', "Período relativo aplicado: últimos {$this->relative_amount} {$this->relative_unit}.");
+        } else {
+            session()->flash('message', 'Período personalizado aplicado com sucesso.');
+        }
     }
 
     public function setQuickPeriod($period)
@@ -155,6 +168,40 @@ class Index extends Component
                 $this->custom_end_date = $now->format('Y-m-d\TH:i');
                 break;
         }
+    }
+    
+    public function setDateMode($mode)
+    {
+        $this->date_mode = $mode;
+        
+        // If switching to relative mode, set default values
+        if ($mode === 'relative') {
+            $this->relative_amount = 7;
+            $this->relative_unit = 'days';
+        }
+    }
+    
+    public function calculateRelativeDates()
+    {
+        $now = now();
+        $end_date = $now;
+        
+        switch ($this->relative_unit) {
+            case 'days':
+                $start_date = $now->copy()->subDays($this->relative_amount);
+                break;
+            case 'weeks':
+                $start_date = $now->copy()->subWeeks($this->relative_amount);
+                break;
+            case 'months':
+                $start_date = $now->copy()->subMonths($this->relative_amount);
+                break;
+            default:
+                $start_date = $now->copy()->subDays($this->relative_amount);
+        }
+        
+        $this->custom_start_date = $start_date->format('Y-m-d\TH:i');
+        $this->custom_end_date = $end_date->format('Y-m-d\TH:i');
     }
     
     protected function loadReportData()
@@ -203,7 +250,7 @@ class Index extends Component
         // Pull actual meal data from database
         $this->loadMealData($user_id, $start_date, $end_date);
         
-        // Pull water consumption data if it exists, otherwise generate sample
+        // Pull water consumption data
         $this->loadWaterConsumptionData($user_id, $start_date, $end_date);
     }
     
@@ -211,7 +258,11 @@ class Index extends Component
     {
         // Get all meals for the user in the date range
         $meals = Meal::where('user_id', $user_id)
-            ->whereBetween('meal_date', [$start_date, $end_date])
+            ->whereBetween('meal_date', [
+                $start_date->format('Y-m-d'), 
+                $end_date->format('Y-m-d')
+            ])
+            ->with(['mealItems.food'])
             ->get();
             
         if ($meals->isEmpty()) {
@@ -225,29 +276,35 @@ class Index extends Component
         $total_carbs = 0;
         $total_fat = 0;
         $total_calories = 0;
-        $days_count = $start_date->diffInDays($end_date) + 1;
+        
+        // Calculate actual days with meals for proper averaging
+        $days_with_meals = $meals->groupBy('meal_date')->count();
+        $total_days = max(1, $start_date->diffInDays($end_date) + 1);
         
         // Get meal item totals
         foreach ($meals as $meal) {
             foreach ($meal->mealItems as $item) {
                 $food = $item->food;
                 if ($food) {
-                    $multiplier = $item->quantity;
+                    // Convert quantity to proper multiplier (assuming quantity is in grams and food nutrition is per 100g)
+                    $multiplier = $item->quantity / 100;
                     
-                    $total_protein += $food->protein * $multiplier;
-                    $total_carbs += $food->carbohydrate * $multiplier; 
-                    $total_fat += $food->fat * $multiplier;
-                    $total_calories += $food->calories * $multiplier;
+                    $total_protein += ($food->protein ?? 0) * $multiplier;
+                    $total_carbs += ($food->carbohydrate ?? 0) * $multiplier; 
+                    $total_fat += ($food->fat ?? 0) * $multiplier;
+                    $total_calories += ($food->calories ?? 0) * $multiplier;
                 }
             }
         }
         
-        // Calculate daily averages
+        // Calculate averages based on period type
+        $divisor = $this->period_type === 'daily' ? 1 : $total_days;
+        
         $this->nutrient_macros = [
-            'protein' => $days_count > 0 ? round($total_protein / $days_count, 1) : 0,
-            'carbs' => $days_count > 0 ? round($total_carbs / $days_count, 1) : 0,
-            'fat' => $days_count > 0 ? round($total_fat / $days_count, 1) : 0,
-            'calories' => $days_count > 0 ? round($total_calories / $days_count, 1) : 0
+            'protein' => $divisor > 0 ? round($total_protein / $divisor, 1) : 0,
+            'carbs' => $divisor > 0 ? round($total_carbs / $divisor, 1) : 0,
+            'fat' => $divisor > 0 ? round($total_fat / $divisor, 1) : 0,
+            'calories' => $divisor > 0 ? round($total_calories / $divisor, 1) : 0
         ];
     }
     
@@ -255,8 +312,12 @@ class Index extends Component
     {
         // Check if there's a Diary model with water consumption data
         $waterEntries = Diary::where('user_id', $user_id)
-            ->whereBetween('entry_date', [$start_date, $end_date])
-            ->whereNotNull('water_consumption')
+            ->whereBetween('date', [
+                $start_date->format('Y-m-d'), 
+                $end_date->format('Y-m-d')
+            ])
+            ->whereNotNull('water')
+            ->where('water', '>', 0)
             ->get();
             
         if ($waterEntries->isEmpty()) {
@@ -265,10 +326,18 @@ class Index extends Component
             return;
         }
         
-        // Calculate average water consumption
-        $days_count = $start_date->diffInDays($end_date) + 1;
-        $total_water = $waterEntries->sum('water_consumption');
-        $this->water_consumption = $days_count > 0 ? round($total_water / $days_count) : 0;
+        // Calculate water consumption based on period type
+        $total_water = $waterEntries->sum('water');
+        $total_days = max(1, $start_date->diffInDays($end_date) + 1);
+        $days_with_data = $waterEntries->count();
+        
+        if ($this->period_type === 'daily') {
+            // For daily view, show total for that day
+            $this->water_consumption = $total_water;
+        } else {
+            // For weekly/monthly/custom, show daily average
+            $this->water_consumption = $days_with_data > 0 ? round($total_water / $days_with_data) : 0;
+        }
     }
     
     protected function generateSampleMacroData()
@@ -305,6 +374,36 @@ class Index extends Component
     {
         $total = $this->getMacroTotal();
         return $total > 0 ? round(($this->nutrient_macros['fat'] / $total) * 100) : 0;
+    }
+
+    public function getPeriodDisplayText()
+    {
+        $date = Carbon::parse($this->current_date);
+        
+        switch ($this->period_type) {
+            case 'daily':
+                return $date->format('d/m/Y');
+            case 'weekly':
+                $start = $date->copy()->startOfWeek();
+                $end = $date->copy()->endOfWeek();
+                return $start->format('d/m') . ' - ' . $end->format('d/m/Y');
+            case 'monthly':
+                return $date->format('F Y');
+            case 'custom':
+                if (!empty($this->custom_start_date) && !empty($this->custom_end_date)) {
+                    $start = Carbon::parse($this->custom_start_date);
+                    $end = Carbon::parse($this->custom_end_date);
+                    return $start->format('d/m/Y') . ' - ' . $end->format('d/m/Y');
+                }
+                return 'Período personalizado';
+            default:
+                return '';
+        }
+    }
+
+    public function getWaterConsumptionLabel()
+    {
+        return $this->period_type === 'daily' ? 'Consumo do Dia' : 'Média Diária';
     }
 
     #[Title('Relatórios')]

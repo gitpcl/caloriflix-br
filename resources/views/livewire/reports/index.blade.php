@@ -1,7 +1,10 @@
 <div class="py-8">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between">
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Relatórios</h1>
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Relatórios</h1>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ $this->getPeriodDisplayText() }}</p>
+            </div>
             
             <!-- Period navigation -->
             <div class="flex items-center space-x-4">
@@ -51,16 +54,25 @@
                             <!-- Absolute/Relative Toggle -->
                             <div class="flex items-center justify-center mb-6">
                                 <div class="inline-flex rounded-lg border border-gray-200 p-1 bg-gray-50">
-                                    <button type="button" class="relative inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-900 shadow-sm ring-1 ring-gray-300 focus:z-10">
+                                    <button 
+                                        wire:click="setDateMode('absolute')"
+                                        type="button" 
+                                        class="relative inline-flex items-center rounded-md px-4 py-2 text-sm font-medium focus:z-10 {{ $date_mode === 'absolute' ? 'bg-white text-gray-900 shadow-sm ring-1 ring-gray-300' : 'text-gray-500 hover:text-gray-900' }}"
+                                    >
                                         Absoluto
                                     </button>
-                                    <button type="button" class="relative inline-flex items-center rounded-md px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 focus:z-10">
+                                    <button 
+                                        wire:click="setDateMode('relative')"
+                                        type="button" 
+                                        class="relative inline-flex items-center rounded-md px-4 py-2 text-sm font-medium focus:z-10 {{ $date_mode === 'relative' ? 'bg-white text-gray-900 shadow-sm ring-1 ring-gray-300' : 'text-gray-500 hover:text-gray-900' }}"
+                                    >
                                         Relativo
                                     </button>
                                 </div>
                             </div>
                             
-                            <!-- Date Inputs -->
+                            @if($date_mode === 'absolute')
+                            <!-- Absolute Date Inputs -->
                             <div class="space-y-4 mb-6">
                                 <div>
                                     <label for="start_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -87,7 +99,9 @@
                                     />
                                 </div>
                             </div>
+                            @endif
                             
+                            @if($date_mode === 'absolute')
                             <!-- Quick Period Buttons -->
                             <div class="flex gap-2 mb-6">
                                 <button 
@@ -100,25 +114,71 @@
                                 <button 
                                     wire:click="setQuickPeriod('3d')"
                                     type="button" 
-                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                                 >
                                     3D
                                 </button>
                                 <button 
                                     wire:click="setQuickPeriod('7d')"
                                     type="button" 
-                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                                 >
                                     7D
                                 </button>
                                 <button 
                                     wire:click="setQuickPeriod('1m')"
                                     type="button" 
-                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                                 >
                                     1M
                                 </button>
                             </div>
+                            @endif
+                            
+                            @if($date_mode === 'relative')
+                            <!-- Relative Date Inputs -->
+                            <div class="space-y-4 mb-6">
+                                <div class="flex gap-3">
+                                    <div class="flex-1">
+                                        <label for="relative_amount" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                            Quantidade
+                                        </label>
+                                        <input 
+                                            type="number" 
+                                            id="relative_amount"
+                                            wire:model="relative_amount"
+                                            min="1"
+                                            max="365"
+                                            class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        />
+                                    </div>
+                                    <div class="flex-1">
+                                        <label for="relative_unit" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                            Unidade
+                                        </label>
+                                        <select 
+                                            id="relative_unit"
+                                            wire:model="relative_unit"
+                                            class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        >
+                                            <option value="days">Dias</option>
+                                            <option value="weeks">Semanas</option>
+                                            <option value="months">Meses</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="text-sm text-gray-500 dark:text-gray-400">
+                                    Mostrará dados dos últimos {{ $relative_amount }} 
+                                    @if($relative_unit === 'days')
+                                        {{ $relative_amount == 1 ? 'dia' : 'dias' }}
+                                    @elseif($relative_unit === 'weeks')
+                                        {{ $relative_amount == 1 ? 'semana' : 'semanas' }}
+                                    @else
+                                        {{ $relative_amount == 1 ? 'mês' : 'meses' }}
+                                    @endif
+                                </div>
+                            </div>
+                            @endif
                             
                             <!-- Action Buttons -->
                             <div class="flex gap-3">
@@ -152,7 +212,7 @@
                 <!-- Protein Box -->
                 <div class="relative overflow-hidden rounded-lg bg-white shadow dark:bg-zinc-700 dark:shadow-zinc-700/20">
                     <div class="p-5">
-                        <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Proteína ingerida em</div>
+                        <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Proteína ingerida em {{ $period_type }}</div>
                         <div class="mt-1 flex items-baseline justify-between">
                             <div class="text-2xl font-semibold text-gray-900 dark:text-white">{{ $nutrient_macros['protein'] }}g</div>
                             <div class="inline-flex items-baseline rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 dark:bg-green-800/20 dark:text-green-500">
@@ -222,8 +282,29 @@
                 <div class="p-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Consumo Total</div>
-                            <div class="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">{{ $water_consumption }} ml</div>
+                            <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">
+                                @if($period_type === 'daily')
+                                    Consumo do Dia
+                                @else
+                                    Média Diária
+                                @endif
+                            </div>
+                            <div class="mt-1 text-2xl font-semibold text-gray-900 dark:text-white">{{ number_format($water_consumption, 0) }} ml</div>
+                            @if($period_type !== 'daily')
+                                <div class="text-xs text-gray-500 dark:text-zinc-400 mt-1">
+                                    @switch($period_type)
+                                        @case('weekly')
+                                            Baseado na semana selecionada
+                                            @break
+                                        @case('monthly')
+                                            Baseado no mês selecionado
+                                            @break
+                                        @case('custom')
+                                            Baseado no período personalizado
+                                            @break
+                                    @endswitch
+                                </div>
+                            @endif
                         </div>
                         
                         <div class="h-6 w-6 text-blue-500">
@@ -233,22 +314,26 @@
                     
                     <div class="mt-6">
                         <div class="flex items-center justify-between">
-                            <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Tipo</div>
+                            <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Status</div>
                             <div class="flex items-center space-x-1">
-                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Tempo</span>
-                                <span class="inline-flex h-4 w-4 items-center justify-center rounded-full bg-gray-200 text-xs font-semibold text-gray-800 dark:bg-gray-700 dark:text-gray-300">?</span>
+                                @php
+                                    $dailyGoal = 2000; // 2L daily goal
+                                    $percentage = min(100, ($water_consumption / $dailyGoal) * 100);
+                                    $status = $percentage >= 100 ? 'Excelente' : ($percentage >= 75 ? 'Bom' : ($percentage >= 50 ? 'Regular' : 'Baixo'));
+                                    $statusColor = $percentage >= 100 ? 'text-green-600' : ($percentage >= 75 ? 'text-blue-600' : ($percentage >= 50 ? 'text-yellow-600' : 'text-red-600'));
+                                @endphp
+                                <span class="text-sm font-medium {{ $statusColor }}">{{ $status }}</span>
+                                <span class="inline-flex h-4 w-4 items-center justify-center rounded-full bg-gray-200 text-xs font-semibold text-gray-800 dark:bg-gray-700 dark:text-gray-300" title="Meta diária: {{ number_format($dailyGoal) }}ml">?</span>
                             </div>
                         </div>
                         
-                        <div class="mt-2 flex items-center justify-between">
-                            <div class="inline-flex items-center space-x-1">
-                                <span class="inline-block h-2.5 w-2.5 rounded-full bg-blue-600"></span>
-                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Tempo</span>
+                        <div class="mt-2">
+                            <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-1">
+                                <span>Progresso</span>
+                                <span>{{ number_format($percentage, 1) }}%</span>
                             </div>
-                            
-                            <div class="inline-flex items-center space-x-1">
-                                <span class="inline-block h-2.5 w-2.5 rounded-full bg-blue-300"></span>
-                                <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Água</span>
+                            <div class="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
+                                <div class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: {{ min(100, $percentage) }}%"></div>
                             </div>
                         </div>
                     </div>
