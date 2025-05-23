@@ -398,6 +398,74 @@ class Index extends Component
     }
     
     /**
+     * Export foods to CSV.
+     *
+     * @return \Symfony\Component\HttpFoundation\StreamedResponse
+     */
+    public function exportCsv()
+    {
+        $foods = Food::query()
+            ->where('user_id', Auth::id())
+            ->when($this->search, function ($query) {
+                $search = '%' . $this->search . '%';
+                $query->where('name', 'like', $search);
+            })
+            ->when($this->sourceFilter !== 'all', function ($query) {
+                $query->where('source', $this->sourceFilter);
+            })
+            ->orderBy('name')
+            ->get();
+
+        $filename = 'alimentos_' . now()->format('Y-m-d_H-i-s') . '.csv';
+
+        return response()->streamDownload(function () use ($foods) {
+            $handle = fopen('php://output', 'w');
+            
+            // Add BOM for UTF-8
+            fwrite($handle, "\xEF\xBB\xBF");
+            
+            // CSV Headers
+            fputcsv($handle, [
+                'Nome',
+                'Quantidade (g)',
+                'Unidade',
+                'Proteina (g)',
+                'Gordura (g)',
+                'Carboidrato (g)',
+                'Fibra (g)',
+                'Calorias',
+                'Codigo de Barras',
+                'Favorito',
+                'Origem',
+                'Data de Criacao'
+            ]);
+
+            // CSV Data
+            foreach ($foods as $food) {
+                fputcsv($handle, [
+                    $food->name,
+                    number_format($food->quantity, 2, '.', ''),
+                    $food->unit ?? '',
+                    number_format($food->protein, 2, '.', ''),
+                    number_format($food->fat, 2, '.', ''),
+                    number_format($food->carbohydrate, 2, '.', ''),
+                    number_format($food->fiber, 2, '.', ''),
+                    number_format($food->calories, 2, '.', ''),
+                    $food->barcode ?? '',
+                    $food->is_favorite ? 'Sim' : 'Nao',
+                    $food->source === 'manual' ? 'Manual' : 'WhatsApp',
+                    $food->created_at->format('Y-m-d H:i:s')
+                ]);
+            }
+
+            fclose($handle);
+        }, $filename, [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ]);
+    }
+    
+    /**
      * Render the component.
      *
      * @return View
