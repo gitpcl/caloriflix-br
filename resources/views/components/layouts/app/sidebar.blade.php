@@ -175,49 +175,87 @@
             </flux:navlist> --}}
 
             <!-- Desktop User Menu -->
-            <flux:dropdown position="bottom" align="start">
-                <flux:profile
-                    :name="auth()->user()->name"
-                    :initials="auth()->user()->initials()"
-                    icon-trailing="chevrons-up-down"
-                />
-
-                <flux:menu class="w-[220px]">
-                    <flux:menu.radio.group>
-                        <div class="p-0 text-sm font-normal">
-                            <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg">
-                                    <span
-                                        class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white"
-                                    >
-                                        {{ auth()->user()->initials() }}
-                                    </span>
-                                </span>
-
-                                <div class="grid flex-1 text-left text-sm leading-tight">
-                                    <span class="truncate font-semibold">{{ auth()->user()->name }}</span>
-                                    <span class="truncate text-xs">{{ auth()->user()->email }}</span>
-                                </div>
-                            </div>
+            <div class="relative" x-data="{ open: false }">
+                <button 
+                    @click="open = !open"
+                    class="flex w-full items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all"
+                >
+                    <div class="flex items-center">
+                        <span class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg mr-2">
+                            <span class="flex h-full w-full items-center justify-center rounded-lg bg-neutral-700 text-white text-sm font-medium">
+                                {{ auth()->user()->initials() }}
+                            </span>
+                        </span>
+                        <div class="flex flex-col text-left">
+                            <span class="text-sm font-medium text-white truncate">{{ auth()->user()->name }}</span>
+                            <span class="text-xs text-neutral-400 truncate">{{ auth()->user()->email }}</span>
                         </div>
-                    </flux:menu.radio.group>
+                    </div>
+                    <svg 
+                        fill="none" 
+                        height="16" 
+                        viewBox="0 0 16 16" 
+                        width="16" 
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="transition-transform duration-200 text-neutral-400" 
+                        :class="open ? 'rotate-180' : ''"
+                    >
+                        <path d="M4 7L8 11L12 7" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="1.5"></path>
+                    </svg>
+                </button>
 
-                    <flux:menu.separator />
+                <!-- Dropdown Menu -->
+                <div 
+                    x-show="open" 
+                    @click.away="open = false"
+                    x-transition:enter="transition ease-out duration-100" 
+                    x-transition:enter-start="transform opacity-0 scale-95" 
+                    x-transition:enter-end="transform opacity-100 scale-100" 
+                    x-transition:leave="transition ease-in duration-75" 
+                    x-transition:leave-start="transform opacity-100 scale-100" 
+                    x-transition:leave-end="transform opacity-0 scale-95"
+                    class="absolute bottom-full left-0 w-full mb-2 bg-neutral-900 border border-neutral-800 rounded-[10px] shadow-lg z-50"
+                    style="display: none;"
+                >
+                    <div class="py-2">
+                        <!-- Settings -->
+                        <a 
+                            href="{{ route('settings.profile') }}" 
+                            class="flex items-center rounded-[10px] mx-2 px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all"
+                            wire:navigate
+                        >
+                            <span class="mr-2 text-neutral-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </span>
+                            {{ __('Settings') }}
+                        </a>
 
-                    <flux:menu.radio.group>
-                        <flux:menu.item :href="route('settings.profile')" icon="cog" wire:navigate>{{ __('Settings') }}</flux:menu.item>
-                    </flux:menu.radio.group>
+                        <!-- Separator -->
+                        <div class="mx-2 my-1 border-t border-neutral-800"></div>
 
-                    <flux:menu.separator />
-
-                    <form method="POST" action="{{ route('logout') }}" class="w-full">
-                        @csrf
-                        <flux:menu.item as="button" type="submit" icon="arrow-right-start-on-rectangle" class="w-full">
-                            {{ __('Log Out') }}
-                        </flux:menu.item>
-                    </form>
-                </flux:menu>
-            </flux:dropdown>
+                        <!-- Logout -->
+                        <form method="POST" action="{{ route('logout') }}" class="w-full">
+                            @csrf
+                            <button 
+                                type="submit" 
+                                class="flex items-center rounded-[10px] mx-2 px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-red-900/20 hover:text-red-400 transition-all w-full text-left"
+                            >
+                                <span class="mr-2 text-neutral-200">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                        <polyline points="16,17 21,12 16,7"/>
+                                        <line x1="21" x2="9" y1="12" y2="12"/>
+                                    </svg>
+                                </span>
+                                {{ __('Log Out') }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </flux:sidebar>
 
         <!-- iOS-style Bottom Navigation (Mobile Only) -->
@@ -342,7 +380,8 @@
                    wire:navigate>
                     <span class="mb-1 {{ request()->routeIs('preferences.index') ? 'text-green-300' : 'text-neutral-200' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>
+                            <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                            <circle cx="12" cy="12" r="3"/>
                         </svg>
                     </span>
                     <span class="text-xs {{ request()->routeIs('preferences.index') ? 'text-green-300' : '' }}">
