@@ -13,7 +13,7 @@
             
             <button 
                 wire:click="today"
-                class="px-3 py-1 text-sm font-medium rounded-md bg-indigo-50 text-indigo-600 hover:bg-indigo-100">
+                class="px-3 py-1 text-sm font-medium rounded-md bg-green-50 text-green-600 hover:bg-green-100">
                 Hoje
             </button>
             
@@ -34,23 +34,23 @@
             <div x-data="{ open: false }" class="bg-white rounded-lg shadow overflow-hidden">
                 <!-- Accordion Header -->
                 <div @click="open = !open" class="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50">
-                    <div class="flex items-center">
+                    <div class="flex items-center space-x-2">
                         @switch($mealType)
                             @case('Café da manhã')
-                                <img src="{{ asset('img/breakfast.svg') }}" alt="Breakfast" class="w-6 h-6 mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-coffee-icon lucide-coffee"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></svg>
                                 @break
                             @case('Almoço')
-                                <img src="{{ asset('img/lunch.svg') }}" alt="Lunch" class="w-6 h-6 mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sandwich-icon lucide-sandwich"><path d="m2.37 11.223 8.372-6.777a2 2 0 0 1 2.516 0l8.371 6.777"/><path d="M21 15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-5.25"/><path d="M3 15a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h9"/><path d="m6.67 15 6.13 4.6a2 2 0 0 0 2.8-.4l3.15-4.2"/><rect width="20" height="4" x="2" y="11" rx="1"/></svg>
                                 @break
                             @case('Lanche da tarde')
-                                <img src="{{ asset('img/snack.svg') }}" alt="Snack" class="w-6 h-6 mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-apple-icon lucide-apple"><path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/></svg>
                                 @break
                             @case('Jantar')
-                                <img src="{{ asset('img/dinner.svg') }}" alt="Dinner" class="w-6 h-6 mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils-icon lucide-utensils"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
                                 @break
                         @endswitch
                         <h3 class="text-lg font-medium">{{ $mealType }}</h3>
-                        <span class="text-xs text-gray-500 bg-gray-100 rounded-full px-2 py-0.5 ml-2">
+                        <span class="text-xs text-green-500 bg-green-100 rounded-full px-2 py-0.5 ml-2">
                             {{ count($meals[$mealType]['items']) ?? 0 }}
                         </span>
                     </div>
@@ -70,7 +70,7 @@
                 <!-- Accordion Content -->
                 <div x-show="open" x-transition class="px-4 pb-4 border-t border-gray-100">
                     @if($meals[$mealType]['empty'])
-                        <div class="py-4 text-center text-gray-500">
+                        <div class="pt-4 text-center text-gray-300">
                             Vazio
                         </div>
                     @else
