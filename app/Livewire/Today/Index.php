@@ -22,6 +22,12 @@ class Index extends Component
         'jantar'
     ];
     
+    // Edit modal properties
+    public $showEditModal = false;
+    public $editingMealItem = null;
+    public $editQuantity = '';
+    public $editNotes = '';
+    
     public function mount()
     {
         $this->date = Carbon::today()->format('Y-m-d');
@@ -96,6 +102,50 @@ class Index extends Component
         ];
         
         return $displayNames[$mealType] ?? $mealType;
+    }
+    
+    public function editMealItem($mealItemId)
+    {
+        $mealItem = MealItem::with('food')->where('id', $mealItemId)
+            ->whereHas('meal', function($query) {
+                $query->where('user_id', Auth::id());
+            })
+            ->first();
+
+        if ($mealItem) {
+            $this->editingMealItem = $mealItem;
+            $this->editQuantity = $mealItem->quantity;
+            $this->editNotes = $mealItem->notes ?? '';
+            $this->showEditModal = true;
+        }
+    }
+    
+    public function updateMealItem()
+    {
+        $this->validate([
+            'editQuantity' => 'required|numeric|min:0.1',
+            'editNotes' => 'nullable|string|max:255'
+        ]);
+
+        if ($this->editingMealItem) {
+            $this->editingMealItem->update([
+                'quantity' => $this->editQuantity,
+                'notes' => $this->editNotes,
+            ]);
+
+            $this->closeEditModal();
+            $this->loadMeals();
+            session()->flash('message', 'Item atualizado com sucesso!');
+        }
+    }
+    
+    public function closeEditModal()
+    {
+        $this->showEditModal = false;
+        $this->editingMealItem = null;
+        $this->editQuantity = '';
+        $this->editNotes = '';
+        $this->resetValidation();
     }
     
     public function deleteMealItem($mealItemId)

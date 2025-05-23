@@ -97,6 +97,16 @@
                                             </div>
                                             <div class="flex items-center space-x-2">
                                                 <button 
+                                                    wire:click="editMealItem({{ $item['id'] }})"
+                                                    class="bg-blue-100 rounded p-2 text-blue-500 hover:text-blue-700 transition-colors duration-200"
+                                                    title="Editar item"
+                                                >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                                    </svg>
+                                                </button>
+                                                <button 
                                                     wire:click="deleteMealItem({{ $item['id'] }})"
                                                     wire:confirm="Tem certeza que deseja remover este item?"
                                                     class="bg-red-100 rounded p-2 text-red-500 hover:text-red-700 transition-colors duration-200"
@@ -115,4 +125,127 @@
             @endforeach
         </div>
     </div>
+
+    <!-- Edit Meal Item Modal -->
+    @if($showEditModal && $editingMealItem)
+        <div class="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50" wire:click="closeEditModal">
+            <div class="bg-white rounded-lg max-w-md w-full p-6" wire:click.stop>
+                <!-- Modal Header -->
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold">{{ $editingMealItem->food->name }}</h3>
+                            <p class="text-sm text-gray-500">{{ \Carbon\Carbon::parse($date)->format('d/m/Y') }}</p>
+                        </div>
+                    </div>
+                    <button wire:click="closeEditModal" class="text-gray-400 hover:text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Quantity Section -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Quantidade</label>
+                    <div class="flex items-center space-x-2 mb-2">
+                        <input 
+                            type="number" 
+                            step="0.1" 
+                            min="0.1"
+                            wire:model="editQuantity"
+                            class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            placeholder="0"
+                        >
+                        <span class="text-sm text-gray-500">{{ $editingMealItem->food->unit }}</span>
+                    </div>
+                    <p class="text-xs text-gray-400">Qtd. sugerida recomendada</p>
+                    @error('editQuantity') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                </div>
+
+                <!-- Quick quantity buttons -->
+                <div class="flex space-x-2 mb-6">
+                    <button 
+                        wire:click="$set('editQuantity', 50)"
+                        class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+                    >
+                        50{{ $editingMealItem->food->unit }}
+                    </button>
+                    <button 
+                        wire:click="$set('editQuantity', 100)"
+                        class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+                    >
+                        100{{ $editingMealItem->food->unit }}
+                    </button>
+                    <button 
+                        wire:click="$set('editQuantity', 150)"
+                        class="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+                    >
+                        150{{ $editingMealItem->food->unit }}
+                    </button>
+                </div>
+
+                <!-- Nutrition Info -->
+                @if($editQuantity)
+                <div class="space-y-3 mb-6">
+                    <div class="flex justify-between">
+                        <span class="text-sm text-gray-600">Proteína</span>
+                        <span class="text-sm font-medium">{{ round($editingMealItem->food->protein * $editQuantity, 1) }} gramas</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-sm text-gray-600">Gordura</span>
+                        <span class="text-sm font-medium">{{ round($editingMealItem->food->fat * $editQuantity, 1) }} gramas</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-sm text-gray-600">Carboidrato</span>
+                        <span class="text-sm font-medium">{{ round($editingMealItem->food->carbohydrate * $editQuantity, 1) }} gramas</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-sm text-gray-600">Fibras</span>
+                        <span class="text-sm font-medium">{{ round(($editingMealItem->food->fiber ?? 0) * $editQuantity, 1) }} gramas</span>
+                    </div>
+                    <div class="flex justify-between border-t pt-2">
+                        <span class="text-sm text-gray-600">Calorias</span>
+                        <span class="text-sm font-medium">{{ round($editingMealItem->food->calories * $editQuantity, 1) }} kcal</span>
+                    </div>
+                </div>
+                @endif
+
+                <!-- Notes Section -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Observações (opcional)</label>
+                    <textarea 
+                        wire:model="editNotes"
+                        rows="3"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        placeholder="Adicione observações sobre este item..."
+                    ></textarea>
+                    @error('editNotes') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-3">
+                    <button 
+                        wire:click="updateMealItem"
+                        class="flex-1 bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors duration-200 font-medium"
+                    >
+                        Salvar
+                    </button>
+                    <button 
+                        wire:click="closeEditModal"
+                        class="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                    >
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
