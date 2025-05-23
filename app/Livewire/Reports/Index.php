@@ -16,6 +16,9 @@ class Index extends Component
 {
     public string $period_type = 'daily';
     public string $current_date;
+    public string $custom_start_date = '';
+    public string $custom_end_date = '';
+    public bool $show_custom_modal = false;
     public array $nutrient_macros = [
         'protein' => 0,
         'carbs' => 0,
@@ -23,7 +26,7 @@ class Index extends Component
         'calories' => 0
     ];
     public float $water_consumption = 0;
-    public array $period_options = ['daily', 'weekly', 'monthly'];
+    public array $period_options = ['daily', 'weekly', 'monthly', 'custom'];
 
     public function mount()
     {
@@ -79,10 +82,81 @@ class Index extends Component
     {
         if (in_array($type, $this->period_options)) {
             $this->period_type = $type;
-            $this->loadReportData();
+            
+            if ($type === 'custom') {
+                $this->openCustomModal();
+            } else {
+                $this->loadReportData();
+            }
         }
     }
+    
+    public function openCustomModal()
+    {
+        $this->show_custom_modal = true;
+        // Set default dates if empty
+        if (empty($this->custom_start_date)) {
+            $this->custom_start_date = now()->subDays(7)->format('Y-m-d');
+        }
+        if (empty($this->custom_end_date)) {
+            $this->custom_end_date = now()->format('Y-m-d');
+        }
+    }
+    
+    public function closeCustomModal()
+    {
+        $this->show_custom_modal = false;
+        // Reset to daily if custom was cancelled
+        if ($this->period_type === 'custom' && (empty($this->custom_start_date) || empty($this->custom_end_date))) {
+            $this->period_type = 'daily';
+        }
+    }
+    
+    public function applyCustomRange()
+    {
+        // Validate dates
+        if (empty($this->custom_start_date) || empty($this->custom_end_date)) {
+            session()->flash('error', 'Por favor, selecione ambas as datas.');
+            return;
+        }
+        
+        $start = Carbon::parse($this->custom_start_date);
+        $end = Carbon::parse($this->custom_end_date);
+        
+        if ($start->gt($end)) {
+            session()->flash('error', 'A data de início deve ser anterior à data de término.');
+            return;
+        }
+        
+        $this->show_custom_modal = false;
+        $this->loadReportData();
+        session()->flash('message', 'Período personalizado aplicado com sucesso.');
+    }
 
+    public function setQuickPeriod($period)
+    {
+        $now = now();
+        
+        switch ($period) {
+            case '24h':
+                $this->custom_start_date = $now->copy()->subDay()->format('Y-m-d\TH:i');
+                $this->custom_end_date = $now->format('Y-m-d\TH:i');
+                break;
+            case '3d':
+                $this->custom_start_date = $now->copy()->subDays(3)->format('Y-m-d\TH:i');
+                $this->custom_end_date = $now->format('Y-m-d\TH:i');
+                break;
+            case '7d':
+                $this->custom_start_date = $now->copy()->subDays(7)->format('Y-m-d\TH:i');
+                $this->custom_end_date = $now->format('Y-m-d\TH:i');
+                break;
+            case '1m':
+                $this->custom_start_date = $now->copy()->subMonth()->format('Y-m-d\TH:i');
+                $this->custom_end_date = $now->format('Y-m-d\TH:i');
+                break;
+        }
+    }
+    
     protected function loadReportData()
     {
         $user_id = Auth::id();
@@ -113,6 +187,16 @@ class Index extends Component
             case 'monthly':
                 $start_date = $date->copy()->startOfMonth();
                 $end_date = $date->copy()->endOfMonth();
+                break;
+            case 'custom':
+                if (!empty($this->custom_start_date) && !empty($this->custom_end_date)) {
+                    $start_date = Carbon::parse($this->custom_start_date)->startOfDay();
+                    $end_date = Carbon::parse($this->custom_end_date)->endOfDay();
+                } else {
+                    // Fallback to daily if custom dates are not set
+                    $start_date = $date->copy()->startOfDay();
+                    $end_date = $date->copy()->endOfDay();
+                }
                 break;
         }
         

@@ -6,7 +6,7 @@
             <!-- Period navigation -->
             <div class="flex items-center space-x-4">
                 <!-- Period selector -->
-                <div class="inline-flex rounded-md shadow-sm">
+                <div class="inline-flex rounded-md shadow-sm relative">
                     <button 
                         wire:click="changePeriodType('daily')"
                         type="button" 
@@ -24,38 +24,122 @@
                     <button 
                         wire:click="changePeriodType('monthly')"
                         type="button" 
-                        class="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 {{ $period_type === 'monthly' ? 'bg-gray-200' : '' }}"
+                        class="relative -ml-px inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 {{ $period_type === 'monthly' ? 'bg-gray-200' : '' }}"
                     >
                         Mês
                     </button>
-                </div>
-                
-                <!-- Date navigation -->
-                <div class="flex items-center space-x-2">
                     <button 
-                        wire:click="previousPeriod"
-                        class="rounded-md p-1 text-gray-400 hover:text-gray-500 focus:outline-none"
+                        wire:click="changePeriodType('custom')"
+                        type="button" 
+                        class="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 {{ $period_type === 'custom' ? 'bg-blue-100 text-blue-700 border-blue-300' : '' }}"
+                        id="personalizado-button"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
                         </svg>
+                        Personalizado
                     </button>
                     
-                    <button 
-                        wire:click="today"
-                        class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                    >
-                        Hoje
-                    </button>
+                    <!-- Custom Date Range Modal positioned relative to button -->
+                    @if($show_custom_modal)
+                    <!-- Background overlay -->
+                    <div class="fixed inset-0 z-40" wire:click="closeCustomModal"></div>
                     
-                    <button 
-                        wire:click="nextPeriod"
-                        class="rounded-md p-1 text-gray-400 hover:text-gray-500 focus:outline-none"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
+                    <div class="absolute top-full mt-2 right-0 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 dark:bg-gray-800 dark:border-gray-700 z-50">
+                        <!-- Content -->
+                        <div class="p-6">
+                            <!-- Absolute/Relative Toggle -->
+                            <div class="flex items-center justify-center mb-6">
+                                <div class="inline-flex rounded-lg border border-gray-200 p-1 bg-gray-50">
+                                    <button type="button" class="relative inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-medium text-gray-900 shadow-sm ring-1 ring-gray-300 focus:z-10">
+                                        Absoluto
+                                    </button>
+                                    <button type="button" class="relative inline-flex items-center rounded-md px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-900 focus:z-10">
+                                        Relativo
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Date Inputs -->
+                            <div class="space-y-4 mb-6">
+                                <div>
+                                    <label for="start_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Começa em
+                                    </label>
+                                    <input 
+                                        type="datetime-local" 
+                                        id="start_date"
+                                        wire:model="custom_start_date"
+                                        class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        placeholder="05/22/2025, 03:20 AM"
+                                    />
+                                </div>
+                                <div>
+                                    <label for="end_date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                        Termina em
+                                    </label>
+                                    <input 
+                                        type="datetime-local" 
+                                        id="end_date"
+                                        wire:model="custom_end_date"
+                                        class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        placeholder="05/23/2025, 03:20 AM"
+                                    />
+                                </div>
+                            </div>
+                            
+                            <!-- Quick Period Buttons -->
+                            <div class="flex gap-2 mb-6">
+                                <button 
+                                    wire:click="setQuickPeriod('24h')"
+                                    type="button" 
+                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                >
+                                    24H
+                                </button>
+                                <button 
+                                    wire:click="setQuickPeriod('3d')"
+                                    type="button" 
+                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                >
+                                    3D
+                                </button>
+                                <button 
+                                    wire:click="setQuickPeriod('7d')"
+                                    type="button" 
+                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                >
+                                    7D
+                                </button>
+                                <button 
+                                    wire:click="setQuickPeriod('1m')"
+                                    type="button" 
+                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                >
+                                    1M
+                                </button>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex gap-3">
+                                <button 
+                                    wire:click="closeCustomModal"
+                                    type="button" 
+                                    class="flex-1 inline-flex justify-center items-center px-4 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                >
+                                    Cancelar
+                                </button>
+                                <button 
+                                    wire:click="applyCustomRange"
+                                    type="button" 
+                                    class="flex-1 inline-flex justify-center items-center px-4 py-2.5 text-sm font-medium text-white bg-black rounded-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                                >
+                                    Salvar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
