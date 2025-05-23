@@ -19,6 +19,11 @@ class Index extends Component
     public string $sourceFilter = 'all';
     public bool $showFilterDropdown = false;
     
+    // Sorting functionality
+    public string $sortBy = 'created_at';
+    public string $sortDirection = 'desc';
+    public bool $showSortDropdown = false;
+    
     // Mass delete functionality
     public array $selectedFoods = [];
     public bool $selectAll = false;
@@ -81,6 +86,8 @@ class Index extends Component
     protected $queryString = [
         'search' => ['except' => ''],
         'sourceFilter' => ['except' => 'all'],
+        'sortBy' => ['except' => 'created_at'],
+        'sortDirection' => ['except' => 'desc'],
     ];
     
     /**
@@ -113,7 +120,10 @@ class Index extends Component
             $query->where('source', $this->sourceFilter);
         }
         
-        return $query->latest()->paginate(10);
+        // Apply sorting
+        $query->orderBy($this->sortBy, $this->sortDirection);
+        
+        return $query->paginate(10);
     }
     
     /**
@@ -398,6 +408,42 @@ class Index extends Component
     }
     
     /**
+     * Toggle sort dropdown.
+     *
+     * @return void
+     */
+    public function toggleSortDropdown(): void
+    {
+        $this->showSortDropdown = !$this->showSortDropdown;
+    }
+    
+    /**
+     * Set sort by.
+     *
+     * @param string $sortBy
+     * @return void
+     */
+    public function setSortBy(string $sortBy): void
+    {
+        $this->sortBy = $sortBy;
+        $this->showSortDropdown = false;
+        $this->resetPage();
+    }
+    
+    /**
+     * Set sort direction.
+     *
+     * @param string $sortDirection
+     * @return void
+     */
+    public function setSortDirection(string $sortDirection): void
+    {
+        $this->sortDirection = $sortDirection;
+        $this->showSortDropdown = false;
+        $this->resetPage();
+    }
+    
+    /**
      * Export foods to CSV.
      *
      * @return \Symfony\Component\HttpFoundation\StreamedResponse
@@ -413,7 +459,7 @@ class Index extends Component
             ->when($this->sourceFilter !== 'all', function ($query) {
                 $query->where('source', $this->sourceFilter);
             })
-            ->orderBy('name')
+            ->orderBy($this->sortBy, $this->sortDirection)
             ->get();
 
         $filename = 'alimentos_' . now()->format('Y-m-d_H-i-s') . '.csv';

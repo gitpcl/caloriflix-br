@@ -147,6 +147,105 @@
                     </div>
                 </div>
                 
+                <!-- Sort Dropdown -->
+                <div class="relative" x-data="{ open: @entangle('showSortDropdown') }">
+                    <button 
+                        wire:click="toggleSortDropdown"
+                        class="px-3 py-1 text-xs bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12" />
+                        </svg>
+                        Ordenar
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div 
+                        x-show="open" 
+                        x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        @click.away="open = false"
+                        class="absolute right-0 mt-2 w-64 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-600 rounded-lg shadow-lg z-50"
+                    >
+                        <div class="py-2">
+                            <div class="px-4 py-2 text-xs font-medium text-neutral-500 dark:text-neutral-400 border-b border-neutral-200 dark:border-neutral-600">
+                                Ordenar por
+                            </div>
+                            
+                            <!-- Sort by Name -->
+                            <button 
+                                wire:click="setSortBy('name')"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortBy === 'name' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                            >
+                                @if($sortBy === 'name')
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                @else
+                                    <div class="w-4 h-4 mr-2"></div>
+                                @endif
+                                Nome
+                            </button>
+                            
+                            <!-- Sort by Date -->
+                            <button 
+                                wire:click="setSortBy('created_at')"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortBy === 'created_at' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                            >
+                                @if($sortBy === 'created_at')
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                @else
+                                    <div class="w-4 h-4 mr-2"></div>
+                                @endif
+                                Data de Registro
+                            </button>
+                            
+                            <div class="border-t border-neutral-200 dark:border-neutral-600 my-2"></div>
+                            
+                            <!-- Sort Direction -->
+                            <button 
+                                wire:click="setSortDirection('asc')"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortDirection === 'asc' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                            >
+                                @if($sortDirection === 'asc')
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                @else
+                                    <div class="w-4 h-4 mr-2"></div>
+                                @endif
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                </svg>
+                                Ordem Crescente
+                            </button>
+                            
+                            <button 
+                                wire:click="setSortDirection('desc')"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortDirection === 'desc' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                            >
+                                @if($sortDirection === 'desc')
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                @else
+                                    <div class="w-4 h-4 mr-2"></div>
+                                @endif
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                                Ordem Decrescente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
                 {{-- <button class="px-3 py-1 text-xs bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
