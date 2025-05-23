@@ -2,25 +2,24 @@
     <div class="flex flex-col space-y-4">
         <!-- Header with title and actions -->
         <div class="flex justify-between items-center">
-            <h1 class="text-xl font-medium text-gray-900 dark:text-white">Alimentos cadastrados</h1>
+            <h1 class="text-xl font-medium text-neutral-900 dark:text-white">Alimentos cadastrados</h1>
             <div class="flex items-center space-x-2">
                 <!-- Search input -->
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                        <svg class="h-5 w-5 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <input wire:model.live.debounce.300ms="search" type="text" placeholder="Buscar..." class="pl-10 pr-4 py-2 border border-gray-200 dark:border-gray-700 rounded-lg w-full dark:bg-gray-700 dark:text-white text-sm">
+                    <input wire:model.live.debounce.300ms="search" type="text" placeholder="Buscar..." class="pl-10 pr-4 py-2 border border-neutral-200 dark:border-neutral-700 rounded-lg w-full dark:bg-neutral-700 dark:text-white text-sm">
                 </div>
                 
                 <!-- Action buttons -->
                 <button 
                     wire:click="openCreateFoodModal"
-                    class="flex items-center justify-center h-10 w-10 rounded-lg bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-200 hover:bg-indigo-200 dark:hover:bg-indigo-700 transition"
+                    class="inline-flex items-center p-2 bg-neutral-100 border border-transparent rounded-md font-semibold text-xs text-neutral-900 uppercase tracking-widest hover:bg-neutral-200 focus:bg-neutral-200 active:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-200 transition ease-in-out duration-150"
                 >
-                    <span class="text-xl font-semibold">+</span>
-                    <span class="sr-only">Adicionar alimento</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                 </button>
             </div>
         </div>
@@ -30,24 +29,24 @@
             <button class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded hover:bg-green-200 flex items-center">
                 <span>Todos</span>
             </button>
-            <button class="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 flex items-center gap-1">
+            <button class="px-2 py-1 text-xs bg-neutral-100 text-neutral-700 rounded hover:bg-neutral-200 flex items-center gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                 </svg>
                 <span>Filtrar</span>
             </button>
-            <button class="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 flex items-center gap-1">
+            <button class="px-2 py-1 text-xs bg-neutral-100 text-neutral-700 rounded hover:bg-neutral-200 flex items-center gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
                 </svg>
                 <span>Ordenar</span>
             </button>
-            <button class="p-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 flex items-center">
+            <button class="p-1 text-xs bg-neutral-100 text-neutral-700 rounded hover:bg-neutral-200 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
             </button>
-            <button class="p-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 flex items-center">
+            <button class="p-1 text-xs bg-neutral-100 text-neutral-700 rounded hover:bg-neutral-200 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                 </svg>
@@ -63,34 +62,26 @@
             @endif
             
             @forelse ($foods as $food)
-                <div class="bg-white dark:bg-gray-800 shadow-sm rounded-md border border-gray-100 dark:border-gray-700 overflow-hidden cursor-pointer" wire:click="openFoodEditModal({{ $food->id }})">
+                <div class="bg-white dark:bg-neutral-800 shadow-sm rounded-md border border-neutral-100 dark:border-neutral-700 overflow-hidden cursor-pointer" wire:click="openFoodEditModal({{ $food->id }})">
                     <div class="px-4 py-3 flex justify-between items-center">
                         <div class="flex items-center space-x-3">
                             <!-- Food icon based on type -->
                             <div class="flex-shrink-0">
-                                @if (strpos(strtolower($food->name), 'protein') !== false || strpos(strtolower($food->name), 'barra') !== false)
-                                    <div class="bg-red-100 rounded p-1"><span class="text-xl">🍫</span></div>
-                                @elseif (strpos(strtolower($food->name), 'shake') !== false || strpos(strtolower($food->name), 'fairlife') !== false)
-                                    <div class="bg-red-100 rounded p-1"><span class="text-xl">🥤</span></div>
-                                @elseif (strpos(strtolower($food->name), 'wrap') !== false || strpos(strtolower($food->name), 'carb') !== false)
-                                    <div class="bg-amber-100 rounded p-1"><span class="text-xl">🌯</span></div>
-                                @elseif (strpos(strtolower($food->name), 'queijo') !== false || strpos(strtolower($food->name), 'queso') !== false)
-                                    <div class="bg-yellow-100 rounded p-1"><span class="text-xl">🧀</span></div>
-                                @else
-                                    <div class="bg-green-100 rounded p-1"><span class="text-xl">🍽️</span></div>
-                                @endif
+                                <div class="bg-green-100 rounded p-2"><span class="text-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils-icon lucide-utensils text-green-600"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+                                </span></div>
                             </div>
                             
                             <!-- Food details -->
                             <div>
-                                <h3 class="text-sm font-medium text-gray-900 dark:text-white leading-tight">
+                                <h3 class="text-sm font-medium text-neutral-900 dark:text-white leading-tight">
                                     {{ floor($food->quantity) }}{{ strtolower($food->unit) == 'ml' || strtolower($food->unit) == 'gramas' ? 'g' : ' ' . $food->unit }} {{ $food->name }}
                                 </h3>
                                 <div class="mt-0.5">
-                                    <div class="text-xs text-blue-600 dark:text-blue-400 leading-tight">
+                                    <div class="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">
                                         {{ floor($food->protein) }}g prot · {{ floor($food->fat) }}g gord · {{ floor($food->carbohydrate) }}g carb · {{ floor($food->calories) }}kcal
                                     </div>
-                                    <a href="#" class="text-xs text-blue-600 dark:text-blue-400 underline">Tabela nutricional</a>
+                                    <a href="#" class="text-xs text-neutral-600 dark:text-neutral-400 underline">Tabela nutricional</a>
                                 </div>
                             </div>
                         </div>
@@ -98,171 +89,263 @@
                         <!-- Add button -->
                         <button 
                             wire:click.stop="openFoodDetailModal({{ $food->id }})" 
-                            class="h-8 w-8 flex-shrink-0 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:text-gray-800 hover:border-gray-300 focus:outline-none shadow-sm"
+                            class="text-xs p-2 flex-shrink-0 rounded-md bg-neutral-100 dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 hover:border-neutral-300 focus:outline-none space-x-2"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
+                            <span>Adicionar à refeição</span>
                         </button>
                     </div>
                 </div>
             @empty
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm rounded-lg">
-                    <div class="p-6 text-gray-500 dark:text-gray-400 text-center">
-                        Nenhum alimento encontrado. Clique no botão "Alimento" para adicionar um novo.
+                <div class="text-center py-12">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-neutral-100 dark:bg-neutral-700 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-neutral-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="mt-2 text-sm font-medium text-neutral-900 dark:text-neutral-100">Nenhum alimento encontrado</h3>
+                    <p class="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+                        Adicione um alimento para começar.
+                    </p>
+                    <div class="mt-6">
+                        <button 
+                            type="button" 
+                            wire:click="openCreateFoodModal"
+                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-300 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                        >
+                            <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                            </svg>
+                            Adicionar primeiro alimento
+                        </button>
                     </div>
                 </div>
             @endforelse
-            
-            <div class="mt-4">
-                {{ $foods->links() }}
-            </div>
         </div>
     </div>
     
     <!-- Create Food Modal -->    
-    <div x-data="{ show: @entangle('showCreateFoodModal') }" x-show="show" x-cloak
-         class="fixed inset-0 z-50 overflow-y-auto" 
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0">
-        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
-
+    <div 
+        x-data="{ show: @entangle('showCreateFoodModal') }" 
+        x-show="show" 
+        x-cloak
+        class="fixed inset-0 z-50 overflow-y-auto" 
+        x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+    >
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div 
-                @click.outside="show = false"
-                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full"
-                role="dialog" 
-                aria-modal="true" 
-                aria-labelledby="modal-headline">
-                
-                <!-- Modal Header -->    
-                <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Adicionar alimento</h3>
-                    <button type="button" @click="show = false" class="text-gray-400 hover:text-gray-500">
-                        <span class="sr-only">Close</span>
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                
-                <div class="px-4 py-4">
-                    <form wire:submit.prevent="save">
-                        <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Nome</label>
-                            <input type="text" wire:model="name" id="name" placeholder="Arroz, Feijão, etc." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            @error('name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="quantity" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Quantidade</label>
-                            <input type="number" wire:model="quantity" id="quantity" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            @error('quantity') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="unit" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Unidade</label>
-                            <input type="text" wire:model="unit" id="unit" placeholder="gramas, ml, etc." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            @error('unit') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="protein" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Proteína</label>
-                            <div class="mt-1 flex rounded-md">
-                                <input type="text" wire:model="protein" id="protein" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">
-                                    gramas
-                                </span>
+                x-show="show" 
+                x-transition:enter="ease-out duration-300" 
+                x-transition:enter-start="opacity-0" 
+                x-transition:enter-end="opacity-100" 
+                x-transition:leave="ease-in duration-200" 
+                x-transition:leave-start="opacity-100" 
+                x-transition:leave-end="opacity-0" 
+                class="fixed inset-0 transition-opacity"
+            >
+                <div class="absolute inset-0 bg-neutral-500/40 dark:bg-neutral-900"></div>
+            </div>
+            
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
+            
+            <div 
+                x-show="show" 
+                x-transition:enter="ease-out duration-300" 
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
+                x-transition:leave="ease-in duration-200" 
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                class="inline-block align-bottom bg-white dark:bg-neutral-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+            >
+                <form wire:submit.prevent="save">
+                    <div class="bg-white dark:bg-neutral-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                                <h3 class="text-lg leading-6 font-medium text-neutral-900 dark:text-neutral-100">
+                                    Adicionar Alimento
+                                </h3>
+                                <div class="mt-4 space-y-4">
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Nome</label>
+                                        <input 
+                                            type="text" 
+                                            wire:model="name" 
+                                            id="name" 
+                                            placeholder="Arroz, Feijão, etc." 
+                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                        >
+                                        @error('name') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="quantity" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Quantidade</label>
+                                        <div class="mt-1 flex rounded-md">
+                                            <input 
+                                                type="text" 
+                                                wire:model="quantity" 
+                                                id="quantity" 
+                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                            >
+                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
+                                                g
+                                            </span>
+                                        </div>
+                                        @error('quantity') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="unit" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Unidade</label>
+                                        <select 
+                                            wire:model="unit" 
+                                            id="unit" 
+                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                        >
+                                            <option value="">Selecione uma unidade</option>
+                                            <option value="gramas">Gramas</option>
+                                            <option value="ml">Mililitros</option>
+                                            <option value="unidade">Unidade</option>
+                                            <option value="fatia">Fatia</option>
+                                            <option value="colher">Colher</option>
+                                            <option value="xícara">Xícara</option>
+                                        </select>
+                                        @error('unit') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="protein" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Proteína</label>
+                                        <div class="mt-1 flex rounded-md">
+                                            <input 
+                                                type="number" 
+                                                step="0.01" 
+                                                wire:model="protein" 
+                                                id="protein" 
+                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                            >
+                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
+                                                g
+                                            </span>
+                                        </div>
+                                        @error('protein') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="fat" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Gordura</label>
+                                        <div class="mt-1 flex rounded-md">
+                                            <input 
+                                                type="number" 
+                                                step="0.01" 
+                                                wire:model="fat" 
+                                                id="fat" 
+                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                            >
+                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
+                                                g
+                                            </span>
+                                        </div>
+                                        @error('fat') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="carbohydrate" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Carboidrato</label>
+                                        <div class="mt-1 flex rounded-md">
+                                            <input 
+                                                type="number" 
+                                                step="0.01" 
+                                                wire:model="carbohydrate" 
+                                                id="carbohydrate" 
+                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                            >
+                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
+                                                g
+                                            </span>
+                                        </div>
+                                        @error('carbohydrate') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="calories" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Calorias</label>
+                                        <div class="mt-1 flex rounded-md">
+                                            <input 
+                                                type="number" 
+                                                step="0.01" 
+                                                wire:model="calories" 
+                                                id="calories" 
+                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                            >
+                                            <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
+                                                kcal
+                                            </span>
+                                        </div>
+                                        @error('calories') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
                             </div>
-                            @error('protein') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
-                        
-                        <div class="mb-4">
-                            <label for="fat" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Gordura</label>
-                            <div class="mt-1 flex rounded-md">
-                                <input type="text" wire:model="fat" id="fat" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">
-                                    gramas
-                                </span>
-                            </div>
-                            @error('fat') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="carbohydrate" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Carboidrato</label>
-                            <div class="mt-1 flex rounded-md">
-                                <input type="text" wire:model="carbohydrate" id="carbohydrate" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">
-                                    gramas
-                                </span>
-                            </div>
-                            @error('carbohydrate') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="fiber" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Fibras</label>
-                            <div class="mt-1 flex rounded-md">
-                                <input type="text" wire:model="fiber" id="fiber" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">
-                                    gramas
-                                </span>
-                            </div>
-                            @error('fiber') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="calories" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Calorias</label>
-                            <div class="mt-1 flex rounded-md">
-                                <input type="text" wire:model="calories" id="calories" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">
-                                    kcal
-                                </span>
-                            </div>
-                            @error('calories') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-                        
-                        <div class="mb-4">
-                            <label for="barcode" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Código de barras <span class="text-gray-400 text-xs">opcional</span></label>
-                            <input type="text" wire:model="barcode" id="barcode" placeholder="123456789012" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                            @error('barcode') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
-                        </div>
-                        
-                        <button type="submit" class="w-full py-2 px-4 border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    </div>
+                    
+                    <div class="bg-neutral-50 dark:bg-neutral-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button 
+                            type="submit" 
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                        >
                             Salvar
                         </button>
-                    </form>
-                </div>                
+                        <button 
+                            type="button" 
+                            wire:click="closeModals" 
+                            class="mt-3 w-full inline-flex justify-center rounded-md border border-neutral-300 dark:border-neutral-600 shadow-sm px-4 py-2 bg-white dark:bg-neutral-800 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                        >
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
     
     <!-- Food Detail Modal -->
     @if ($selectedFood)
-    <div x-data="{ show: @entangle('showFoodDetailModal') }" x-show="show" x-cloak
-         class="fixed inset-0 z-50 overflow-y-auto" 
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0">
+    <div 
+        x-data="{ show: @entangle('showFoodDetailModal') }" 
+        x-show="show" 
+        x-cloak
+        class="fixed inset-0 z-50 overflow-y-auto" 
+        x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+    >
         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            <div 
+                x-show="show" 
+                x-transition:enter="ease-out duration-300" 
+                x-transition:enter-start="opacity-0" 
+                x-transition:enter-end="opacity-100" 
+                x-transition:leave="ease-in duration-200" 
+                x-transition:leave-start="opacity-100" 
+                x-transition:leave-end="opacity-0" 
+                class="fixed inset-0 transition-opacity"
+            >
+                <div class="absolute inset-0 bg-neutral-500/40 dark:bg-neutral-900"></div>
             </div>
 
             <div 
                 @click.outside="show = false"
-                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full"
+                class="inline-block align-bottom bg-white dark:bg-neutral-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full"
                 role="dialog" 
                 aria-modal="true" 
-                aria-labelledby="modal-headline">
+                aria-labelledby="modal-headline"
+            >
                 
                 <!-- Modal Header -->
                 <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
@@ -278,17 +361,17 @@
                 <div class="px-6 py-4">
                     <!-- Food Title with Nutritional Info -->
                     <div class="text-center mb-6">
-                        <h2 class="text-xl font-medium text-gray-900 dark:text-white mb-1">{{ floor($selectedFood->quantity) }}g {{ $selectedFood->name }}</h2>
-                        <p class="text-sm text-gray-600 dark:text-gray-400">{{ floor($selectedFood->protein) }}g prot · {{ floor($selectedFood->fat) }}g gord · {{ floor($selectedFood->carbohydrate) }}g carb · {{ floor($selectedFood->calories) }}kcal</p>
+                        <h2 class="text-xl font-medium text-neutral-900 dark:text-neutral-100 mb-1">{{ floor($selectedFood->quantity) }}g {{ $selectedFood->name }}</h2>
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">{{ floor($selectedFood->protein) }}g prot · {{ floor($selectedFood->fat) }}g gord · {{ floor($selectedFood->carbohydrate) }}g carb · {{ floor($selectedFood->calories) }}kcal</p>
                     </div>
                     
                     <!-- Quantity Adjustment -->
                     <div class="mb-6">
-                        <label class="block text-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Alterar quantidade:</label>
+                        <label class="block text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">Alterar quantidade:</label>
                         <div class="flex items-center justify-center">
                             <button 
                                 wire:click="updateFoodQuantity({{ $foodQuantity - 5 }})" 
-                                class="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-l text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                                class="px-3 py-1 bg-neutral-200 dark:bg-neutral-700 rounded-l text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600"
                             >
                                 –
                             </button>
@@ -296,11 +379,11 @@
                                 type="number" 
                                 wire:model.debounce.500ms="foodQuantity" 
                                 min="5" 
-                                class="w-16 py-1 text-center border-t border-b border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                                class="w-16 py-1 text-center border-t border-b border-neutral-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white"
                             >
                             <button 
                                 wire:click="updateFoodQuantity({{ $foodQuantity + 5 }})" 
-                                class="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-r text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+                                class="px-3 py-1 bg-neutral-200 dark:bg-neutral-700 rounded-r text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600"
                             >
                                 +
                             </button>
@@ -309,12 +392,12 @@
                     
                     <!-- Used Recently Option -->
                     <div class="flex items-center justify-center mb-4">
-                        <input id="recently-used" type="checkbox" wire:model="recentlyUsed" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                        <label for="recently-used" class="ml-2 block text-sm text-gray-600 dark:text-gray-400">OK, usados recentemente</label>
+                        <input id="recently-used" type="checkbox" wire:model="recentlyUsed" class="h-4 w-4 text-green-600 border-neutral-300 rounded">
+                        <label for="recently-used" class="ml-2 block text-sm text-neutral-600 dark:text-neutral-400">OK, usados recentemente</label>
                     </div>
                     
                     <!-- No Records Message -->
-                    <div class="text-center text-sm text-gray-500 dark:text-gray-400 mb-6">
+                    <div class="text-center text-sm text-neutral-500 dark:text-neutral-400 mb-6">
                         Sem registros
                     </div>
                     
@@ -324,7 +407,7 @@
                             <button 
                                 @click="open = !open" 
                                 type="button" 
-                                class="w-full flex items-center justify-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                class="w-full flex items-center justify-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                             >
                                 <span>Adicionar em {{ $selectedMeal }}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
@@ -354,7 +437,7 @@
                     
                     <!-- Records Table -->
                     <div>
-                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-200 mb-3">Registros do alimento: 1</h3>
+                        <h3 class="text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-3">Registros do alimento: 1</h3>
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>
                                 <tr>
@@ -389,25 +472,39 @@
     
     <!-- Food Edit Modal -->
     @if($selectedFood && $showFoodEditModal)
-    <div x-data="{ show: @entangle('showFoodEditModal') }" x-show="show" x-cloak
-         class="fixed inset-0 z-50 overflow-y-auto" 
-         x-transition:enter="transition ease-out duration-300"
-         x-transition:enter-start="opacity-0"
-         x-transition:enter-end="opacity-100"
-         x-transition:leave="transition ease-in duration-200"
-         x-transition:leave-start="opacity-100"
-         x-transition:leave-end="opacity-0">
+    <div 
+        x-data="{ show: @entangle('showFoodEditModal') }" 
+        x-show="show" 
+        x-cloak
+        class="fixed inset-0 z-50 overflow-y-auto" 
+        x-transition:enter="ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+    >
         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            <div 
+                x-show="show" 
+                x-transition:enter="ease-out duration-300" 
+                x-transition:enter-start="opacity-0" 
+                x-transition:enter-end="opacity-100" 
+                x-transition:leave="ease-in duration-200" 
+                x-transition:leave-start="opacity-100" 
+                x-transition:leave-end="opacity-0" 
+                class="fixed inset-0 transition-opacity"
+            >
+                <div class="absolute inset-0 bg-neutral-500/40 dark:bg-neutral-900"></div>
             </div>
 
             <div 
                 @click.outside="show = false"
-                class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full"
+                class="inline-block align-bottom bg-white dark:bg-neutral-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full"
                 role="dialog" 
                 aria-modal="true" 
-                aria-labelledby="modal-headline">
+                aria-labelledby="modal-headline"
+            >
                 
                 <!-- Modal Header with Close Button -->
                 <div class="flex justify-end p-2">
@@ -422,12 +519,12 @@
                 <div class="px-4 pb-6">
                     <!-- Food Header with Image and Title -->
                     <div class="flex items-center justify-center mb-4">
-                        <div class="w-12 h-12 bg-gray-200 rounded mr-3 flex items-center justify-center overflow-hidden">
+                        <div class="w-12 h-12 bg-neutral-200 dark:bg-neutral-700 rounded mr-3 flex items-center justify-center overflow-hidden">
                             <img src="https://via.placeholder.com/50" alt="{{ $selectedFood->name }}" class="w-full h-full object-cover">
                         </div>
                         <div class="text-center">
-                            <h2 class="text-lg font-medium text-gray-900 dark:text-white">{{ $quantity }}g {{ $name }}</h2>
-                            <div class="flex items-center text-sm text-gray-500">
+                            <h2 class="text-lg font-medium text-neutral-900 dark:text-neutral-100">{{ $quantity }}g {{ $name }}</h2>
+                            <div class="flex items-center text-sm text-neutral-500">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
@@ -444,36 +541,36 @@
                         <div class="space-y-4">
                             <!-- Name Field -->
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
+                                <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Name</label>
                                 <div class="relative">
                                     <input 
                                         type="text" 
                                         wire:model="name" 
-                                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                     >
-                                    <button type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-red-500">
+                                    <button type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-red-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
                                         </svg>
                                     </button>
                                 </div>
                                 <div class="text-xs text-gray-500 mt-1">Adicionado via WhatsApp</div>
-                                @error('name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                @error('name') <span class="text-red-300 text-xs">{{ $message }}</span> @enderror
                             </div>
                             
                             <!-- Quantity Field -->
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Quantidade</label>
+                                <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Quantidade</label>
                                 <div class="flex">
                                     <input 
                                         type="number" 
                                         wire:model="quantity" 
                                         step="0.1"
-                                        class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                     >
-                                    <span class="inline-flex items-center px-3 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">g</span>
+                                    <span class="inline-flex items-center px-3 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">g</span>
                                 </div>
-                                @error('quantity') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                @error('quantity') <span class="text-red-300 text-xs">{{ $message }}</span> @enderror
                             </div>
                             
                             <!-- Quick Quantity Options -->
@@ -490,82 +587,82 @@
                             <div>
                                 <div class="grid grid-cols-3 gap-2">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Proteína</label>
+                                        <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Proteína</label>
                                         <div class="flex">
                                             <input 
                                                 type="number" 
                                                 wire:model="protein"
                                                 step="0.1"
-                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                             >
-                                            <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-xs dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
+                                            <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
                                         </div>
-                                        @error('protein') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                        @error('protein') <span class="text-red-300 text-xs">{{ $message }}</span> @enderror
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gordura</label>
+                                        <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Gordura</label>
                                         <div class="flex">
                                             <input 
                                                 type="number" 
                                                 wire:model="fat"
                                                 step="0.1"
-                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                             >
-                                            <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-xs dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
+                                            <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
                                         </div>
-                                        @error('fat') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                        @error('fat') <span class="text-red-300 text-xs">{{ $message }}</span> @enderror
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Carboidrato</label>
+                                        <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Carboidrato</label>
                                         <div class="flex">
                                             <input 
                                                 type="number" 
                                                 wire:model="carbohydrate"
                                                 step="0.1"
-                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                             >
-                                            <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-xs dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
+                                            <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
                                         </div>
-                                        @error('carbohydrate') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                        @error('carbohydrate') <span class="text-red-300 text-xs">{{ $message }}</span> @enderror
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Fibras</label>
+                                        <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Fibras</label>
                                         <div class="flex">
                                             <input 
                                                 type="number" 
                                                 wire:model="fiber"
                                                 step="0.1"
-                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                             >
-                                            <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-xs dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
+                                            <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
                                         </div>
-                                        @error('fiber') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                        @error('fiber') <span class="text-red-300 text-xs">{{ $message }}</span> @enderror
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Calorias</label>
+                                        <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Calorias</label>
                                         <div class="flex">
                                             <input 
                                                 type="number" 
                                                 wire:model="calories"
                                                 step="1"
-                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                             >
-                                            <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-xs dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">kcal</span>
+                                            <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">kcal</span>
                                         </div>
-                                        @error('calories') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                                        @error('calories') <span class="text-red-300 text-xs">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
                             
                             <!-- Action Buttons -->
                             <div class="pt-4 flex justify-center">
-                                <button type="button" wire:click="delete({{ $selectedFood->id }})" class="flex items-center px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 focus:outline-none mr-2">
+                                <button type="button" wire:click="delete({{ $selectedFood->id }})" class="flex items-center px-4 py-2 bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 sm:ml-3 sm:w-auto sm:text-sm">
                                     <span>Excluir</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0111 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
                                     </svg>
                                 </button>
-                                <button type="submit" class="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none">
+                                <button type="submit" class="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
                                     <span>Salvar</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -577,7 +674,7 @@
                     
                     <!-- Records Section -->
                     <div class="mt-8">
-                        <h3 class="text-sm font-medium text-gray-800 dark:text-gray-200 mb-3">Registros do alimento: 1</h3>
+                        <h3 class="text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-3">Registros do alimento: 1</h3>
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead>
                                 <tr>
