@@ -27,6 +27,11 @@ class Index extends Component
     public $editingMealItem = null;
     public $editQuantity = '';
     public $editNotes = '';
+    public $editProtein = '';
+    public $editFat = '';
+    public $editCarbohydrate = '';
+    public $editFiber = '';
+    public $editCalories = '';
     
     public function mount()
     {
@@ -116,6 +121,14 @@ class Index extends Component
             $this->editingMealItem = $mealItem;
             $this->editQuantity = $mealItem->quantity;
             $this->editNotes = $mealItem->notes ?? '';
+            
+            // Set nutrition values based on current quantity
+            $this->editProtein = round($mealItem->food->protein * $mealItem->quantity, 1);
+            $this->editFat = round($mealItem->food->fat * $mealItem->quantity, 1);
+            $this->editCarbohydrate = round($mealItem->food->carbohydrate * $mealItem->quantity, 1);
+            $this->editFiber = round(($mealItem->food->fiber ?? 0) * $mealItem->quantity, 1);
+            $this->editCalories = round($mealItem->food->calories * $mealItem->quantity, 1);
+            
             $this->showEditModal = true;
         }
     }
@@ -124,13 +137,28 @@ class Index extends Component
     {
         $this->validate([
             'editQuantity' => 'required|numeric|min:0.1',
-            'editNotes' => 'nullable|string|max:255'
+            'editNotes' => 'nullable|string|max:255',
+            'editProtein' => 'required|numeric|min:0',
+            'editFat' => 'required|numeric|min:0',
+            'editCarbohydrate' => 'required|numeric|min:0',
+            'editFiber' => 'required|numeric|min:0',
+            'editCalories' => 'required|numeric|min:0',
         ]);
 
         if ($this->editingMealItem) {
+            // Update the meal item
             $this->editingMealItem->update([
                 'quantity' => $this->editQuantity,
                 'notes' => $this->editNotes,
+            ]);
+
+            // Update the food's nutrition values per unit
+            $this->editingMealItem->food->update([
+                'protein' => $this->editQuantity > 0 ? $this->editProtein / $this->editQuantity : 0,
+                'fat' => $this->editQuantity > 0 ? $this->editFat / $this->editQuantity : 0,
+                'carbohydrate' => $this->editQuantity > 0 ? $this->editCarbohydrate / $this->editQuantity : 0,
+                'fiber' => $this->editQuantity > 0 ? $this->editFiber / $this->editQuantity : 0,
+                'calories' => $this->editQuantity > 0 ? $this->editCalories / $this->editQuantity : 0,
             ]);
 
             $this->closeEditModal();
@@ -145,6 +173,11 @@ class Index extends Component
         $this->editingMealItem = null;
         $this->editQuantity = '';
         $this->editNotes = '';
+        $this->editProtein = '';
+        $this->editFat = '';
+        $this->editCarbohydrate = '';
+        $this->editFiber = '';
+        $this->editCalories = '';
         $this->resetValidation();
     }
     
