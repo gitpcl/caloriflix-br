@@ -333,7 +333,7 @@
                 <!-- Protein Box -->
                 <div class="relative overflow-hidden rounded-lg bg-white shadow dark:bg-zinc-700 dark:shadow-zinc-700/20">
                     <div class="p-5">
-                        <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Proteína ingerida em {{ $period_type }}</div>
+                        <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Proteína</div>
                         <div class="mt-1 flex items-baseline justify-between">
                             <div class="text-2xl font-semibold text-gray-900 dark:text-white">{{ $nutrient_macros['protein'] }}g</div>
                             <div class="inline-flex items-baseline rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 dark:bg-green-800/20 dark:text-green-500">
@@ -350,7 +350,7 @@
                 <div class="relative overflow-hidden rounded-lg bg-white shadow dark:bg-zinc-700 dark:shadow-zinc-700/20">
                     <div class="p-5">
                         <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">
-                            Carboidratos por dia
+                            Carboidratos
                         </div>
                         <div class="mt-1 flex items-baseline justify-between">
                             <div class="text-2xl font-semibold text-gray-900 dark:text-white">{{ $nutrient_macros['carbs'] }}g</div>
@@ -367,7 +367,7 @@
                 <!-- Fats Box -->
                 <div class="relative overflow-hidden rounded-lg bg-white shadow dark:bg-zinc-700 dark:shadow-zinc-700/20">
                     <div class="p-5">
-                        <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Gordura ingerida por dia</div>
+                        <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Gordura</div>
                         <div class="mt-1 flex items-baseline justify-between">
                             <div class="text-2xl font-semibold text-gray-900 dark:text-white">{{ $nutrient_macros['fat'] }}g</div>
                             <div class="inline-flex items-baseline rounded-full bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800 dark:bg-blue-800/20 dark:text-blue-500">
@@ -383,12 +383,14 @@
                 <!-- Calories Box -->
                 <div class="relative overflow-hidden rounded-lg bg-white shadow dark:bg-zinc-700 dark:shadow-zinc-700/20">
                     <div class="p-5">
-                        <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Calorias ingeridas por dia</div>
+                        <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Déficit calórico total</div>
                         <div class="mt-1 flex items-baseline justify-between">
-                            <div class="text-2xl font-semibold text-gray-900 dark:text-white">{{ $nutrient_macros['calories'] }} kcal</div>
+                            <div class="text-2xl font-semibold {{ $this->getCaloricDeficitColor() }}">
+                                {{ $this->getCaloricDeficitFormatted() }}
+                            </div>
                         </div>
                         <div class="mt-4 text-sm text-gray-500 dark:text-gray-400">
-                            Item: valores médios por data
+                            Meta: {{ number_format($daily_calorie_goal) }} kcal/dia
                         </div>
                     </div>
                 </div>

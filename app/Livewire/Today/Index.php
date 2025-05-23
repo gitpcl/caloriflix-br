@@ -163,6 +163,10 @@ class Index extends Component
 
             $this->closeEditModal();
             $this->loadMeals();
+            
+            // Dispatch event to refresh reports
+            $this->dispatch('meal-item-updated');
+            
             session()->flash('message', 'Item atualizado com sucesso!');
         }
     }

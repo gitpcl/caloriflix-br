@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\On;
 
 class Index extends Component
 {
@@ -33,6 +34,8 @@ class Index extends Component
     public int $water_amount = 250;
     public string $water_date;
     public array $period_options = ['daily', 'weekly', 'monthly', 'custom'];
+    public int $daily_calorie_goal = 2000;
+    public float $caloric_deficit = 0;
 
     public function mount()
     {
@@ -276,6 +279,7 @@ class Index extends Component
             'calories' => 0
         ];
         $this->water_consumption = 0;
+        $this->caloric_deficit = 0;
         
         // Different date ranges based on period type
         $start_date = null;
@@ -311,6 +315,9 @@ class Index extends Component
         
         // Pull water consumption data
         $this->loadWaterConsumptionData($user_id, $start_date, $end_date);
+        
+        // Calculate caloric deficit
+        $this->calculateCaloricDeficit($user_id, $start_date, $end_date);
     }
     
     protected function loadMealData($user_id, $start_date, $end_date)
@@ -385,6 +392,46 @@ class Index extends Component
             // For weekly/monthly/custom, show daily average
             $this->water_consumption = $days_with_data > 0 ? round($total_water / $days_with_data) : 0;
         }
+    }
+    
+    protected function calculateCaloricDeficit($user_id, $start_date, $end_date)
+    {
+        $total_calories = MealItem::join('meals', 'meal_items.meal_id', '=', 'meals.id')
+            ->join('foods', 'meal_items.food_id', '=', 'foods.id')
+            ->where('meals.user_id', $user_id)
+            ->whereBetween('meals.meal_date', [
+                $start_date->format('Y-m-d'), 
+                $end_date->format('Y-m-d')
+            ])
+            ->sum(DB::raw('foods.calories * meal_items.quantity'));
+        
+        // For non-daily periods, calculate daily average
+        if ($this->period_type === 'daily') {
+            $this->caloric_deficit = $this->daily_calorie_goal - $total_calories;
+        } else {
+            $total_days = max(1, $start_date->diffInDays($end_date) + 1);
+            $average_daily_calories = $total_calories / $total_days;
+            $this->caloric_deficit = $this->daily_calorie_goal - $average_daily_calories;
+        }
+    }
+    
+    public function getCaloricDeficitColor()
+    {
+        return $this->caloric_deficit >= 0 ? 'text-green-400' : 'text-red-400';
+    }
+    
+    public function getCaloricDeficitFormatted()
+    {
+        $sign = $this->caloric_deficit > 0 ? '+' : '';
+        return $sign . number_format($this->caloric_deficit, 0) . ' kcal';
+    }
+    
+    #[On('meal-updated')]
+    #[On('meal-item-updated')]
+    #[On('meal-item-deleted')]
+    public function refreshReports()
+    {
+        $this->loadReportData();
     }
     
     public function getMacroTotal()
