@@ -23,6 +23,6 @@ class MealItem extends Model
 
     public function food()
     {
-        return $this->belongsTo(Food::class);
+        return $this->belongsTo(Food::class, 'food_id', 'id');
     }
 }

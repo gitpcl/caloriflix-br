@@ -16,10 +16,10 @@ class Index extends Component
     public $meals = [];
     public $date;
     public $mealTypes = [
-        'Café da manhã',
-        'Almoço',
-        'Lanche da tarde',
-        'Jantar'
+        'cafe_da_manha',
+        'almoco',
+        'lanche_da_tarde',
+        'jantar'
     ];
     
     public function mount()
@@ -84,6 +84,33 @@ class Index extends Component
     {
         $this->date = Carbon::today()->format('Y-m-d');
         $this->loadMeals();
+    }
+    
+    public function getMealDisplayName($mealType)
+    {
+        $displayNames = [
+            'cafe_da_manha' => 'Café da manhã',
+            'almoco' => 'Almoço',
+            'lanche_da_tarde' => 'Lanche da tarde',
+            'jantar' => 'Jantar',
+        ];
+        
+        return $displayNames[$mealType] ?? $mealType;
+    }
+    
+    public function deleteMealItem($mealItemId)
+    {
+        $mealItem = MealItem::where('id', $mealItemId)
+            ->whereHas('meal', function($query) {
+                $query->where('user_id', Auth::id());
+            })
+            ->first();
+
+        if ($mealItem) {
+            $mealItem->delete();
+            $this->loadMeals(); // Reload meals to update the display
+            session()->flash('message', 'Item removido com sucesso!');
+        }
     }
     
     #[Title('Hoje')]
