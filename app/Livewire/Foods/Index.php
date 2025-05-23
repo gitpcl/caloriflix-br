@@ -15,6 +15,10 @@ class Index extends Component
     
     public string $search = '';
     
+    // Filter functionality
+    public string $sourceFilter = 'all';
+    public bool $showFilterDropdown = false;
+    
     // Mass delete functionality
     public array $selectedFoods = [];
     public bool $selectAll = false;
@@ -76,6 +80,7 @@ class Index extends Component
      */
     protected $queryString = [
         'search' => ['except' => ''],
+        'sourceFilter' => ['except' => 'all'],
     ];
     
     /**
@@ -97,13 +102,18 @@ class Index extends Component
     {
         $search = '%' . $this->search . '%';
         
-        return Food::query()
+        $query = Food::query()
             ->where('user_id', Auth::id())
             ->where(function ($query) use ($search) {
                 $query->where('name', 'like', $search);
-            })
-            ->latest()
-            ->paginate(10);
+            });
+            
+        // Apply source filter
+        if ($this->sourceFilter !== 'all') {
+            $query->where('source', $this->sourceFilter);
+        }
+        
+        return $query->latest()->paginate(10);
     }
     
     /**
@@ -253,6 +263,7 @@ class Index extends Component
             'fiber' => $this->fiber,
             'calories' => $this->calories,
             'barcode' => $this->barcode,
+            'source' => 'manual',
         ]);
         
         $this->reset([
@@ -361,6 +372,29 @@ class Index extends Component
     public function toggleSelectionMode(): void
     {
         $this->selectionMode = !$this->selectionMode;
+    }
+    
+    /**
+     * Toggle filter dropdown.
+     *
+     * @return void
+     */
+    public function toggleFilterDropdown(): void
+    {
+        $this->showFilterDropdown = !$this->showFilterDropdown;
+    }
+    
+    /**
+     * Set source filter.
+     *
+     * @param string $filter
+     * @return void
+     */
+    public function setSourceFilter(string $filter): void
+    {
+        $this->sourceFilter = $filter;
+        $this->showFilterDropdown = false;
+        $this->resetPage();
     }
     
     /**

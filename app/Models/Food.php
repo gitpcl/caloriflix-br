@@ -25,6 +25,7 @@ class Food extends Model
         'calories',
         'barcode',
         'is_favorite',
+        'source',
     ];
 
     protected $casts = [
@@ -35,6 +36,7 @@ class Food extends Model
         'fiber' => 'decimal:2',
         'calories' => 'decimal:2',
         'is_favorite' => 'boolean',
+        'source' => 'string',
     ];
 
     /**

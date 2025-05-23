@@ -70,12 +70,82 @@
                     Selecionar
                 </button>
                 
-                <button class="px-3 py-1 text-xs bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
-                    </svg>
-                    Filtros
-                </button>
+                <!-- Filter Dropdown -->
+                <div class="relative" x-data="{ open: @entangle('showFilterDropdown') }">
+                    <button 
+                        wire:click="toggleFilterDropdown"
+                        class="px-3 py-1 text-xs {{ $sourceFilter !== 'all' ? 'bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200' : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400' }} border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
+                        </svg>
+                        Filtros
+                        @if($sourceFilter !== 'all')
+                            <span class="ml-1 text-xs bg-green-500 text-white rounded-full px-1">1</span>
+                        @endif
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div 
+                        x-show="open" 
+                        x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="transform opacity-0 scale-95"
+                        x-transition:enter-end="transform opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-75"
+                        x-transition:leave-start="transform opacity-100 scale-100"
+                        x-transition:leave-end="transform opacity-0 scale-95"
+                        @click.away="open = false"
+                        class="absolute right-0 mt-2 w-64 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-600 rounded-lg shadow-lg z-50"
+                    >
+                        <div class="py-2">
+                            <div class="px-4 py-2 text-xs font-medium text-neutral-500 dark:text-neutral-400 border-b border-neutral-200 dark:border-neutral-600">
+                                Filtrar por origem
+                            </div>
+                            
+                            <button 
+                                wire:click="setSourceFilter('all')"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'all' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                            >
+                                @if($sourceFilter === 'all')
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                @else
+                                    <div class="w-4 h-4 mr-2"></div>
+                                @endif
+                                Todos
+                            </button>
+                            
+                            <button 
+                                wire:click="setSourceFilter('manual')"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'manual' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                            >
+                                @if($sourceFilter === 'manual')
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                @else
+                                    <div class="w-4 h-4 mr-2"></div>
+                                @endif
+                                Adicionados Manualmente
+                            </button>
+                            
+                            <button 
+                                wire:click="setSourceFilter('whatsapp')"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'whatsapp' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                            >
+                                @if($sourceFilter === 'whatsapp')
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                @else
+                                    <div class="w-4 h-4 mr-2"></div>
+                                @endif
+                                Adicionados via WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 
                 <button class="px-3 py-1 text-xs bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
