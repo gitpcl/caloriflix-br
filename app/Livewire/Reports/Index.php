@@ -19,6 +19,7 @@ class Index extends Component
     public string $custom_start_date = '';
     public string $custom_end_date = '';
     public bool $show_custom_modal = false;
+    public bool $show_water_modal = false;
     public string $date_mode = 'absolute'; // 'absolute' or 'relative'
     public int $relative_amount = 7;
     public string $relative_unit = 'days'; // 'days', 'weeks', 'months'
@@ -29,11 +30,15 @@ class Index extends Component
         'calories' => 0
     ];
     public float $water_consumption = 0;
+    public int $water_amount = 250;
+    public string $water_date;
     public array $period_options = ['daily', 'weekly', 'monthly', 'custom'];
 
     public function mount()
     {
+        $this->period_type = 'daily';
         $this->current_date = now()->format('Y-m-d');
+        $this->water_date = now()->format('Y-m-d');
         $this->loadReportData();
     }
 
@@ -113,6 +118,18 @@ class Index extends Component
         if ($this->period_type === 'custom' && (empty($this->custom_start_date) || empty($this->custom_end_date))) {
             $this->period_type = 'daily';
         }
+    }
+    
+    public function openWaterModal()
+    {
+        $this->show_water_modal = true;
+        $this->water_amount = 250;
+        $this->water_date = now()->format('Y-m-d');
+    }
+    
+    public function closeWaterModal()
+    {
+        $this->show_water_modal = false;
     }
     
     public function applyCustomRange()
@@ -204,6 +221,48 @@ class Index extends Component
         $this->custom_end_date = $end_date->format('Y-m-d\TH:i');
     }
     
+    public function addWaterEntry()
+    {
+        // Validate inputs
+        $this->validate([
+            'water_amount' => 'required|integer|min:1|max:5000',
+            'water_date' => 'required|date'
+        ]);
+        
+        $user_id = Auth::id();
+        
+        // Ensure date is in correct format (Y-m-d) without time
+        $date = Carbon::parse($this->water_date)->format('Y-m-d');
+        
+        // Use DB::table to avoid any model casting issues
+        $existingEntry = DB::table('diaries')
+            ->where('user_id', $user_id)
+            ->whereDate('date', $date)
+            ->first();
+        
+        if ($existingEntry) {
+            // Update existing entry
+            DB::table('diaries')
+                ->where('user_id', $user_id)
+                ->whereDate('date', $date)
+                ->increment('water', $this->water_amount);
+        } else {
+            // Create new entry
+            DB::table('diaries')->insert([
+                'user_id' => $user_id,
+                'date' => $date,
+                'water' => $this->water_amount,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        }
+        
+        $this->show_water_modal = false;
+        $this->loadReportData();
+        
+        session()->flash('message', "Adicionados {$this->water_amount}ml de água para " . Carbon::parse($this->water_date)->format('d/m/Y'));
+    }
+    
     protected function loadReportData()
     {
         $user_id = Auth::id();
@@ -265,12 +324,6 @@ class Index extends Component
             ->with(['mealItems.food'])
             ->get();
             
-        if ($meals->isEmpty()) {
-            // No meals found, generate sample data
-            $this->generateSampleMacroData();
-            return;
-        }
-        
         // Initialize counters
         $total_protein = 0;
         $total_carbs = 0;
@@ -281,18 +334,20 @@ class Index extends Component
         $days_with_meals = $meals->groupBy('meal_date')->count();
         $total_days = max(1, $start_date->diffInDays($end_date) + 1);
         
-        // Get meal item totals
-        foreach ($meals as $meal) {
-            foreach ($meal->mealItems as $item) {
-                $food = $item->food;
-                if ($food) {
-                    // Convert quantity to proper multiplier (assuming quantity is in grams and food nutrition is per 100g)
-                    $multiplier = $item->quantity / 100;
-                    
-                    $total_protein += ($food->protein ?? 0) * $multiplier;
-                    $total_carbs += ($food->carbohydrate ?? 0) * $multiplier; 
-                    $total_fat += ($food->fat ?? 0) * $multiplier;
-                    $total_calories += ($food->calories ?? 0) * $multiplier;
+        // Get meal item totals only if meals exist
+        if ($meals->isNotEmpty()) {
+            foreach ($meals as $meal) {
+                foreach ($meal->mealItems as $item) {
+                    $food = $item->food;
+                    if ($food) {
+                        // Convert quantity to proper multiplier (assuming quantity is in grams and food nutrition is per 100g)
+                        $multiplier = $item->quantity / 100;
+                        
+                        $total_protein += ($food->protein ?? 0) * $multiplier;
+                        $total_carbs += ($food->carbohydrate ?? 0) * $multiplier; 
+                        $total_fat += ($food->fat ?? 0) * $multiplier;
+                        $total_calories += ($food->calories ?? 0) * $multiplier;
+                    }
                 }
             }
         }
@@ -312,20 +367,12 @@ class Index extends Component
     {
         // Check if there's a Diary model with water consumption data
         $waterEntries = Diary::where('user_id', $user_id)
-            ->whereBetween('date', [
-                $start_date->format('Y-m-d'), 
-                $end_date->format('Y-m-d')
-            ])
+            ->whereDate('date', '>=', $start_date->format('Y-m-d'))
+            ->whereDate('date', '<=', $end_date->format('Y-m-d'))
             ->whereNotNull('water')
             ->where('water', '>', 0)
             ->get();
             
-        if ($waterEntries->isEmpty()) {
-            // No water data found, generate sample
-            $this->water_consumption = rand(500, 2500);
-            return;
-        }
-        
         // Calculate water consumption based on period type
         $total_water = $waterEntries->sum('water');
         $total_days = max(1, $start_date->diffInDays($end_date) + 1);
@@ -339,19 +386,6 @@ class Index extends Component
             $this->water_consumption = $days_with_data > 0 ? round($total_water / $days_with_data) : 0;
         }
     }
-    
-    protected function generateSampleMacroData()
-    {
-        // Generate random sample data for demonstration purposes
-        $this->nutrient_macros = [
-            'protein' => rand(30, 120),
-            'carbs' => rand(100, 250),
-            'fat' => rand(30, 90),
-            'calories' => rand(1500, 2500)
-        ];
-    }
-    
-    // Glycemic functionality removed - will be implemented in the future
     
     public function getMacroTotal()
     {
