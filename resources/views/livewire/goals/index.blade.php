@@ -27,7 +27,7 @@
         }
     }" 
     x-cloak
-    class="goals-component"
+    class="py-6 max-w-4xl mx-auto"
 >
     <!-- Notification -->
     <div 
@@ -45,7 +45,7 @@
             :class="{ 
                 'bg-green-50 border-green-500': notificationType === 'success',
                 'bg-red-50 border-red-500': notificationType === 'error',
-                'bg-blue-50 border-blue-500': notificationType === 'info'
+                'bg-green-50 border-green-500': notificationType === 'info'
             }"
             class="max-w-sm w-full border-l-4 shadow-lg rounded-lg pointer-events-auto"
         >
@@ -72,7 +72,7 @@
                         </svg>
                         <svg 
                             x-show="notificationType === 'info'"
-                            class="h-6 w-6 text-blue-400" 
+                            class="h-6 w-6 text-green-400" 
                             fill="none" 
                             viewBox="0 0 24 24" 
                             stroke="currentColor"
@@ -85,7 +85,7 @@
                             :class="{ 
                                 'text-green-800': notificationType === 'success',
                                 'text-red-800': notificationType === 'error',
-                                'text-blue-800': notificationType === 'info'
+                                'text-green-800': notificationType === 'info'
                             }"
                             class="text-sm font-medium" 
                             x-text="notificationMessage"
@@ -108,25 +108,43 @@
     </div>
     
     <!-- Main Content -->
-    <div class="space-y-6">
+    <div>
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-2xl font-semibold mb-4">Minhas Metas</h1>
+        </div>
+        
+        @if (session()->has('message'))
+            <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
+                {{ session('message') }}
+            </div>
+        @endif
+        
+        <div class="space-y-4">
         <!-- Profile Section (Accordion) -->
-        <div class="mb-6 bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <div class="flex justify-between items-center p-4 cursor-pointer" wire:click="toggleProfile">
-                <div class="flex items-center gap-3">
-                    <span class="text-gray-600">👤</span>
+        <div x-data="{ open: {{ $profileExpanded ? 'true' : 'false' }} }" class="bg-white rounded-lg shadow overflow-hidden">
+            <!-- Accordion Header -->
+            <div @click="open = !open; $wire.toggleProfile()" class="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50">
+                <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600 lucide lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     <div>
-                        <h3 class="font-medium text-gray-900">Perfil</h3>
-                        <p class="text-sm text-gray-500">Complete seu perfil para maior precisão</p>
+                        <h3 class="text-lg font-medium">Meu Perfil</h3>
+                        <p class="text-sm text-gray-500">Dados pessoais e preferências</p>
                     </div>
                 </div>
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform" :class="{'rotate-180': $wire.profileExpanded}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </div>
+                <!-- Chevron icon that rotates -->
+                <svg 
+                    class="w-5 h-5 text-gray-500 transition-transform duration-200" 
+                    :class="{'rotate-180': open}" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 20 20" 
+                    fill="currentColor"
+                >
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
             </div>
             
-            <div x-show="$wire.profileExpanded" class="p-4 border-t border-gray-200" style="display: none;">
+            <!-- Accordion Content -->
+            <div x-show="open" x-transition class="p-4 border-t border-gray-100">
                 <form wire:submit.prevent="saveProfile">
                     <div class="space-y-4">
                         <!-- Error messages -->
@@ -158,7 +176,7 @@
                         <div>
                             <label for="weight" class="block text-sm font-medium text-gray-700">Seu peso</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" step="0.1" id="weight" wire:model="weight" class="block w-full pr-16 sm:text-sm border-gray-300 rounded-md" placeholder="0.0">
+                                <input type="number" step="0.1" id="weight" wire:model="weight" class="block w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0.0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">quilogramas (kg)</span>
                                 </div>
@@ -169,7 +187,7 @@
                         <div>
                             <label for="height" class="block text-sm font-medium text-gray-700">Sua altura</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="height" wire:model="height" class="block w-full pr-16 sm:text-sm border-gray-300 rounded-md" placeholder="0">
+                                <input type="number" id="height" wire:model="height" class="block w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">centímetros (cm)</span>
                                 </div>
@@ -179,7 +197,7 @@
                         <!-- Gender Field -->
                         <div>
                             <label for="gender" class="block text-sm font-medium text-gray-700">Gênero</label>
-                            <select id="gender" wire:model="gender" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                            <select id="gender" wire:model="gender" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md">
                                 <option value="Masculino">Masculino</option>
                                 <option value="Feminino">Feminino</option>
                             </select>
@@ -189,7 +207,7 @@
                         <div>
                             <label for="age" class="block text-sm font-medium text-gray-700">Idade</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="age" wire:model="age" class="block w-full pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0">
+                                <input type="number" id="age" wire:model="age" class="block w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">anos</span>
                                 </div>
@@ -199,7 +217,7 @@
                         <!-- Activity Level Field -->
                         <div>
                             <label for="activityLevel" class="block text-sm font-medium text-gray-700">Nível de Atividade <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">novo</span></label>
-                            <select id="activityLevel" wire:model="activityLevel" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                            <select id="activityLevel" wire:model="activityLevel" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md">
                                 <option value="Sedentário">Sedentário</option>
                                 <option value="Levemente ativo">Levemente ativo</option>
                                 <option value="Moderadamente ativo">Moderadamente ativo</option>
@@ -228,7 +246,7 @@
                                 </div>
                                 <button 
                                     type="button"
-                                    class="relative inline-flex items-center h-6 rounded-full w-11 {{ $useBasalMetabolicRate ? 'bg-blue-600' : 'bg-gray-200' }}"
+                                    class="relative inline-flex items-center h-6 rounded-full w-11 {{ $useBasalMetabolicRate ? 'bg-green-600' : 'bg-gray-200' }}"
                                     wire:click="$toggle('useBasalMetabolicRate')"
                                 >
                                     <span class="sr-only">Toggle BMR</span>
@@ -238,7 +256,7 @@
                         </div>
                         
                         <div class="flex justify-end mt-4">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition">
                                 Salvar perfil
                             </button>
                         </div>
@@ -248,30 +266,37 @@
         </div>
         
         <!-- Goals Section (Accordion) -->
-        <div class="mb-6 bg-white rounded-lg border border-gray-200 overflow-hidden">
-            <div class="flex justify-between items-center p-4 cursor-pointer" wire:click="toggleGoals">
-                <div class="flex items-center gap-3">
-                    <span class="text-gray-600">🎯</span>
+        <div x-data="{ open: {{ $goalsExpanded ? 'true' : 'false' }} }" class="bg-white rounded-lg shadow overflow-hidden">
+            <!-- Accordion Header -->
+            <div @click="open = !open; $wire.toggleGoals()" class="flex items-center justify-between p-4 cursor-pointer hover:bg-gray-50">
+                <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600 lucide lucide-target"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
                     <div>
-                        <h3 class="font-medium text-gray-900">Metas</h3>
-                        <p class="text-sm text-gray-500">Defina suas metas como calorias etc</p>
+                        <h3 class="text-lg font-medium">Minhas Metas</h3>
+                        <p class="text-sm text-gray-500">Metas diárias de nutrição</p>
                     </div>
                 </div>
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 transform transition-transform" :class="{'rotate-180': $wire.goalsExpanded}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </div>
+                <!-- Chevron icon that rotates -->
+                <svg 
+                    class="w-5 h-5 text-gray-500 transition-transform duration-200" 
+                    :class="{'rotate-180': open}" 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    viewBox="0 0 20 20" 
+                    fill="currentColor"
+                >
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
             </div>
             
-            <div x-show="$wire.goalsExpanded" class="p-4 border-t border-gray-200" style="display: none;">
+            <!-- Accordion Content -->
+            <div x-show="open" x-transition class="p-4 border-t border-gray-100">
                 <form wire:submit.prevent="saveGoals">
                     <div class="space-y-4">
                         <!-- Protein Field -->
                         <div>
                             <label for="protein" class="block text-sm font-medium text-gray-700">Proteína</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="protein" wire:model="protein" class="block w-full pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0">
+                                <input type="number" id="protein" wire:model="protein" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">gramas (g)</span>
                                 </div>
@@ -282,7 +307,7 @@
                         <div>
                             <label for="carbs" class="block text-sm font-medium text-gray-700">Carboidrato</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="carbs" wire:model="carbs" class="block w-full pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0">
+                                <input type="number" id="carbs" wire:model="carbs" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">gramas (g)</span>
                                 </div>
@@ -293,7 +318,7 @@
                         <div>
                             <label for="fat" class="block text-sm font-medium text-gray-700">Gordura</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="fat" wire:model="fat" class="block w-full pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0">
+                                <input type="number" id="fat" wire:model="fat" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">gramas (g)</span>
                                 </div>
@@ -304,7 +329,7 @@
                         <div>
                             <label for="fiber" class="block text-sm font-medium text-gray-700">Fibras</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="fiber" wire:model="fiber" class="block w-full pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0">
+                                <input type="number" id="fiber" wire:model="fiber" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">gramas (g)</span>
                                 </div>
@@ -315,7 +340,7 @@
                         <div>
                             <label for="calories" class="block text-sm font-medium text-gray-700">Calorias</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="calories" wire:model="calories" class="block w-full pr-12 sm:text-sm border-gray-300 rounded-md" placeholder="0">
+                                <input type="number" id="calories" wire:model="calories" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">kcal</span>
                                 </div>
@@ -336,7 +361,7 @@
                         <!-- Objective Field -->
                         <div>
                             <label for="objective" class="block text-sm font-medium text-gray-700">Objetivo</label>
-                            <select id="objective" wire:model="objective" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                            <select id="objective" wire:model="objective" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md">
                                 <option value="Perder gordura">Perder gordura</option>
                                 <option value="Manter peso">Manter peso</option>
                                 <option value="Ganhar massa">Ganhar massa</option>
@@ -348,7 +373,7 @@
                                 Sugerir metas <span class="ml-1 text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">novo</span>
                             </button>
                             
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition">
                                 Salvar metas
                             </button>
                         </div>
@@ -358,10 +383,10 @@
         </div>
         
         <!-- Diet Plan Card -->
-        <div class="mb-6 bg-white rounded-lg border border-gray-200 overflow-hidden p-4">
+        <div class="bg-white rounded-lg shadow overflow-hidden p-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <span class="text-gray-600">🍎</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600 lucide lucide-utensils"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
                     <div>
                         <h3 class="font-medium text-gray-900">Seu plano alimentar</h3>
                         <p class="text-sm text-gray-500">Informe seu plano alimentar</p>
@@ -382,7 +407,7 @@
         <div class="mb-6 bg-white rounded-lg border border-gray-200 overflow-hidden p-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-3">
-                    <span class="text-gray-600">🏋️‍♂️</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-600 lucide lucide-dumbbell"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></svg>
                     <div>
                         <h3 class="font-medium text-gray-900">Seu plano de treino</h3>
                         <p class="text-sm text-gray-500">Preencha com seu treino da semana</p>
@@ -397,6 +422,7 @@
                     </button>
                 </div>
             </div>
+        </div>
         </div>
     </div>
     
@@ -442,7 +468,7 @@
                             <textarea
                                 wire:model="dietPlan"
                                 placeholder="Descreva sua dieta da semana aqui..."
-                                class="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                class="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                             ></textarea>
                         </div>
                         
@@ -457,7 +483,7 @@
                             </div>
                             
                             <div class="mt-2">
-                                <label for="dietPlanFile" class="text-blue-600 hover:text-blue-500 cursor-pointer">
+                                <label for="dietPlanFile" class="text-green-600 hover:text-green-500 cursor-pointer">
                                     Selecione o pdf
                                 </label>
                                 <input 
@@ -478,7 +504,7 @@
                     <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end">
                         <button
                             type="submit"
-                            class="w-full inline-flex justify-center px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition"
+                            class="w-full inline-flex justify-center px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition"
                         >
                             Salvar plano
                         </button>
@@ -530,7 +556,7 @@
                             <textarea
                                 wire:model="trainingPlan"
                                 placeholder="Descreva seu plano de treino aqui..."
-                                class="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                class="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                             ></textarea>
                         </div>
                     </div>
@@ -538,7 +564,7 @@
                     <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end">
                         <button
                             type="submit"
-                            class="w-full inline-flex justify-center px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition"
+                            class="w-full inline-flex justify-center px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition"
                         >
                             Salvar treino
                         </button>
