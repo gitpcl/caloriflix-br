@@ -1,0 +1,461 @@
+{
+  "info": {
+    "_postman_id": "45a611f2-9b59-4f79-9d0f-c82e42b71b5a",
+    "name": "Caloriflix API v1",
+    "description": "Collection for the Caloriflix API v1 endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "API Info",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}",
+          "host": ["{{baseUrl}}"]
+        },
+        "description": "Get API information"
+      },
+      "response": []
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"user@example.com\",\n    \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "login"]
+            },
+            "description": "Login to the API and receive a token"
+          },
+          "response": []
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"New User\",\n    \"email\": \"newuser@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "register"]
+            },
+            "description": "Register a new user"
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "logout"]
+            },
+            "description": "Logout and invalidate the token"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Foods",
+      "item": [
+        {
+          "name": "List Foods",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/foods?search=&source=&favorite=&sort_by=name&sort_direction=asc&per_page=15",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "foods"],
+              "query": [
+                {
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "key": "source",
+                  "value": "",
+                  "description": "manual, whatsapp"
+                },
+                {
+                  "key": "favorite",
+                  "value": "",
+                  "description": "true, false"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "name",
+                  "description": "name, calories, protein, created_at"
+                },
+                {
+                  "key": "sort_direction",
+                  "value": "asc",
+                  "description": "asc, desc"
+                },
+                {
+                  "key": "per_page",
+                  "value": "15"
+                }
+              ]
+            },
+            "description": "List all foods with optional filters"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Food",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Oatmeal\",\n    \"quantity\": 100,\n    \"unit\": \"g\",\n    \"protein\": 13.15,\n    \"fat\": 6.52,\n    \"carbohydrate\": 68.18,\n    \"fiber\": 10.1,\n    \"calories\": 379,\n    \"barcode\": \"123456789\",\n    \"is_favorite\": false\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/foods",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "foods"]
+            },
+            "description": "Create a new food"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Food",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/foods/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "foods", "1"]
+            },
+            "description": "Get a specific food by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Food",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Oatmeal Updated\",\n    \"protein\": 13.5,\n    \"is_favorite\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/v1/foods/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "foods", "1"]
+            },
+            "description": "Update a food"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Food",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/foods/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "foods", "1"]
+            },
+            "description": "Delete a food"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Favorite Foods",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/foods/favorites",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "foods", "favorites"]
+            },
+            "description": "Get favorite foods"
+          },
+          "response": []
+        }
+      ],
+      "description": "Food management endpoints"
+    },
+    {
+      "name": "Meals",
+      "item": [
+        {
+          "name": "List Meals",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/meals?start_date=&end_date=&type=&sort_by=date&sort_direction=desc&per_page=15",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "meals"],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "",
+                  "description": "YYYY-MM-DD"
+                },
+                {
+                  "key": "end_date",
+                  "value": "",
+                  "description": "YYYY-MM-DD"
+                },
+                {
+                  "key": "type",
+                  "value": "",
+                  "description": "breakfast, lunch, dinner, snack"
+                },
+                {
+                  "key": "sort_by",
+                  "value": "date",
+                  "description": "date, type, created_at"
+                },
+                {
+                  "key": "sort_direction",
+                  "value": "desc",
+                  "description": "asc, desc"
+                },
+                {
+                  "key": "per_page",
+                  "value": "15"
+                }
+              ]
+            },
+            "description": "List all meals with optional filters"
+          },
+          "response": []
+        },
+        {
+          "name": "Today's Meals",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/meals/today",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "meals", "today"]
+            },
+            "description": "Get today's meals"
+          },
+          "response": []
+        },
+        {
+          "name": "Meals By Date",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/meals/date/2025-05-28",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "meals", "date", "2025-05-28"]
+            },
+            "description": "Get meals for a specific date"
+          },
+          "response": []
+        }
+      ],
+      "description": "Meal management endpoints"
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Daily Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/reports",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "reports"]
+            },
+            "description": "Get daily reports"
+          },
+          "response": []
+        },
+        {
+          "name": "Period Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/reports/period/weekly",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "reports", "period", "weekly"],
+              "description": "Options: daily, weekly, monthly"
+            },
+            "description": "Get reports by period"
+          },
+          "response": []
+        },
+        {
+          "name": "Custom Range Report",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/v1/reports/custom?start_date=2025-05-01&end_date=2025-05-28",
+              "host": ["{{baseUrl}}"],
+              "path": ["v1", "reports", "custom"],
+              "query": [
+                {
+                  "key": "start_date",
+                  "value": "2025-05-01",
+                  "description": "YYYY-MM-DD"
+                },
+                {
+                  "key": "end_date",
+                  "value": "2025-05-28",
+                  "description": "YYYY-MM-DD"
+                }
+              ]
+            },
+            "description": "Get reports for a custom date range"
+          },
+          "response": []
+        }
+      ],
+      "description": "Report endpoints"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "your_token_here",
+      "type": "string"
+    }
+  ]
+}
