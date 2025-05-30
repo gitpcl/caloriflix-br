@@ -25,6 +25,9 @@ class NutritionalGoal extends Model
         'calories',
         'water',
         'objective',
+        'start_date',
+        'end_date',
+        'is_active',
     ];
     
     /**

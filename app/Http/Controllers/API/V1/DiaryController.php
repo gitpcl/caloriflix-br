@@ -155,7 +155,7 @@ class DiaryController extends BaseController
     }
 
     /**
-     * Get diary by specific date.
+     * Get diary entry by date.
      *
      * @param string $date
      * @return JsonResponse
@@ -168,7 +168,7 @@ class DiaryController extends BaseController
         }
         
         $diary = Diary::where('user_id', request()->user()->id)
-            ->where('date', $date)
+            ->whereDate('date', $date)
             ->first();
 
         if (!$diary) {

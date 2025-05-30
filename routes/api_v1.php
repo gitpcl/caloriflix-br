@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     
     // Foods
+    Route::get('/foods/favorites', [FoodController::class, 'favorites'])->name('api.foods.favorites');
     Route::apiResource('foods', FoodController::class)->names([
         'index' => 'api.foods.index',
         'store' => 'api.foods.store',
@@ -35,7 +36,6 @@ Route::middleware('auth:sanctum')->group(function () {
         'update' => 'api.foods.update',
         'destroy' => 'api.foods.destroy',
     ]);
-    Route::get('/foods/favorites', [FoodController::class, 'favorites'])->name('api.foods.favorites');
     
     // Meals
     Route::apiResource('meals', MealController::class)->names([
@@ -58,6 +58,7 @@ Route::middleware('auth:sanctum')->group(function () {
     ]);
     
     // Diary
+    Route::get('/diary/date/{date}', [DiaryController::class, 'byDate'])->name('api.diary.by-date');
     Route::apiResource('diary', DiaryController::class)->names([
         'index' => 'api.diary.index',
         'store' => 'api.diary.store',
@@ -65,7 +66,6 @@ Route::middleware('auth:sanctum')->group(function () {
         'update' => 'api.diary.update',
         'destroy' => 'api.diary.destroy',
     ]);
-    Route::get('/diary/date/{date}', [DiaryController::class, 'byDate'])->name('api.diary.by-date');
     
     // Recipes
     Route::apiResource('recipes', RecipeController::class)->names([
@@ -88,6 +88,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/measurements/type/{type}', [MeasurementController::class, 'byType'])->name('api.measurements.by-type');
     
     // Nutritional Goals
+    Route::get('/nutritional-goals/current', [NutritionalGoalController::class, 'current'])->name('api.nutritional-goals.current');
     Route::apiResource('nutritional-goals', NutritionalGoalController::class)->names([
         'index' => 'api.nutritional-goals.index',
         'store' => 'api.nutritional-goals.store',
@@ -95,7 +96,6 @@ Route::middleware('auth:sanctum')->group(function () {
         'update' => 'api.nutritional-goals.update',
         'destroy' => 'api.nutritional-goals.destroy',
     ]);
-    Route::get('/nutritional-goals/current', [NutritionalGoalController::class, 'current'])->name('api.nutritional-goals.current');
     
     // User Profile
     Route::get('/profile', [UserProfileController::class, 'show'])->name('api.profile.show');

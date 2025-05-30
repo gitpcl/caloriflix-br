@@ -76,7 +76,11 @@ class MealItemController extends BaseController
         // Load the relationships for the response
         $mealItem->load(['meal', 'food']);
 
-        return $this->sendResponse($mealItem, 'Meal item created successfully');
+        return response()->json([
+            'success' => true,
+            'data' => $mealItem,
+            'message' => 'Meal item created successfully'
+        ], 201);
     }
 
     /**
@@ -87,14 +91,14 @@ class MealItemController extends BaseController
      */
     public function show($id): JsonResponse
     {
-        $mealItem = MealItem::with(['meal', 'food'])
-            ->whereHas('meal', function($query) {
-                $query->where('user_id', request()->user()->id);
-            })
-            ->find($id);
+        $mealItem = MealItem::with(['meal', 'food'])->find($id);
 
         if (is_null($mealItem)) {
             return $this->sendError('Meal item not found.');
+        }
+
+        if ($mealItem->meal->user_id !== request()->user()->id) {
+            return $this->sendError('Forbidden.', [], 403);
         }
 
         return $this->sendResponse($mealItem, 'Meal item retrieved successfully');
@@ -109,13 +113,14 @@ class MealItemController extends BaseController
      */
     public function update(Request $request, $id): JsonResponse
     {
-        $mealItem = MealItem::whereHas('meal', function($query) {
-                $query->where('user_id', request()->user()->id);
-            })
-            ->find($id);
+        $mealItem = MealItem::with('meal')->find($id);
 
         if (is_null($mealItem)) {
             return $this->sendError('Meal item not found.');
+        }
+
+        if ($mealItem->meal->user_id !== request()->user()->id) {
+            return $this->sendError('Forbidden.', [], 403);
         }
 
         $validator = Validator::make($request->all(), [
@@ -156,13 +161,14 @@ class MealItemController extends BaseController
      */
     public function destroy($id): JsonResponse
     {
-        $mealItem = MealItem::whereHas('meal', function($query) {
-                $query->where('user_id', request()->user()->id);
-            })
-            ->find($id);
+        $mealItem = MealItem::with('meal')->find($id);
 
         if (is_null($mealItem)) {
             return $this->sendError('Meal item not found.');
+        }
+
+        if ($mealItem->meal->user_id !== request()->user()->id) {
+            return $this->sendError('Forbidden.', [], 403);
         }
 
         $mealItem->delete();

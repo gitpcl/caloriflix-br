@@ -34,6 +34,13 @@ class ReminderFactory extends Factory
             'auto_command_enabled' => $this->faker->boolean(20), // 20% chance of having auto command
             'auto_command' => $this->faker->boolean(20) ? $this->faker->sentence(5) : '',
             'active' => $this->faker->boolean(80), // 80% chance of being active
+            // Add fields expected by controller/tests
+            'title' => $this->faker->sentence(3),
+            'type' => $this->faker->randomElement(['meal', 'water', 'medication', 'measurement', 'other']),
+            'time' => $this->faker->time('H:i'),
+            'days' => json_encode($this->faker->randomElements(range(0, 6), $this->faker->numberBetween(1, 7))),
+            'repeat_type' => $this->faker->randomElement(['daily', 'weekly', 'monthly', 'specific_days']),
+            'is_active' => $this->faker->boolean(80),
         ];
     }
     

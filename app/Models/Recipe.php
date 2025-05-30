@@ -18,6 +18,11 @@ class Recipe extends Model
         'preparation_time',
         'cooking_time',
         'servings',
+        'protein',
+        'fat',
+        'carbohydrate',
+        'fiber',
+        'calories',
     ];
     
     /**

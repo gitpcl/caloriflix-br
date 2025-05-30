@@ -72,6 +72,7 @@ class ReminderController extends BaseController
 
         $reminder = Reminder::create([
             'user_id' => request()->user()->id,
+            'name' => $request->title, // Use title as name for backward compatibility
             'title' => $request->title,
             'description' => $request->description,
             'type' => $request->type,
@@ -154,6 +155,11 @@ class ReminderController extends BaseController
         // Update days as JSON if provided
         if ($request->has('days')) {
             $request->merge(['days' => json_encode($request->days)]);
+        }
+
+        // If title is provided, also update name for backward compatibility
+        if ($request->has('title')) {
+            $request->merge(['name' => $request->title]);
         }
 
         $reminder->update($request->except('details'));

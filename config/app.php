@@ -105,6 +105,10 @@ return [
         ),
     ],
 
+    // 'providers' => [
+    //     App\Providers\RouteServiceProvider::class,
+    // ],
+
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver

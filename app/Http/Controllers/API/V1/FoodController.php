@@ -97,10 +97,14 @@ class FoodController extends BaseController
      */
     public function show($id): JsonResponse
     {
-        $food = Food::where('user_id', request()->user()->id)->find($id);
+        $food = Food::find($id);
 
         if (is_null($food)) {
             return $this->sendError('Food not found.');
+        }
+
+        if ($food->user_id !== request()->user()->id) {
+            return $this->sendError('Forbidden.', [], 403);
         }
 
         return $this->sendResponse($food, 'Food retrieved successfully');
@@ -115,10 +119,14 @@ class FoodController extends BaseController
      */
     public function update(Request $request, $id): JsonResponse
     {
-        $food = Food::where('user_id', request()->user()->id)->find($id);
+        $food = Food::find($id);
 
         if (is_null($food)) {
             return $this->sendError('Food not found.');
+        }
+
+        if ($food->user_id !== request()->user()->id) {
+            return $this->sendError('Forbidden.', [], 403);
         }
 
         $validator = Validator::make($request->all(), [
@@ -151,10 +159,14 @@ class FoodController extends BaseController
      */
     public function destroy($id): JsonResponse
     {
-        $food = Food::where('user_id', request()->user()->id)->find($id);
+        $food = Food::find($id);
 
         if (is_null($food)) {
             return $this->sendError('Food not found.');
+        }
+
+        if ($food->user_id !== request()->user()->id) {
+            return $this->sendError('Forbidden.', [], 403);
         }
 
         $food->delete();

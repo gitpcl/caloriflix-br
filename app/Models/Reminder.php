@@ -19,8 +19,13 @@ class Reminder extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'title',
         'description',
         'reminder_type',
+        'type',
+        'time',
+        'days',
+        'repeat_type',
         'interval_hours',
         'interval_minutes',
         'start_time',
@@ -29,6 +34,7 @@ class Reminder extends Model
         'auto_command_enabled',
         'auto_command',
         'active',
+        'is_active',
     ];
     
     /**
@@ -40,8 +46,10 @@ class Reminder extends Model
         'buttons_enabled' => 'boolean',
         'auto_command_enabled' => 'boolean',
         'active' => 'boolean',
+        'is_active' => 'boolean',
         'start_time' => 'datetime',
         'end_time' => 'datetime',
+        'days' => 'array',
     ];
     
     /**
@@ -58,5 +66,13 @@ class Reminder extends Model
     public function details(): HasMany
     {
         return $this->hasMany(ReminderDetail::class);
+    }
+    
+    /**
+     * Alias for details() to match controller usage
+     */
+    public function reminderDetails(): HasMany
+    {
+        return $this->details();
     }
 }
