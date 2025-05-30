@@ -45,6 +45,7 @@ class FoodFactory extends Factory
             'calories' => $this->faker->randomFloat(2, 50, 700),
             'barcode' => $this->faker->boolean(30) ? $this->faker->numerify('############') : null,
             'is_favorite' => $this->faker->boolean(20),
+            'source' => $this->faker->randomElement(['manual', 'whatsapp']),
         ];
     }
     
