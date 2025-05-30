@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('meal_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('meal_id')->constrained()->onDelete('cascade');
-            $table->foreignId('food_id')->constrained()->onDelete('cascade');
+            $table->foreignId('food_id')->constrained('foods')->onDelete('cascade');
             $table->float('quantity');
             $table->text('notes')->nullable();
             $table->timestamps();

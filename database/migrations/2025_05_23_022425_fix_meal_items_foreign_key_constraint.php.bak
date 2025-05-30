@@ -1,0 +1,57 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        // Disable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        Schema::table('meal_items', function (Blueprint $table) {
+            // Safely drop foreign key if it exists (using dropConstrainedForeignId is safer)
+            try {
+                $table->dropForeign(['food_id']);
+            } catch (\Exception $e) {
+                // Foreign key might not exist, continue
+            }
+            
+            // Add the correct foreign key constraint pointing to 'foods' table
+            $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
+        });
+
+        // Re-enable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        // Disable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        Schema::table('meal_items', function (Blueprint $table) {
+            // Safely drop foreign key if it exists
+            try {
+                $table->dropForeign(['food_id']);
+            } catch (\Exception $e) {
+                // Foreign key might not exist, continue
+            }
+            
+            // Restore the foreign key with correct table name
+            $table->foreign('food_id')->references('id')->on('foods')->onDelete('cascade');
+        });
+
+        // Re-enable foreign key checks
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+    }
+};
