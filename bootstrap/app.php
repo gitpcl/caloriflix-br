@@ -21,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'cache.response' => \App\Http\Middleware\CacheResponse::class,
             'cache.invalidate' => \App\Http\Middleware\InvalidateCache::class,
+            'superadmin' => \App\Http\Middleware\SuperAdminMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

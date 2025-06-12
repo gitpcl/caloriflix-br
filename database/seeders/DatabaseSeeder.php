@@ -24,22 +24,30 @@ class DatabaseSeeder extends Seeder
 
         // Food::factory(100)->create();
 
+        // Seed roles and permissions first
+        $this->call(RolesAndPermissionsSeeder::class);
+
         $users = [
             [
                 'name' => 'Pedro Lopes',
                 'email' => 'admin@pedroclopes.com',
                 'password' => Hash::make('*Password1'),
+                'role' => 'superadmin', // Assigning SuperAdmin role
             ],
             [
                 'name' => 'Richard Silva',
                 'email' => 'richard.ypsilva@gmail.com',
                 'password' => Hash::make('*Password1'),
+                'role' => 'admin', // Assigning Admin role
             ],
         ];
 
-        foreach ($users as $user) {
-            $user = User::create($user);
-            // $user->assignRole('admin');
+        foreach ($users as $userData) {
+            $role = $userData['role'];
+            unset($userData['role']);
+            
+            $user = User::create($userData);
+            $user->assignRole($role);
         }
     }
 }

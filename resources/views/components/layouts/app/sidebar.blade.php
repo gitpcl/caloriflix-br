@@ -159,6 +159,20 @@
                             <span class="{{ request()->routeIs('preferences.index') ? 'text-caloriflix-300' : '' }}">{{ __('Preferências') }}</span>
                         </div>
                     </a>
+
+                    <!-- Roles & Permissions Item (SuperAdmin only) -->
+                    @if(auth()->user()->hasRole('superadmin'))
+                        <a href="{{ route('roles-permissions.index') }}"
+                           class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('roles-permissions.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
+                           wire:navigate>
+                            <div class="flex items-center">
+                                <span class="mr-2 {{ request()->routeIs('roles-permissions.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+                                </span>
+                                <span class="{{ request()->routeIs('roles-permissions.index') ? 'text-caloriflix-300' : '' }}">{{ __('Roles & Permissions') }}</span>
+                            </div>
+                        </a>
+                    @endif
                 </flux:navlist.group>
             </flux:navlist>
 

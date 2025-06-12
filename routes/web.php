@@ -51,6 +51,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Meals route
     Route::get('/meals', App\Livewire\Diary\Index::class)->name('meals.index');
+
+    // Roles & Permissions route (SuperAdmin only)
+    Route::get('/roles-permissions', App\Livewire\RolesPermissions\Index::class)
+        ->middleware('superadmin')
+        ->name('roles-permissions.index');
 });
 
 require __DIR__.'/auth.php';
