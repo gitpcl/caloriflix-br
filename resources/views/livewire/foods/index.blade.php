@@ -14,9 +14,9 @@
                     </div>
                     <input wire:model.live.debounce.300ms="search" type="text" placeholder="Buscar..." class="pl-10 pr-4 py-2 border border-neutral-200 dark:border-neutral-700 rounded-lg w-full dark:bg-neutral-700 dark:text-white text-sm">
                 </div>
-                
+
                 <!-- Action buttons -->
-                <button 
+                <button
                     wire:click="openCreateFoodModal"
                     class="inline-flex items-center p-2 bg-neutral-100 border border-transparent rounded-md font-semibold text-xs text-neutral-900 uppercase tracking-widest hover:bg-neutral-200 focus:bg-neutral-200 active:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-200 transition ease-in-out duration-150"
                 >
@@ -24,7 +24,7 @@
                 </button>
             </div>
         </div>
-        
+
         <!-- Filters and Mass Actions Bar -->
         @if($selectionMode)
             <div class="flex items-center justify-between bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-lg px-4 py-3">
@@ -36,7 +36,7 @@
                         </svg>
                         Cancelar
                     </button>
-                    
+
                     <button wire:click="selectAll" class="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 mr-1 lucide lucide-check-circle">
                             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
@@ -45,9 +45,9 @@
                         Selecionar todos
                     </button>
                 </div>
-                
-                <button 
-                    wire:click="massDelete" 
+
+                <button
+                    wire:click="massDelete"
                     wire:confirm="Tem certeza que deseja excluir os alimentos selecionados?"
                     class="text-sm {{ count($selectedFoods) > 0 ? 'text-red-300 hover:text-red-400' : 'text-neutral-400 cursor-not-allowed' }} flex items-center"
                     {{ count($selectedFoods) == 0 ? 'disabled' : '' }}
@@ -61,10 +61,10 @@
         @else
             <!-- Filter buttons -->
             <div class="flex items-center space-x-2 text-sm">
-                
+
                 <!-- Selection Mode Toggle Button -->
-                <button 
-                    wire:click="toggleSelectionMode" 
+                <button
+                    wire:click="toggleSelectionMode"
                     class="px-3 py-1 text-xs {{ $selectionMode ? 'bg-caloriflix-100 dark:bg-caloriflix-800 text-caloriflix-800 dark:text-caloriflix-200' : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400' }} border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -72,10 +72,10 @@
                     </svg>
                     Selecionar
                 </button>
-                
+
                 <!-- Filter Dropdown -->
                 <div class="relative" x-data="{ open: @entangle('showFilterDropdown') }">
-                    <button 
+                    <button
                         wire:click="toggleFilterDropdown"
                         class="px-3 py-1 text-xs {{ $sourceFilter !== 'all' ? 'bg-caloriflix-100 dark:bg-caloriflix-800 text-caloriflix-800 dark:text-caloriflix-200' : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400' }} border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center"
                     >
@@ -87,10 +87,10 @@
                             <span class="ml-1 text-xs bg-caloriflix-500 text-white rounded-full px-1">1</span>
                         @endif
                     </button>
-                    
+
                     <!-- Dropdown Menu -->
-                    <div 
-                        x-show="open" 
+                    <div
+                        x-show="open"
                         x-transition:enter="transition ease-out duration-100"
                         x-transition:enter-start="transform opacity-0 scale-95"
                         x-transition:enter-end="transform opacity-100 scale-100"
@@ -104,8 +104,8 @@
                             <div class="px-4 py-2 text-xs font-medium text-neutral-500 dark:text-neutral-400 border-b border-neutral-200 dark:border-neutral-600">
                                 Filtrar por origem
                             </div>
-                            
-                            <button 
+
+                            <button
                                 wire:click="setSourceFilter('all')"
                                 class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'all' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
@@ -118,8 +118,8 @@
                                 @endif
                                 Todos
                             </button>
-                            
-                            <button 
+
+                            <button
                                 wire:click="setSourceFilter('manual')"
                                 class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'manual' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
@@ -132,8 +132,8 @@
                                 @endif
                                 Adicionados Manualmente
                             </button>
-                            
-                            <button 
+
+                            <button
                                 wire:click="setSourceFilter('whatsapp')"
                                 class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'whatsapp' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
@@ -149,10 +149,10 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Sort Dropdown -->
                 <div class="relative" x-data="{ open: @entangle('showSortDropdown') }">
-                    <button 
+                    <button
                         wire:click="toggleSortDropdown"
                         class="px-3 py-1 text-xs bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center"
                     >
@@ -161,10 +161,10 @@
                         </svg>
                         Ordenar
                     </button>
-                    
+
                     <!-- Dropdown Menu -->
-                    <div 
-                        x-show="open" 
+                    <div
+                        x-show="open"
                         x-transition:enter="transition ease-out duration-100"
                         x-transition:enter-start="transform opacity-0 scale-95"
                         x-transition:enter-end="transform opacity-100 scale-100"
@@ -178,9 +178,9 @@
                             <div class="px-4 py-2 text-xs font-medium text-neutral-500 dark:text-neutral-400 border-b border-neutral-200 dark:border-neutral-600">
                                 Ordenar por
                             </div>
-                            
+
                             <!-- Sort by Name -->
-                            <button 
+                            <button
                                 wire:click="setSortBy('name')"
                                 class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortBy === 'name' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
@@ -193,9 +193,9 @@
                                 @endif
                                 Nome
                             </button>
-                            
+
                             <!-- Sort by Date -->
-                            <button 
+                            <button
                                 wire:click="setSortBy('created_at')"
                                 class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortBy === 'created_at' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
@@ -208,11 +208,11 @@
                                 @endif
                                 Data de Registro
                             </button>
-                            
+
                             <div class="border-t border-neutral-200 dark:border-neutral-600 my-2"></div>
-                            
+
                             <!-- Sort Direction -->
-                            <button 
+                            <button
                                 wire:click="setSortDirection('asc')"
                                 class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortDirection === 'asc' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
@@ -228,8 +228,8 @@
                                 </svg>
                                 Ordem Crescente
                             </button>
-                            
-                            <button 
+
+                            <button
                                 wire:click="setSortDirection('desc')"
                                 class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortDirection === 'desc' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
@@ -248,15 +248,15 @@
                         </div>
                     </div>
                 </div>
-                
+
                 {{-- <button class="px-3 py-1 text-xs bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
                     Atualizar
                 </button> --}}
-                
-                <button 
+
+                <button
                     wire:click="exportCsv"
                     class="px-3 py-1 text-xs bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center"
                 >
@@ -265,7 +265,7 @@
                 </button>
             </div>
         @endif
-        
+
         <!-- Food List -->
         <div class="grid grid-cols-1 gap-4">
             @if (session()->has('message'))
@@ -273,7 +273,7 @@
                     {{ session('message') }}
                 </div>
             @endif
-            
+
             @forelse ($foods as $food)
                 <div class="bg-white dark:bg-neutral-800 shadow-sm rounded-md border border-neutral-100 dark:border-neutral-700 overflow-hidden cursor-pointer" wire:click="openFoodEditModal({{ $food->id }})">
                     <div class="px-4 py-3 flex justify-between items-center">
@@ -281,22 +281,22 @@
                             <!-- Checkbox for mass selection -->
                             @if($selectionMode)
                                 <div class="flex-shrink-0" wire:click.stop>
-                                    <input 
-                                        type="checkbox" 
-                                        wire:model.live="selectedFoods" 
-                                        value="{{ $food->id }}" 
+                                    <input
+                                        type="checkbox"
+                                        wire:model.live="selectedFoods"
+                                        value="{{ $food->id }}"
                                         class="h-4 w-4 text-caloriflix-600 border-neutral-300 dark:border-neutral-600 rounded focus:ring-caloriflix-500"
                                     >
                                 </div>
                             @endif
-                            
+
                             <!-- Food icon based on type -->
                             <div class="flex-shrink-0">
                                 <div class="bg-caloriflix-100 rounded p-2"><span class="text-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils-icon lucide-utensils text-caloriflix-600"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
                                 </span></div>
                             </div>
-                            
+
                             <!-- Food details -->
                             <div>
                                 <h3 class="text-sm font-medium text-neutral-900 dark:text-white leading-tight">
@@ -310,10 +310,10 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Add button -->
-                        <button 
-                            wire:click.stop="openFoodDetailModal({{ $food->id }})" 
+                        <button
+                            wire:click.stop="openFoodDetailModal({{ $food->id }})"
                             class="text-xs p-2 flex-shrink-0 rounded-md bg-neutral-100 dark:bg-neutral-700 border border-neutral-200 dark:border-neutral-600 flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:text-neutral-800 hover:border-neutral-300 focus:outline-none space-x-2"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -335,8 +335,8 @@
                         Adicione um alimento para começar.
                     </p>
                     <div class="mt-6">
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             wire:click="openCreateFoodModal"
                             class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-caloriflix-300 hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                         >
@@ -350,13 +350,13 @@
             @endforelse
         </div>
     </div>
-    
-    <!-- Create Food Modal -->    
-    <div 
-        x-data="{ show: @entangle('showCreateFoodModal') }" 
-        x-show="show" 
+
+    <!-- Create Food Modal -->
+    <div
+        x-data="{ show: @entangle('showCreateFoodModal') }"
+        x-show="show"
         x-cloak
-        class="fixed inset-0 z-50 overflow-y-auto" 
+        class="fixed inset-0 z-50 overflow-y-auto"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
@@ -365,29 +365,29 @@
         x-transition:leave-end="opacity-0"
     >
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div 
-                x-show="show" 
-                x-transition:enter="ease-out duration-300" 
-                x-transition:enter-start="opacity-0" 
-                x-transition:enter-end="opacity-100" 
-                x-transition:leave="ease-in duration-200" 
-                x-transition:leave-start="opacity-100" 
-                x-transition:leave-end="opacity-0" 
+            <div
+                x-show="show"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
                 class="fixed inset-0 transition-opacity"
             >
                 <div class="absolute inset-0 bg-neutral-500/40 dark:bg-neutral-900"></div>
             </div>
-            
+
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
-            
-            <div 
-                x-show="show" 
-                x-transition:enter="ease-out duration-300" 
-                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
-                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
-                x-transition:leave="ease-in duration-200" 
-                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
-                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+
+            <div
+                x-show="show"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 class="inline-block align-bottom bg-white dark:bg-neutral-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
             >
                 <form wire:submit.prevent="save">
@@ -400,23 +400,23 @@
                                 <div class="mt-4 space-y-4">
                                     <div>
                                         <label for="name" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Nome</label>
-                                        <input 
-                                            type="text" 
-                                            wire:model="name" 
-                                            id="name" 
-                                            placeholder="Arroz, Feijão, etc." 
+                                        <input
+                                            type="text"
+                                            wire:model="name"
+                                            id="name"
+                                            placeholder="Arroz, Feijão, etc."
                                             class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                         >
                                         @error('name') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
-                                    
+
                                     <div>
                                         <label for="quantity" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Quantidade</label>
                                         <div class="mt-1 flex rounded-md">
-                                            <input 
-                                                type="text" 
-                                                wire:model="quantity" 
-                                                id="quantity" 
+                                            <input
+                                                type="text"
+                                                wire:model="quantity"
+                                                id="quantity"
                                                 class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             >
                                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
@@ -425,12 +425,12 @@
                                         </div>
                                         @error('quantity') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
-                                    
+
                                     <div>
                                         <label for="unit" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Unidade</label>
-                                        <select 
-                                            wire:model="unit" 
-                                            id="unit" 
+                                        <select
+                                            wire:model="unit"
+                                            id="unit"
                                             class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                         >
                                             <option value="">Selecione uma unidade</option>
@@ -443,15 +443,15 @@
                                         </select>
                                         @error('unit') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
-                                    
+
                                     <div>
                                         <label for="protein" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Proteína</label>
                                         <div class="mt-1 flex rounded-md">
-                                            <input 
-                                                type="number" 
-                                                step="0.01" 
-                                                wire:model="protein" 
-                                                id="protein" 
+                                            <input
+                                                type="number"
+                                                step="0.01"
+                                                wire:model="protein"
+                                                id="protein"
                                                 class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             >
                                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
@@ -460,15 +460,15 @@
                                         </div>
                                         @error('protein') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
-                                    
+
                                     <div>
                                         <label for="fat" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Gordura</label>
                                         <div class="mt-1 flex rounded-md">
-                                            <input 
-                                                type="number" 
-                                                step="0.01" 
-                                                wire:model="fat" 
-                                                id="fat" 
+                                            <input
+                                                type="number"
+                                                step="0.01"
+                                                wire:model="fat"
+                                                id="fat"
                                                 class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             >
                                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
@@ -477,15 +477,15 @@
                                         </div>
                                         @error('fat') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
-                                    
+
                                     <div>
                                         <label for="carbohydrate" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Carboidrato</label>
                                         <div class="mt-1 flex rounded-md">
-                                            <input 
-                                                type="number" 
-                                                step="0.01" 
-                                                wire:model="carbohydrate" 
-                                                id="carbohydrate" 
+                                            <input
+                                                type="number"
+                                                step="0.01"
+                                                wire:model="carbohydrate"
+                                                id="carbohydrate"
                                                 class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             >
                                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
@@ -494,15 +494,15 @@
                                         </div>
                                         @error('carbohydrate') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
-                                    
+
                                     <div>
                                         <label for="calories" class="block text-sm font-medium text-neutral-700 dark:text-neutral-300">Calorias</label>
                                         <div class="mt-1 flex rounded-md">
-                                            <input 
-                                                type="number" 
-                                                step="0.01" 
-                                                wire:model="calories" 
-                                                id="calories" 
+                                            <input
+                                                type="number"
+                                                step="0.01"
+                                                wire:model="calories"
+                                                id="calories"
                                                 class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             >
                                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
@@ -515,17 +515,17 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="bg-neutral-50 dark:bg-neutral-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-caloriflix-600 text-base font-medium text-white hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 sm:ml-3 sm:w-auto sm:text-sm"
                         >
                             Salvar
                         </button>
-                        <button 
-                            type="button" 
-                            wire:click="closeModals" 
+                        <button
+                            type="button"
+                            wire:click="closeModals"
                             class="mt-3 w-full inline-flex justify-center rounded-md border border-neutral-300 dark:border-neutral-600 shadow-sm px-4 py-2 bg-white dark:bg-neutral-800 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                         >
                             Cancelar
@@ -535,14 +535,14 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Food Detail Modal -->
     @if ($selectedFood)
-    <div 
-        x-data="{ show: @entangle('showFoodDetailModal') }" 
-        x-show="show" 
+    <div
+        x-data="{ show: @entangle('showFoodDetailModal') }"
+        x-show="show"
         x-cloak
-        class="fixed inset-0 z-50 overflow-y-auto" 
+        class="fixed inset-0 z-50 overflow-y-auto"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
@@ -551,27 +551,27 @@
         x-transition:leave-end="opacity-0"
     >
         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div 
-                x-show="show" 
-                x-transition:enter="ease-out duration-300" 
-                x-transition:enter-start="opacity-0" 
-                x-transition:enter-end="opacity-100" 
-                x-transition:leave="ease-in duration-200" 
-                x-transition:leave-start="opacity-100" 
-                x-transition:leave-end="opacity-0" 
+            <div
+                x-show="show"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
                 class="fixed inset-0 transition-opacity"
             >
                 <div class="absolute inset-0 bg-neutral-500/40 dark:bg-neutral-900"></div>
             </div>
 
-            <div 
+            <div
                 @click.outside="show = false"
                 class="inline-block align-bottom bg-white dark:bg-neutral-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full"
-                role="dialog" 
-                aria-modal="true" 
+                role="dialog"
+                aria-modal="true"
                 aria-labelledby="modal-headline"
             >
-                
+
                 <!-- Modal Header -->
                 <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
                     <h3 class="text-lg font-medium text-gray-900 dark:text-white"></h3>
@@ -582,73 +582,73 @@
                         </svg>
                     </button>
                 </div>
-                
+
                 <div class="px-6 py-4">
                     <!-- Food Title with Nutritional Info -->
                     <div class="text-center mb-6">
                         <h2 class="text-xl font-medium text-neutral-900 dark:text-neutral-100 mb-1">{{ floor($selectedFood->quantity) }}g {{ $selectedFood->name }}</h2>
                         <p class="text-sm text-neutral-600 dark:text-neutral-400">{{ floor($selectedFood->protein) }}g prot · {{ floor($selectedFood->fat) }}g gord · {{ floor($selectedFood->carbohydrate) }}g carb · {{ floor($selectedFood->calories) }}kcal</p>
                     </div>
-                    
+
                     <!-- Quantity Adjustment -->
                     <div class="mb-6">
                         <label class="block text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">Alterar quantidade:</label>
                         <div class="flex items-center justify-center">
-                            <button 
-                                wire:click="updateFoodQuantity({{ $foodQuantity - 5 }})" 
+                            <button
+                                wire:click="updateFoodQuantity({{ $foodQuantity - 5 }})"
                                 class="px-3 py-1 bg-neutral-200 dark:bg-neutral-700 rounded-l text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600"
                             >
                                 –
                             </button>
-                            <input 
-                                type="number" 
-                                wire:model.debounce.500ms="foodQuantity" 
-                                min="5" 
+                            <input
+                                type="number"
+                                wire:model.debounce.500ms="foodQuantity"
+                                min="5"
                                 class="w-16 py-1 text-center border-t border-b border-neutral-300 dark:border-neutral-600 dark:bg-neutral-800 dark:text-white"
                             >
-                            <button 
-                                wire:click="updateFoodQuantity({{ $foodQuantity + 5 }})" 
+                            <button
+                                wire:click="updateFoodQuantity({{ $foodQuantity + 5 }})"
                                 class="px-3 py-1 bg-neutral-200 dark:bg-neutral-700 rounded-r text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-600"
                             >
                                 +
                             </button>
                         </div>
                     </div>
-                    
+
                     <!-- Used Recently Option -->
                     <div class="flex items-center justify-center mb-4">
                         <input id="recently-used" type="checkbox" wire:model="recentlyUsed" class="h-4 w-4 text-caloriflix-600 border-neutral-300 rounded">
                         <label for="recently-used" class="ml-2 block text-sm text-neutral-600 dark:text-neutral-400">OK, usados recentemente</label>
                     </div>
-                    
+
                     <!-- No Records Message -->
                     <div class="text-center text-sm text-neutral-500 dark:text-neutral-400 mb-6">
                         Sem registros
                     </div>
-                    
+
                     <!-- Add to Meal Button -->
                     <div class="mb-8">
                         <div x-data="{ open: false }" class="relative">
-                            <button 
-                                @click="open = !open" 
-                                type="button" 
-                                class="w-full flex items-center justify-center px-4 py-2 bg-caloriflix-600 text-white rounded-md hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
+                            <button
+                                @click="open = !open"
+                                type="button"
+                                class="w-full flex items-center justify-center px-4 py-2 bg-caloriflix-300 text-black rounded-md hover:bg-caloriflix-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                             >
                                 <span>Adicionar em {{ $selectedMeal }}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg>
                             </button>
-                            
-                            <div 
-                                x-show="open" 
-                                @click.away="open = false" 
+
+                            <div
+                                x-show="open"
+                                @click.away="open = false"
                                 class="absolute z-50 mt-1 w-full rounded-md bg-white dark:bg-gray-700 shadow-lg"
                             >
                                 <div class="py-1">
                                     @foreach(['Café da manhã', 'Lanche da manhã', 'Almoço', 'Lanche da tarde', 'Jantar', 'Ceia'] as $meal)
-                                        <button 
-                                            wire:click="addFoodToMeal('{{ $meal }}')" 
+                                        <button
+                                            wire:click="addFoodToMeal('{{ $meal }}')"
                                             @click="open = false"
                                             class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
                                         >
@@ -659,7 +659,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Records Table -->
                     <div>
                         <h3 class="text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-3">Registros do alimento: 1</h3>
@@ -694,14 +694,14 @@
         </div>
     </div>
     @endif
-    
+
     <!-- Food Edit Modal -->
     @if($selectedFood && $showFoodEditModal)
-    <div 
-        x-data="{ show: @entangle('showFoodEditModal') }" 
-        x-show="show" 
+    <div
+        x-data="{ show: @entangle('showFoodEditModal') }"
+        x-show="show"
         x-cloak
-        class="fixed inset-0 z-50 overflow-y-auto" 
+        class="fixed inset-0 z-50 overflow-y-auto"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
@@ -710,27 +710,27 @@
         x-transition:leave-end="opacity-0"
     >
         <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div 
-                x-show="show" 
-                x-transition:enter="ease-out duration-300" 
-                x-transition:enter-start="opacity-0" 
-                x-transition:enter-end="opacity-100" 
-                x-transition:leave="ease-in duration-200" 
-                x-transition:leave-start="opacity-100" 
-                x-transition:leave-end="opacity-0" 
+            <div
+                x-show="show"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
                 class="fixed inset-0 transition-opacity"
             >
                 <div class="absolute inset-0 bg-neutral-500/40 dark:bg-neutral-900"></div>
             </div>
 
-            <div 
+            <div
                 @click.outside="show = false"
                 class="inline-block align-bottom bg-white dark:bg-neutral-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full"
-                role="dialog" 
-                aria-modal="true" 
+                role="dialog"
+                aria-modal="true"
                 aria-labelledby="modal-headline"
             >
-                
+
                 <!-- Modal Header with Close Button -->
                 <div class="flex justify-end p-2">
                     <button type="button" wire:click="closeModals" class="text-gray-400 hover:text-gray-500">
@@ -740,7 +740,7 @@
                         </svg>
                     </button>
                 </div>
-                
+
                 <div class="px-4 pb-6">
                     <!-- Food Header with Image and Title -->
                     <div class="flex items-center justify-center mb-4">
@@ -760,7 +760,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <form wire:submit.prevent="updateFood">
                         <!-- Form Fields -->
                         <div class="space-y-4">
@@ -768,9 +768,9 @@
                             <div>
                                 <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Name</label>
                                 <div class="relative">
-                                    <input 
-                                        type="text" 
-                                        wire:model="name" 
+                                    <input
+                                        type="text"
+                                        wire:model="name"
                                         class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                     >
                                     <button type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-red-300">
@@ -782,14 +782,14 @@
                                 <div class="text-xs text-gray-500 mt-1">Adicionado via WhatsApp</div>
                                 @error('name') <span class="text-red-300 text-xs">{{ $message }}</span> @enderror
                             </div>
-                            
+
                             <!-- Quantity Field -->
                             <div>
                                 <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Quantidade</label>
                                 <div class="flex">
-                                    <input 
-                                        type="number" 
-                                        wire:model="quantity" 
+                                    <input
+                                        type="number"
+                                        wire:model="quantity"
                                         step="0.1"
                                         class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                     >
@@ -797,7 +797,7 @@
                                 </div>
                                 @error('quantity') <span class="text-red-300 text-xs">{{ $message }}</span> @enderror
                             </div>
-                            
+
                             <!-- Quick Quantity Options -->
                             <div class="flex mb-1 text-sm">
                                 <span class="text-gray-500 mr-2 self-center">Def. usado recentemente:</span>
@@ -807,15 +807,15 @@
                                     <button type="button" wire:click="$set('quantity', 39.5)" class="bg-gray-200 px-2 py-1 rounded text-gray-700 hover:bg-gray-300 text-xs">39.5g</button>
                                 </div>
                             </div>
-                            
+
                             <!-- Nutritional Values -->
                             <div>
                                 <div class="grid grid-cols-3 gap-2">
                                     <div>
                                         <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Proteína</label>
                                         <div class="flex">
-                                            <input 
-                                                type="number" 
+                                            <input
+                                                type="number"
                                                 wire:model="protein"
                                                 step="0.1"
                                                 class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -827,8 +827,8 @@
                                     <div>
                                         <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Gordura</label>
                                         <div class="flex">
-                                            <input 
-                                                type="number" 
+                                            <input
+                                                type="number"
                                                 wire:model="fat"
                                                 step="0.1"
                                                 class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -840,8 +840,8 @@
                                     <div>
                                         <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Carboidrato</label>
                                         <div class="flex">
-                                            <input 
-                                                type="number" 
+                                            <input
+                                                type="number"
                                                 wire:model="carbohydrate"
                                                 step="0.1"
                                                 class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -853,8 +853,8 @@
                                     <div>
                                         <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Fibras</label>
                                         <div class="flex">
-                                            <input 
-                                                type="number" 
+                                            <input
+                                                type="number"
                                                 wire:model="fiber"
                                                 step="0.1"
                                                 class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -866,8 +866,8 @@
                                     <div>
                                         <label class="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">Calorias</label>
                                         <div class="flex">
-                                            <input 
-                                                type="number" 
+                                            <input
+                                                type="number"
                                                 wire:model="calories"
                                                 step="1"
                                                 class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
@@ -878,7 +878,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Action Buttons -->
                             <div class="pt-4 flex justify-center">
                                 <button type="button" wire:click="delete({{ $selectedFood->id }})" class="flex items-center px-4 py-2 bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-neutral-200 rounded-md hover:bg-neutral-300 dark:hover:bg-neutral-600 focus:outline-none focus:ring-2 focus:ring-neutral-500 sm:ml-3 sm:w-auto sm:text-sm">
@@ -896,7 +896,7 @@
                             </div>
                         </div>
                     </form>
-                    
+
                     <!-- Records Section -->
                     <div class="mt-8">
                         <h3 class="text-sm font-medium text-neutral-800 dark:text-neutral-200 mb-3">Registros do alimento: 1</h3>

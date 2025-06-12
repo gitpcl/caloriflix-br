@@ -1,1 +1,1 @@
-🍏
+<img src="{{ asset('img/logo_regular.png') }}" alt="logo" style="width: 200px;">

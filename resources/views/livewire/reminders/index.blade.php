@@ -2,10 +2,10 @@
     <div class="py-6 max-w-4xl mx-auto">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-semibold text-gray-800">Lembretes e comandos <span class="text-xs bg-caloriflix-100 text-caloriflix-800 px-2 py-1 rounded-full">novo</span></h1>
-            
-            <button 
+
+            <button
                 wire:click="openCreateModal"
-                class="flex items-center justify-center gap-1 px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition"
+                class="flex items-center justify-center gap-1 px-4 py-2 bg-caloriflix-300 text-black text-sm rounded-md hover:bg-caloriflix-400 transition"
             >
                 <span>+</span> Personalizar lembrete
             </button>
@@ -21,7 +21,7 @@
         <!-- Fixed Reminders Section -->
         <div class="mb-6">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Fixos</h2>
-            
+
             <div class="space-y-4">
                 @if($reminders->count() > 0)
                     @foreach($reminders->where('reminder_type', 'horário específico') as $reminder)
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div>
-                                <button 
+                                <button
                                     type="button"
                                     class="relative inline-flex items-center h-6 rounded-full w-11 {{ $reminder->active ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
                                     wire:click="toggleActive({{ $reminder->id }})"
@@ -70,7 +70,7 @@
 
             <!-- Customize button -->
             {{-- <div class="mt-4 flex justify-center">
-                <button 
+                <button
                     wire:click="openCreateModal"
                     class="flex items-center justify-center gap-1 px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition"
                 >
@@ -82,7 +82,7 @@
         <!-- Personalizados Section -->
         <div class="mb-6">
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Personalizados</h2>
-            
+
             <div class="space-y-4">
                 @if($reminders->where('reminder_type', 'intervalo de tempo')->count() > 0)
                     @foreach($reminders->where('reminder_type', 'intervalo de tempo') as $reminder)
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="flex items-center gap-2">
-                                <button 
+                                <button
                                     type="button"
                                     class="relative inline-flex items-center h-6 rounded-full w-11 {{ $reminder->active ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
                                     wire:click="toggleActive({{ $reminder->id }})"
@@ -117,19 +117,19 @@
                                 </button>
                                 <div class="relative" x-data="{ open: false }">
                                     <!-- Three dots button -->
-                                    <button 
-                                        type="button" 
-                                        @click="open = !open" 
+                                    <button
+                                        type="button"
+                                        @click="open = !open"
                                         class="ml-2 text-gray-400 hover:text-gray-600"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
                                         </svg>
                                     </button>
-                                    
+
                                     <!-- Dropdown menu -->
-                                    <div 
-                                        x-show="open" 
+                                    <div
+                                        x-show="open"
                                         @click.outside="open = false"
                                         class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50"
                                         x-transition:enter="transition ease-out duration-100"
@@ -141,7 +141,7 @@
                                         style="display: none;"
                                     >
                                         <div class="py-1 rounded-md bg-white shadow-xs">
-                                            <button 
+                                            <button
                                                 wire:click="duplicateReminder({{ $reminder->id }})"
                                                 @click="open = false"
                                                 class="flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -151,9 +151,9 @@
                                                 </svg>
                                                 Duplicar
                                             </button>
-                                            
-                                            <button 
-                                                wire:click="deleteReminder({{ $reminder->id }})" 
+
+                                            <button
+                                                wire:click="deleteReminder({{ $reminder->id }})"
                                                 @click="open = false"
                                                 class="flex w-full items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
                                                 onclick="if(!confirm('Tem certeza que deseja excluir este lembrete? Esta ação não pode ser desfeita.')) return false;"
@@ -178,7 +178,7 @@
 
             <!-- Customize button -->
             {{-- <div class="mt-4 flex justify-center">
-                <button 
+                <button
                     wire:click="openCreateModal"
                     class="flex items-center justify-center gap-1 px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition"
                 >
@@ -190,7 +190,7 @@
         <!-- Suggestions Section -->
         <div>
             <h2 class="text-xl font-semibold text-gray-800 mb-4">Sugestões <span class="text-xs bg-caloriflix-100 text-caloriflix-800 px-2 py-1 rounded-full">novo</span></h2>
-            
+
             <div class="space-y-4">
                 <!-- Beber água -->
                 @if(!$reminders->where('reminder_type', 'intervalo de tempo')->where('name', 'Beber Água')->count())
@@ -203,7 +203,7 @@
                         </div>
                     </div>
                     <div>
-                        <button 
+                        <button
                             wire:click="prepareSuggestion('Beber Água', 'Lembrar de beber água a cada 1 hora', 1, 0)"
                             class="text-gray-400 hover:text-gray-600"
                         >
@@ -224,7 +224,7 @@
                         </div>
                     </div>
                     <div>
-                        <button 
+                        <button
                             wire:click="prepareSuggestion('Tomar Remédio', 'Lembrar de tomar remédio a cada 8 horas', 8, 0)"
                             class="text-gray-400 hover:text-gray-600"
                         >
@@ -245,7 +245,7 @@
                         </div>
                     </div>
                     <div>
-                        <button 
+                        <button
                             wire:click="prepareSuggestion('Tomar Suplemento', 'Lembrar de tomar suplemento todos os dias às 8h', 24, 0)"
                             class="text-gray-400 hover:text-gray-600"
                         >
@@ -266,7 +266,7 @@
                         </div>
                     </div>
                     <div>
-                        <button 
+                        <button
                             wire:click="prepareSuggestion('Se Movimentar', 'Lembrar de se movimentar a cada 3 horas', 3, 0)"
                             class="text-gray-400 hover:text-gray-600"
                         >
@@ -275,7 +275,7 @@
                     </div>
                 </div>
                 @endif
-                
+
                 <!-- No suggestions message -->
                 @if(
                     $reminders->where('reminder_type', 'intervalo de tempo')->where('name', 'Beber Água')->count() &&
@@ -301,7 +301,7 @@
     >
         <div class="flex items-center justify-center min-h-screen px-4">
             <!-- Backdrop -->
-            <div 
+            <div
                 x-show="$wire.showModal"
                 class="fixed inset-0 bg-black/40"
                 @click="$wire.closeModal()"
@@ -321,10 +321,10 @@
                         </h3>
                     </div>
                     <div>
-                        <button 
+                        <button
                             type="button"
                             wire:click="$set('reminderEnabled', {{ !$reminderEnabled ? 'true' : 'false' }})"
-                            class="relative inline-flex items-center h-6 rounded-full w-11 {{ $reminderEnabled ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
+                            class="relative inline-flex items-center h-6 rounded-full w-11 {{ $reminderEnabled ? 'bg-caloriflix-300' : 'bg-gray-200' }}"
                         >
                             <span class="sr-only">Toggle active</span>
                             <span class="{{ $reminderEnabled ? 'translate-x-6' : 'translate-x-1' }} inline-block w-4 h-4 transform bg-white rounded-full transition"></span>
@@ -337,10 +337,10 @@
                         <!-- Name field -->
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                wire:model="name" 
+                            <input
+                                type="text"
+                                id="name"
+                                wire:model="name"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                 placeholder="Nome do lembrete"
                             >
@@ -350,10 +350,10 @@
                         <!-- Description field -->
                         <div>
                             <label for="description" class="block text-sm font-medium text-gray-700">Descrição</label>
-                            <textarea 
-                                id="description" 
-                                wire:model="description" 
-                                rows="3" 
+                            <textarea
+                                id="description"
+                                wire:model="description"
+                                rows="3"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                 placeholder="Descrição do lembrete"
                             ></textarea>
@@ -362,8 +362,8 @@
                         <!-- Reminder Type -->
                         <div>
                             <label for="reminderType" class="block text-sm font-medium text-gray-700">Tipo do lembrete</label>
-                            <select 
-                                id="reminderType" 
+                            <select
+                                id="reminderType"
                                 wire:model="reminderType"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                             >
@@ -377,20 +377,20 @@
                             <label class="block text-sm font-medium text-gray-700">Intervalo</label>
                             <div class="mt-1 grid grid-cols-2 gap-3">
                                 <div class="flex items-center">
-                                    <input 
-                                        type="number" 
+                                    <input
+                                        type="number"
                                         wire:model="intervalHours"
-                                        min="0" 
+                                        min="0"
                                         class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                     >
                                     <span class="ml-2 text-gray-500">horas</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <input 
-                                        type="number" 
+                                    <input
+                                        type="number"
                                         wire:model="intervalMinutes"
-                                        min="0" 
-                                        max="59" 
+                                        min="0"
+                                        max="59"
                                         class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                     >
                                     <span class="ml-2 text-gray-500">minutos</span>
@@ -406,19 +406,19 @@
                             <div class="grid grid-cols-2 gap-4 mt-1">
                                 <div>
                                     <label for="startTime" class="block text-sm text-gray-500">Início</label>
-                                    <input 
-                                        type="time" 
-                                        id="startTime" 
-                                        wire:model="startTime" 
+                                    <input
+                                        type="time"
+                                        id="startTime"
+                                        wire:model="startTime"
                                         class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                     >
                                 </div>
                                 <div>
                                     <label for="endTime" class="block text-sm text-gray-500">Fim</label>
-                                    <input 
-                                        type="time" 
-                                        id="endTime" 
-                                        wire:model="endTime" 
+                                    <input
+                                        type="time"
+                                        id="endTime"
+                                        wire:model="endTime"
                                         class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                     >
                                 </div>
@@ -427,10 +427,10 @@
 
                         <!-- Buttons toggle -->
                         <div class="flex items-center">
-                            <button 
+                            <button
                                 type="button"
                                 wire:click="$set('buttonsEnabled', {{ !$buttonsEnabled ? 'true' : 'false' }})"
-                                class="relative inline-flex items-center h-6 rounded-full w-11 {{ $buttonsEnabled ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
+                                class="relative inline-flex items-center h-6 rounded-full w-11 {{ $buttonsEnabled ? 'bg-caloriflix-300' : 'bg-gray-200' }}"
                             >
                                 <span class="sr-only">Toggle buttons</span>
                                 <span class="{{ $buttonsEnabled ? 'translate-x-6' : 'translate-x-1' }} inline-block w-4 h-4 transform bg-white rounded-full transition"></span>
@@ -440,7 +440,7 @@
 
                         <!-- Auto command toggle -->
                         <div class="flex items-center">
-                            <button 
+                            <button
                                 type="button"
                                 wire:click="$set('autoCommandEnabled', {{ !$autoCommandEnabled ? 'true' : 'false' }})"
                                 class="relative inline-flex items-center h-6 rounded-full w-11 {{ $autoCommandEnabled ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
@@ -456,14 +456,14 @@
                     <!-- Footer actions -->
                     <div class="flex justify-between px-6 py-4 bg-gray-50 border-t border-gray-200">
                         <div class="flex space-x-2">
-                            <button 
+                            <button
                                 type="button"
                                 wire:click="testReminder"
                                 class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                             >
                                 Testar
                             </button>
-                            <button 
+                            <button
                                 type="button"
                                 @click="$wire.closeModal()"
                                 class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
@@ -473,9 +473,9 @@
                                 </svg>
                             </button>
                         </div>
-                        <button 
+                        <button
                             type="submit"
-                            class="inline-flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-caloriflix-600 hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
+                            class="inline-flex justify-center py-2 px-4 text-sm font-medium rounded-md text-black bg-caloriflix-300 hover:bg-caloriflix-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                         >
                             {{ $isEditing ? 'Salvar alterações' : 'Criar lembrete' }}
                         </button>

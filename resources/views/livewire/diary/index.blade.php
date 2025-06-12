@@ -5,8 +5,8 @@
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Diário Pessoal</h2>
                 <div>
                     <div class="inline-flex rounded-md">
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             wire:click="openCreateModal"
                             class="inline-flex items-center p-2 bg-neutral-100 border border-transparent rounded-md font-semibold text-xs text-neutral-900 uppercase tracking-widest hover:bg-neutral-200 focus:bg-neutral-200 active:bg-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-200 focus:ring-offset-2 transition ease-in-out duration-150"
                         >
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Search Bar -->
             <div class="mb-6">
                 <div class="relative">
@@ -25,15 +25,15 @@
                             <path d="m21 21-4.3-4.3"/>
                         </svg>
                     </div>
-                    <input 
-                        type="text" 
-                        wire:model.live.debounce.300ms="search" 
+                    <input
+                        type="text"
+                        wire:model.live.debounce.300ms="search"
                         class="pl-10 px-2 pr-2 py-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-caloriflix-300 focus:ring-caloriflix-300"
                         placeholder="Pesquisar entradas do diário..."
                     >
                 </div>
             </div>
-            
+
             @if($diaries->isEmpty())
                 <div class="text-center py-12">
                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 dark:bg-gray-700 mb-4">
@@ -46,10 +46,10 @@
                         Comece a registrar seu progresso diário agora.
                     </p>
                     <div class="mt-6">
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             wire:click="openCreateModal"
-                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-caloriflix-300 hover:bg-caloriflix-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
+                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-black bg-caloriflix-300 hover:bg-caloriflix-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="-ml-1 mr-2 h-5 w-5 lucide lucide-plus">
                                 <line x1="12" x2="12" y1="5" y2="19"/>
@@ -74,7 +74,7 @@
                                     </h3>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button 
+                                    <button
                                         wire:click="edit({{ $diary->id }})"
                                         class="text-gray-400 hover:text-caloriflix-500 focus:outline-none"
                                     >
@@ -83,7 +83,7 @@
                                             <path d="m15 5 4 4"/>
                                         </svg>
                                     </button>
-                                    <button 
+                                    <button
                                         wire:click="delete({{ $diary->id }})"
                                         onclick="confirm('Tem certeza que deseja excluir esta entrada?') || event.stopImmediatePropagation()"
                                         class="text-gray-400 hover:text-red-500 focus:outline-none"
@@ -98,7 +98,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                             <div class="p-4">
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <!-- Mood Section -->
@@ -113,7 +113,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Water Section -->
                                     <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 text-center">
                                         <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Consumo de Água</h4>
@@ -129,7 +129,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                    
+
                                     <!-- Sleep Section -->
                                     <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 text-center">
                                         <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tempo de Sono</h4>
@@ -149,7 +149,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                
+
                                 <!-- Notes Section -->
                                 @if($diary->notes)
                                     <div class="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
@@ -161,7 +161,7 @@
                         </div>
                     @endforeach
                 </div>
-                
+
                 <!-- Pagination -->
                 <div class="mt-6">
                     {{ $diaries->links() }}
@@ -169,10 +169,10 @@
             @endif
         </div>
     </div>
-    
+
     <!-- Create/Edit Diary Modal -->
     <div
-        x-data="{ 
+        x-data="{
             isCreating: @entangle('isCreating').live,
             isEditing: @entangle('isEditing').live,
             get show() {
@@ -199,29 +199,29 @@
         class="fixed inset-0 z-50 overflow-y-auto"
     >
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div 
-                x-show="show" 
-                x-transition:enter="ease-out duration-300" 
-                x-transition:enter-start="opacity-0" 
-                x-transition:enter-end="opacity-100" 
-                x-transition:leave="ease-in duration-200" 
-                x-transition:leave-start="opacity-100" 
-                x-transition:leave-end="opacity-0" 
+            <div
+                x-show="show"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100"
+                x-transition:leave-end="opacity-0"
                 class="fixed inset-0 transition-opacity"
             >
                 <div class="absolute inset-0 bg-gray-500 dark:bg-gray-900 opacity-75"></div>
             </div>
-            
+
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
-            
-            <div 
-                x-show="show" 
-                x-transition:enter="ease-out duration-300" 
-                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
-                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
-                x-transition:leave="ease-in duration-200" 
-                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
-                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+
+            <div
+                x-show="show"
+                x-transition:enter="ease-out duration-300"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="ease-in duration-200"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 class="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
             >
                 <form wire:submit.prevent="{{ $isEditing ? 'update' : 'create' }}">
@@ -234,22 +234,22 @@
                                 <div class="mt-4 space-y-4">
                                     <div>
                                         <label for="date" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Data</label>
-                                        <input 
-                                            type="date" 
-                                            wire:model="date" 
-                                            id="date" 
+                                        <input
+                                            type="date"
+                                            wire:model="date"
+                                            id="date"
                                             class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-caloriflix-300 focus:ring-caloriflix-300"
                                         >
                                         @error('date') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
-                                    
+
                                     <div>
                                         <label for="mood" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Humor (1-5)</label>
                                         <div class="mt-1 flex justify-between items-center">
                                             <div class="flex space-x-3">
                                                 @foreach([1, 2, 3, 4, 5] as $moodValue)
-                                                    <button 
-                                                        type="button" 
+                                                    <button
+                                                        type="button"
                                                         wire:click="$set('mood', {{ $moodValue }})"
                                                         class="p-2 {{ $mood == $moodValue ? 'bg-caloriflix-100 dark:bg-caloriflix-900 rounded-full ring-2 ring-caloriflix-500' : '' }} focus:outline-none"
                                                     >
@@ -267,13 +267,13 @@
                                         </div>
                                         @error('mood') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
-                                    
+
                                     <div>
                                         <label for="water" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Consumo de Água (ml)</label>
-                                        <input 
-                                            type="number" 
-                                            wire:model="water" 
-                                            id="water" 
+                                        <input
+                                            type="number"
+                                            wire:model="water"
+                                            id="water"
                                             min="0"
                                             step="100"
                                             class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-caloriflix-300 focus:ring-caloriflix-300"
@@ -281,13 +281,13 @@
                                         >
                                         @error('water') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
-                                    
+
                                     <div>
                                         <label for="sleep" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tempo de Sono (minutos)</label>
-                                        <input 
-                                            type="number" 
-                                            wire:model="sleep" 
-                                            id="sleep" 
+                                        <input
+                                            type="number"
+                                            wire:model="sleep"
+                                            id="sleep"
                                             min="0"
                                             step="15"
                                             class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-caloriflix-300 focus:ring-caloriflix-300"
@@ -298,12 +298,12 @@
                                             Exemplo: 480 (8 horas)
                                         </span>
                                     </div>
-                                    
+
                                     <div>
                                         <label for="notes" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Anotações</label>
-                                        <textarea 
-                                            wire:model="notes" 
-                                            id="notes" 
+                                        <textarea
+                                            wire:model="notes"
+                                            id="notes"
                                             rows="4"
                                             class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-caloriflix-300 focus:ring-caloriflix-300"
                                             placeholder="Como foi seu dia?"
@@ -315,14 +315,14 @@
                         </div>
                     </div>
                     <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-caloriflix-300 text-base font-medium text-white hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 sm:ml-3 sm:w-auto sm:text-sm"
                         >
                             {{ $isEditing ? 'Atualizar' : 'Salvar' }}
                         </button>
-                        <button 
-                            type="button" 
+                        <button
+                            type="button"
                             wire:click="closeModal"
                             class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                         >
@@ -333,27 +333,27 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         document.addEventListener('livewire:initialized', () => {
             Livewire.on('diary-saved', message => {
                 // You can implement toast notifications here if needed
                 console.log(message);
             });
-            
+
             // Debug events
             Livewire.on('diary-edit-started', message => {
                 console.log('Edit started:', message);
                 console.log('isEditing:', @json($isEditing));
                 console.log('isCreating:', @json($isCreating));
             });
-            
+
             Livewire.on('diary-error', message => {
                 console.error('Diary error:', message);
                 alert('Error: ' + message);
             });
         });
-        
+
         // Debug: Log when Alpine.js modal state changes
         document.addEventListener('alpine:init', () => {
             Alpine.data('modalDebug', () => ({

@@ -11,13 +11,13 @@
                 this.notificationMessage = event.detail.message;
                 this.notificationType = event.detail.type || 'success';
                 this.showNotification = true;
-                
+
                 // Auto-hide notification after 5 seconds
                 setTimeout(() => {
                     this.showNotification = false;
                 }, 5000);
             });
-            
+
             Livewire.hook('message.processed', (message, component) => {
                 console.log('Livewire message processed:', message);
                 if (message.response.effects.errors && Object.keys(message.response.effects.errors).length > 0) {
@@ -25,13 +25,13 @@
                 }
             });
         }
-    }" 
+    }"
     x-cloak
     class="py-6 max-w-4xl mx-auto"
 >
     <!-- Notification -->
-    <div 
-        x-show="showNotification" 
+    <div
+        x-show="showNotification"
         x-transition:enter="transform ease-out duration-300 transition"
         x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
         x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0"
@@ -41,8 +41,8 @@
         class="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end"
         style="z-index: 9999;"
     >
-        <div 
-            :class="{ 
+        <div
+            :class="{
                 'bg-caloriflix-50 border-caloriflix-500': notificationType === 'success',
                 'bg-red-50 border-red-500': notificationType === 'error',
                 'bg-caloriflix-50 border-caloriflix-500': notificationType === 'info'
@@ -52,48 +52,48 @@
             <div class="relative p-4">
                 <div class="flex items-start">
                     <div class="flex-shrink-0">
-                        <svg 
+                        <svg
                             x-show="notificationType === 'success'"
-                            class="h-6 w-6 text-caloriflix-400" 
-                            fill="none" 
-                            viewBox="0 0 24 24" 
+                            class="h-6 w-6 text-caloriflix-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
                             stroke="currentColor"
                         >
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <svg 
+                        <svg
                             x-show="notificationType === 'error'"
-                            class="h-6 w-6 text-red-400" 
-                            fill="none" 
-                            viewBox="0 0 24 24" 
+                            class="h-6 w-6 text-red-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
                             stroke="currentColor"
                         >
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <svg 
+                        <svg
                             x-show="notificationType === 'info'"
-                            class="h-6 w-6 text-caloriflix-400" 
-                            fill="none" 
-                            viewBox="0 0 24 24" 
+                            class="h-6 w-6 text-caloriflix-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
                             stroke="currentColor"
                         >
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
                     <div class="ml-3 w-0 flex-1 pt-0.5">
-                        <p 
-                            :class="{ 
+                        <p
+                            :class="{
                                 'text-caloriflix-800': notificationType === 'success',
                                 'text-red-800': notificationType === 'error',
                                 'text-caloriflix-800': notificationType === 'info'
                             }"
-                            class="text-sm font-medium" 
+                            class="text-sm font-medium"
                             x-text="notificationMessage"
                         ></p>
                     </div>
                     <div class="ml-4 flex-shrink-0 flex">
-                        <button 
-                            @click="showNotification = false" 
+                        <button
+                            @click="showNotification = false"
                             class="inline-flex text-gray-400 hover:text-gray-500 focus:outline-none"
                         >
                             <span class="sr-only">Close</span>
@@ -106,19 +106,19 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Content -->
     <div>
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-semibold mb-4">Minhas Metas</h1>
         </div>
-        
+
         @if (session()->has('message'))
             <div class="mb-4 p-4 bg-caloriflix-100 border border-caloriflix-400 text-caloriflix-700 rounded-md">
                 {{ session('message') }}
             </div>
         @endif
-        
+
         <div class="space-y-4">
         <!-- Profile Section (Accordion) -->
         <div x-data="{ open: {{ $profileExpanded ? 'true' : 'false' }} }" class="bg-white rounded-lg shadow overflow-hidden">
@@ -132,17 +132,17 @@
                     </div>
                 </div>
                 <!-- Chevron icon that rotates -->
-                <svg 
-                    class="w-5 h-5 text-gray-500 transition-transform duration-200" 
-                    :class="{'rotate-180': open}" 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 20 20" 
+                <svg
+                    class="w-5 h-5 text-gray-500 transition-transform duration-200"
+                    :class="{'rotate-180': open}"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
                     fill="currentColor"
                 >
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
             </div>
-            
+
             <!-- Accordion Content -->
             <div x-show="open" x-transition class="p-4 border-t border-gray-100">
                 <form wire:submit.prevent="saveProfile">
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                         @endif
-                        
+
                         <!-- Weight Field -->
                         <div>
                             <label for="weight" class="block text-sm font-medium text-gray-700">Seu peso</label>
@@ -182,7 +182,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Height Field -->
                         <div>
                             <label for="height" class="block text-sm font-medium text-gray-700">Sua altura</label>
@@ -193,7 +193,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Gender Field -->
                         <div>
                             <label for="gender" class="block text-sm font-medium text-gray-700">Gênero</label>
@@ -202,7 +202,7 @@
                                 <option value="Feminino">Feminino</option>
                             </select>
                         </div>
-                        
+
                         <!-- Age Field -->
                         <div>
                             <label for="age" class="block text-sm font-medium text-gray-700">Idade</label>
@@ -213,7 +213,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Activity Level Field -->
                         <div>
                             <label for="activityLevel" class="block text-sm font-medium text-gray-700">Nível de Atividade <span class="text-xs bg-caloriflix-100 text-caloriflix-800 px-2 py-1 rounded-full">novo</span></label>
@@ -225,7 +225,7 @@
                                 <option value="Extremamente ativo">Extremamente ativo</option>
                             </select>
                         </div>
-                        
+
                         <!-- Basal Metabolic Rate Field -->
                         <div>
                             <label for="basalMetabolicRate" class="block text-sm font-medium text-gray-700">Taxa metabólica basal</label>
@@ -236,7 +236,7 @@
                                 </button>
                             </div>
                         </div>
-                        
+
                         <!-- Use BMR Toggle -->
                         <div class="bg-gray-50 p-4 rounded-md">
                             <div class="flex items-center justify-between">
@@ -244,9 +244,9 @@
                                     <label for="useBasalMetabolicRate" class="font-medium text-gray-900">Usar taxa metabólica basal como base</label>
                                     <p class="text-sm text-gray-500">Ativo: Sera usado para calcular déficit/superávit calórico. Desativado: usar sua meta calórica</p>
                                 </div>
-                                <button 
+                                <button
                                     type="button"
-                                    class="relative inline-flex items-center h-6 rounded-full w-11 {{ $useBasalMetabolicRate ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
+                                    class="relative inline-flex items-center h-6 rounded-full w-11 {{ $useBasalMetabolicRate ? 'bg-caloriflix-300' : 'bg-gray-200' }}"
                                     wire:click="$toggle('useBasalMetabolicRate')"
                                 >
                                     <span class="sr-only">Toggle BMR</span>
@@ -254,9 +254,9 @@
                                 </button>
                             </div>
                         </div>
-                        
+
                         <div class="flex justify-end mt-4">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-caloriflix-300 text-black text-sm rounded-md hover:bg-caloriflix-400 transition">
                                 Salvar perfil
                             </button>
                         </div>
@@ -264,7 +264,7 @@
                 </form>
             </div>
         </div>
-        
+
         <!-- Goals Section (Accordion) -->
         <div x-data="{ open: {{ $goalsExpanded ? 'true' : 'false' }} }" class="bg-white rounded-lg shadow overflow-hidden">
             <!-- Accordion Header -->
@@ -277,17 +277,17 @@
                     </div>
                 </div>
                 <!-- Chevron icon that rotates -->
-                <svg 
-                    class="w-5 h-5 text-gray-500 transition-transform duration-200" 
-                    :class="{'rotate-180': open}" 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    viewBox="0 0 20 20" 
+                <svg
+                    class="w-5 h-5 text-gray-500 transition-transform duration-200"
+                    :class="{'rotate-180': open}"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
                     fill="currentColor"
                 >
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
             </div>
-            
+
             <!-- Accordion Content -->
             <div x-show="open" x-transition class="p-4 border-t border-gray-100">
                 <form wire:submit.prevent="saveGoals">
@@ -302,7 +302,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Carbs Field -->
                         <div>
                             <label for="carbs" class="block text-sm font-medium text-gray-700">Carboidrato</label>
@@ -313,7 +313,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Fat Field -->
                         <div>
                             <label for="fat" class="block text-sm font-medium text-gray-700">Gordura</label>
@@ -324,7 +324,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Fiber Field -->
                         <div>
                             <label for="fiber" class="block text-sm font-medium text-gray-700">Fibras</label>
@@ -335,7 +335,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Calories Field -->
                         <div>
                             <label for="calories" class="block text-sm font-medium text-gray-700">Calorias</label>
@@ -346,7 +346,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Water Field -->
                         <div>
                             <label for="water" class="block text-sm font-medium text-gray-700">Água</label>
@@ -357,7 +357,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Objective Field -->
                         <div>
                             <label for="objective" class="block text-sm font-medium text-gray-700">Objetivo</label>
@@ -367,13 +367,13 @@
                                 <option value="Ganhar massa">Ganhar massa</option>
                             </select>
                         </div>
-                        
+
                         <div class="flex justify-between mt-4">
                             <button type="button" wire:click="suggestGoals" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-800 text-sm rounded-md hover:bg-gray-200 transition">
                                 Sugerir metas <span class="ml-1 text-xs bg-caloriflix-100 text-caloriflix-800 px-2 py-1 rounded-full">novo</span>
                             </button>
-                            
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition">
+
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-caloriflix-300 text-black text-sm rounded-md hover:bg-caloriflix-400 transition">
                                 Salvar metas
                             </button>
                         </div>
@@ -381,7 +381,7 @@
                 </form>
             </div>
         </div>
-        
+
         <!-- Diet Plan Card -->
         <div class="bg-white rounded-lg shadow overflow-hidden p-4">
             <div class="flex justify-between items-center">
@@ -402,7 +402,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Training Plan Card -->
         <div class="mb-6 bg-white rounded-lg border border-gray-200 overflow-hidden p-4">
             <div class="flex justify-between items-center">
@@ -425,7 +425,7 @@
         </div>
         </div>
     </div>
-    
+
     <!-- Diet Plan Modal -->
     <div
         x-data="{}"
@@ -435,22 +435,22 @@
     >
         <div class="flex items-center justify-center min-h-screen px-4">
             <!-- Backdrop -->
-            <div 
+            <div
                 x-show="$wire.showDietPlanModal"
                 class="fixed inset-0 bg-gray-500 opacity-60"
                 @click="$wire.closeModals()"
             ></div>
-            
+
             <!-- Modal content -->
-            <div 
+            <div
                 x-show="$wire.showDietPlanModal"
                 class="bg-white rounded-lg max-w-xl w-full z-10 relative"
             >
                 <!-- Header with close button -->
                 <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
                     <h3 class="text-lg font-medium text-gray-900">Seu plano alimentar:</h3>
-                    <button 
-                        type="button" 
+                    <button
+                        type="button"
                         class="text-gray-400 hover:text-gray-500"
                         @click="$wire.closeModals()"
                     >
@@ -460,7 +460,7 @@
                         </svg>
                     </button>
                 </div>
-                
+
                 <form wire:submit.prevent="saveDietPlan">
                     <div class="px-6 py-4 space-y-4">
                         <!-- Text area for diet plan -->
@@ -471,9 +471,9 @@
                                 class="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                             ></textarea>
                         </div>
-                        
+
                         <div class="text-center text-gray-500 my-2">ou</div>
-                        
+
                         <!-- PDF upload area -->
                         <div class="border-2 border-dashed border-gray-300 rounded-md p-6 text-center">
                             <div class="flex justify-center">
@@ -481,12 +481,12 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                             </div>
-                            
+
                             <div class="mt-2">
                                 <label for="dietPlanFile" class="text-caloriflix-600 hover:text-caloriflix-500 cursor-pointer">
                                     Selecione o pdf
                                 </label>
-                                <input 
+                                <input
                                     id="dietPlanFile"
                                     wire:model="dietPlanFile"
                                     type="file"
@@ -497,14 +497,14 @@
                             </div>
                             <p class="text-xs text-gray-500">.PDF até 2MB</p>
                         </div>
-                        
+
                         <p class="text-xs text-gray-500">* Você também pode enviar arquivos PDF através do WhatsApp do Dieta.ai</p>
                     </div>
-                    
+
                     <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end">
                         <button
                             type="submit"
-                            class="w-full inline-flex justify-center px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition"
+                            class="w-full inline-flex justify-center px-4 py-2 bg-caloriflix-300 text-black text-sm rounded-md hover:bg-caloriflix-400 transition"
                         >
                             Salvar plano
                         </button>
@@ -513,7 +513,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Training Plan Modal -->
     <div
         x-data="{}"
@@ -523,22 +523,22 @@
     >
         <div class="flex items-center justify-center min-h-screen px-4">
             <!-- Backdrop -->
-            <div 
+            <div
                 x-show="$wire.showTrainingPlanModal"
                 class="fixed inset-0 bg-gray-500 opacity-60"
                 @click="$wire.closeModals()"
             ></div>
-            
+
             <!-- Modal content -->
-            <div 
+            <div
                 x-show="$wire.showTrainingPlanModal"
                 class="bg-white rounded-lg max-w-xl w-full z-10 relative"
             >
                 <!-- Header with close button -->
                 <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
                     <h3 class="text-lg font-medium text-gray-900">Seu plano de treino:</h3>
-                    <button 
-                        type="button" 
+                    <button
+                        type="button"
                         class="text-gray-400 hover:text-gray-500"
                         @click="$wire.closeModals()"
                     >
@@ -548,7 +548,7 @@
                         </svg>
                     </button>
                 </div>
-                
+
                 <form wire:submit.prevent="saveTrainingPlan">
                     <div class="px-6 py-4 space-y-4">
                         <!-- Text area for training plan -->
@@ -560,11 +560,11 @@
                             ></textarea>
                         </div>
                     </div>
-                    
+
                     <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end">
                         <button
                             type="submit"
-                            class="w-full inline-flex justify-center px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition"
+                            class="w-full inline-flex justify-center px-4 py-2 bg-caloriflix-300 text-black text-sm rounded-md hover:bg-caloriflix-400 transition"
                         >
                             Salvar treino
                         </button>
