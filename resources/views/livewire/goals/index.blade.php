@@ -43,9 +43,9 @@
     >
         <div 
             :class="{ 
-                'bg-green-50 border-green-500': notificationType === 'success',
+                'bg-caloriflix-50 border-caloriflix-500': notificationType === 'success',
                 'bg-red-50 border-red-500': notificationType === 'error',
-                'bg-green-50 border-green-500': notificationType === 'info'
+                'bg-caloriflix-50 border-caloriflix-500': notificationType === 'info'
             }"
             class="max-w-sm w-full border-l-4 shadow-lg rounded-lg pointer-events-auto"
         >
@@ -54,7 +54,7 @@
                     <div class="flex-shrink-0">
                         <svg 
                             x-show="notificationType === 'success'"
-                            class="h-6 w-6 text-green-400" 
+                            class="h-6 w-6 text-caloriflix-400" 
                             fill="none" 
                             viewBox="0 0 24 24" 
                             stroke="currentColor"
@@ -72,7 +72,7 @@
                         </svg>
                         <svg 
                             x-show="notificationType === 'info'"
-                            class="h-6 w-6 text-green-400" 
+                            class="h-6 w-6 text-caloriflix-400" 
                             fill="none" 
                             viewBox="0 0 24 24" 
                             stroke="currentColor"
@@ -83,9 +83,9 @@
                     <div class="ml-3 w-0 flex-1 pt-0.5">
                         <p 
                             :class="{ 
-                                'text-green-800': notificationType === 'success',
+                                'text-caloriflix-800': notificationType === 'success',
                                 'text-red-800': notificationType === 'error',
-                                'text-green-800': notificationType === 'info'
+                                'text-caloriflix-800': notificationType === 'info'
                             }"
                             class="text-sm font-medium" 
                             x-text="notificationMessage"
@@ -114,7 +114,7 @@
         </div>
         
         @if (session()->has('message'))
-            <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
+            <div class="mb-4 p-4 bg-caloriflix-100 border border-caloriflix-400 text-caloriflix-700 rounded-md">
                 {{ session('message') }}
             </div>
         @endif
@@ -176,7 +176,7 @@
                         <div>
                             <label for="weight" class="block text-sm font-medium text-gray-700">Seu peso</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" step="0.1" id="weight" wire:model="weight" class="block w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0.0">
+                                <input type="number" step="0.1" id="weight" wire:model="weight" class="block w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent" placeholder="0.0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">quilogramas (kg)</span>
                                 </div>
@@ -187,7 +187,7 @@
                         <div>
                             <label for="height" class="block text-sm font-medium text-gray-700">Sua altura</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="height" wire:model="height" class="block w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
+                                <input type="number" id="height" wire:model="height" class="block w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">centímetros (cm)</span>
                                 </div>
@@ -197,7 +197,7 @@
                         <!-- Gender Field -->
                         <div>
                             <label for="gender" class="block text-sm font-medium text-gray-700">Gênero</label>
-                            <select id="gender" wire:model="gender" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md">
+                            <select id="gender" wire:model="gender" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm rounded-md">
                                 <option value="Masculino">Masculino</option>
                                 <option value="Feminino">Feminino</option>
                             </select>
@@ -207,7 +207,7 @@
                         <div>
                             <label for="age" class="block text-sm font-medium text-gray-700">Idade</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="age" wire:model="age" class="block w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
+                                <input type="number" id="age" wire:model="age" class="block w-full px-3 py-2 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">anos</span>
                                 </div>
@@ -216,8 +216,8 @@
                         
                         <!-- Activity Level Field -->
                         <div>
-                            <label for="activityLevel" class="block text-sm font-medium text-gray-700">Nível de Atividade <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">novo</span></label>
-                            <select id="activityLevel" wire:model="activityLevel" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md">
+                            <label for="activityLevel" class="block text-sm font-medium text-gray-700">Nível de Atividade <span class="text-xs bg-caloriflix-100 text-caloriflix-800 px-2 py-1 rounded-full">novo</span></label>
+                            <select id="activityLevel" wire:model="activityLevel" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm rounded-md">
                                 <option value="Sedentário">Sedentário</option>
                                 <option value="Levemente ativo">Levemente ativo</option>
                                 <option value="Moderadamente ativo">Moderadamente ativo</option>
@@ -246,7 +246,7 @@
                                 </div>
                                 <button 
                                     type="button"
-                                    class="relative inline-flex items-center h-6 rounded-full w-11 {{ $useBasalMetabolicRate ? 'bg-green-600' : 'bg-gray-200' }}"
+                                    class="relative inline-flex items-center h-6 rounded-full w-11 {{ $useBasalMetabolicRate ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
                                     wire:click="$toggle('useBasalMetabolicRate')"
                                 >
                                     <span class="sr-only">Toggle BMR</span>
@@ -256,7 +256,7 @@
                         </div>
                         
                         <div class="flex justify-end mt-4">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition">
                                 Salvar perfil
                             </button>
                         </div>
@@ -296,7 +296,7 @@
                         <div>
                             <label for="protein" class="block text-sm font-medium text-gray-700">Proteína</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="protein" wire:model="protein" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
+                                <input type="number" id="protein" wire:model="protein" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">gramas (g)</span>
                                 </div>
@@ -307,7 +307,7 @@
                         <div>
                             <label for="carbs" class="block text-sm font-medium text-gray-700">Carboidrato</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="carbs" wire:model="carbs" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
+                                <input type="number" id="carbs" wire:model="carbs" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">gramas (g)</span>
                                 </div>
@@ -318,7 +318,7 @@
                         <div>
                             <label for="fat" class="block text-sm font-medium text-gray-700">Gordura</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="fat" wire:model="fat" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
+                                <input type="number" id="fat" wire:model="fat" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">gramas (g)</span>
                                 </div>
@@ -329,7 +329,7 @@
                         <div>
                             <label for="fiber" class="block text-sm font-medium text-gray-700">Fibras</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="fiber" wire:model="fiber" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
+                                <input type="number" id="fiber" wire:model="fiber" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">gramas (g)</span>
                                 </div>
@@ -340,7 +340,7 @@
                         <div>
                             <label for="calories" class="block text-sm font-medium text-gray-700">Calorias</label>
                             <div class="mt-1 relative rounded-md shadow-sm">
-                                <input type="number" id="calories" wire:model="calories" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="0">
+                                <input type="number" id="calories" wire:model="calories" class="block w-full px-3 py-2 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent" placeholder="0">
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">
                                     <span class="text-gray-500 sm:text-sm">kcal</span>
                                 </div>
@@ -361,7 +361,7 @@
                         <!-- Objective Field -->
                         <div>
                             <label for="objective" class="block text-sm font-medium text-gray-700">Objetivo</label>
-                            <select id="objective" wire:model="objective" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md">
+                            <select id="objective" wire:model="objective" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm rounded-md">
                                 <option value="Perder gordura">Perder gordura</option>
                                 <option value="Manter peso">Manter peso</option>
                                 <option value="Ganhar massa">Ganhar massa</option>
@@ -370,10 +370,10 @@
                         
                         <div class="flex justify-between mt-4">
                             <button type="button" wire:click="suggestGoals" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-800 text-sm rounded-md hover:bg-gray-200 transition">
-                                Sugerir metas <span class="ml-1 text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">novo</span>
+                                Sugerir metas <span class="ml-1 text-xs bg-caloriflix-100 text-caloriflix-800 px-2 py-1 rounded-full">novo</span>
                             </button>
                             
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition">
+                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition">
                                 Salvar metas
                             </button>
                         </div>
@@ -468,7 +468,7 @@
                             <textarea
                                 wire:model="dietPlan"
                                 placeholder="Descreva sua dieta da semana aqui..."
-                                class="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                class="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                             ></textarea>
                         </div>
                         
@@ -483,7 +483,7 @@
                             </div>
                             
                             <div class="mt-2">
-                                <label for="dietPlanFile" class="text-green-600 hover:text-green-500 cursor-pointer">
+                                <label for="dietPlanFile" class="text-caloriflix-600 hover:text-caloriflix-500 cursor-pointer">
                                     Selecione o pdf
                                 </label>
                                 <input 
@@ -504,7 +504,7 @@
                     <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end">
                         <button
                             type="submit"
-                            class="w-full inline-flex justify-center px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition"
+                            class="w-full inline-flex justify-center px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition"
                         >
                             Salvar plano
                         </button>
@@ -556,7 +556,7 @@
                             <textarea
                                 wire:model="trainingPlan"
                                 placeholder="Descreva seu plano de treino aqui..."
-                                class="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                class="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                             ></textarea>
                         </div>
                     </div>
@@ -564,7 +564,7 @@
                     <div class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end">
                         <button
                             type="submit"
-                            class="w-full inline-flex justify-center px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition"
+                            class="w-full inline-flex justify-center px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition"
                         >
                             Salvar treino
                         </button>

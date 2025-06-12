@@ -80,17 +80,11 @@ class FoodController extends BaseController
     /**
      * Display the specified food.
      *
-     * @param int $id
+     * @param Food $food
      * @return JsonResponse
      */
-    public function show($id): JsonResponse
+    public function show(Food $food): JsonResponse
     {
-        $food = Food::find($id);
-
-        if (is_null($food)) {
-            return $this->sendError('Food not found.');
-        }
-
         if ($food->user_id !== request()->user()->id) {
             return $this->sendError('Forbidden.', [], 403);
         }
@@ -102,21 +96,11 @@ class FoodController extends BaseController
      * Update the specified food.
      *
      * @param UpdateFoodRequest $request
-     * @param int $id
+     * @param Food $food
      * @return JsonResponse
      */
-    public function update(UpdateFoodRequest $request, $id): JsonResponse
+    public function update(UpdateFoodRequest $request, Food $food): JsonResponse
     {
-        $food = Food::find($id);
-
-        if (is_null($food)) {
-            return $this->sendError('Food not found.');
-        }
-
-        if ($food->user_id !== $request->user()->id) {
-            return $this->sendError('Forbidden.', [], 403);
-        }
-
         $food->update($request->validated());
 
         return $this->sendResponse(new FoodResource($food), 'Food updated successfully');
@@ -125,17 +109,11 @@ class FoodController extends BaseController
     /**
      * Remove the specified food.
      *
-     * @param int $id
+     * @param Food $food
      * @return JsonResponse
      */
-    public function destroy($id): JsonResponse
+    public function destroy(Food $food): JsonResponse
     {
-        $food = Food::find($id);
-
-        if (is_null($food)) {
-            return $this->sendError('Food not found.');
-        }
-
         if ($food->user_id !== request()->user()->id) {
             return $this->sendError('Forbidden.', [], 403);
         }

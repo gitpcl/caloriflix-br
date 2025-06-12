@@ -119,6 +119,37 @@ class ApiHandler
      */
     protected function handleNotFoundHttpException(NotFoundHttpException $exception): JsonResponse
     {
+        // Check if this is a model binding failure
+        if ($exception->getPrevious() instanceof ModelNotFoundException) {
+            return $this->handleModelNotFoundException($exception->getPrevious());
+        }
+        
+        // Check if the URL contains a resource identifier pattern
+        $request = request();
+        $path = $request->path();
+        
+        // Common resource patterns in the API
+        $resourcePatterns = [
+            '/foods/(\d+)' => 'Food',
+            '/meals/(\d+)' => 'Meal',
+            '/meal-items/(\d+)' => 'Meal Item',
+            '/diary/(\d+)' => 'Diary Entry',
+            '/recipes/(\d+)' => 'Recipe',
+            '/measurements/(\d+)' => 'Measurement',
+            '/nutritional-goals/(\d+)' => 'Nutritional Goal',
+            '/reminders/(\d+)' => 'Reminder',
+        ];
+        
+        foreach ($resourcePatterns as $pattern => $resourceName) {
+            if (preg_match("#api/v1{$pattern}#", $path)) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Resource not found.',
+                    'error' => "{$resourceName} not found.",
+                ], 404);
+            }
+        }
+        
         return response()->json([
             'success' => false,
             'message' => 'Endpoint not found.',

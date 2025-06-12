@@ -14,7 +14,7 @@
                 
                 <button 
                     wire:click="today"
-                    class="px-3 py-1 text-sm font-medium rounded-md bg-green-50 text-green-600 hover:bg-green-100">
+                    class="px-3 py-1 text-sm font-medium rounded-md bg-caloriflix-50 text-caloriflix-600 hover:bg-caloriflix-100">
                     Hoje
                 </button>
                 
@@ -31,7 +31,7 @@
         </div>
 
         @if (session()->has('message'))
-            <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
+            <div class="mb-4 p-4 bg-caloriflix-100 border border-caloriflix-400 text-caloriflix-700 rounded-md">
                 {{ session('message') }}
             </div>
         @endif
@@ -57,7 +57,7 @@
                                     @break
                             @endswitch
                             <h3 class="text-lg font-medium">{{ $this->getMealDisplayName($mealType) }}</h3>
-                            <span class="text-xs text-green-500 bg-green-100 rounded-full px-2 py-0.5 ml-2">
+                            <span class="text-xs text-caloriflix-500 bg-caloriflix-100 rounded-full px-2 py-0.5 ml-2">
                                 {{ count($meals[$mealType]['items']) ?? 0 }}
                             </span>
                         </div>
@@ -161,7 +161,7 @@
                             step="0.1" 
                             min="0.1"
                             wire:model="editQuantity"
-                            class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                             placeholder="0"
                         >
                         <span class="text-sm text-gray-500">{{ $editingMealItem->food->unit }}</span>
@@ -204,7 +204,7 @@
                                 step="0.1" 
                                 min="0"
                                 wire:model="editProtein"
-                                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                 placeholder="0.0"
                             >
                             @error('editProtein') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
@@ -217,7 +217,7 @@
                                 step="0.1" 
                                 min="0"
                                 wire:model="editFat"
-                                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                 placeholder="0.0"
                             >
                             @error('editFat') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
@@ -230,7 +230,7 @@
                                 step="0.1" 
                                 min="0"
                                 wire:model="editCarbohydrate"
-                                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                 placeholder="0.0"
                             >
                             @error('editCarbohydrate') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
@@ -243,7 +243,7 @@
                                 step="0.1" 
                                 min="0"
                                 wire:model="editFiber"
-                                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                 placeholder="0.0"
                             >
                             @error('editFiber') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
@@ -257,7 +257,7 @@
                             step="0.1" 
                             min="0"
                             wire:model="editCalories"
-                            class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                            class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                             placeholder="0.0"
                         >
                         @error('editCalories') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
@@ -270,7 +270,7 @@
                     <textarea 
                         wire:model="editNotes"
                         rows="3"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                         placeholder="Adicione observações sobre este item..."
                     ></textarea>
                     @error('editNotes') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
@@ -280,7 +280,7 @@
                 <div class="flex space-x-3">
                     <button 
                         wire:click="updateMealItem"
-                        class="flex-1 bg-green-100 text-green-700 py-2 px-4 rounded-md hover:bg-green-200 transition-colors duration-200 font-medium"
+                        class="flex-1 bg-caloriflix-100 text-caloriflix-700 py-2 px-4 rounded-md hover:bg-caloriflix-200 transition-colors duration-200 font-medium"
                     >
                         Salvar
                     </button>

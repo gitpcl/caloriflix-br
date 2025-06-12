@@ -18,7 +18,7 @@ https://your-domain.com/api/v1/
 To get general API information and available versions:
 
 ```http
-GET /api/
+GET /api/v1/
 ```
 
 **Response:**
@@ -38,7 +38,7 @@ The Caloriflix API uses Laravel Sanctum token-based authentication.
 ### Obtaining a Token
 
 ```http
-POST /api/login
+POST /api/v1/login
 ```
 
 **Request Body:**
@@ -72,7 +72,7 @@ Authorization: Bearer 1|abcdefghijklmnopqrstuvwxyz123456789
 ### Registration
 
 ```http
-POST /api/register
+POST /api/v1/register
 ```
 
 **Request Body:**
@@ -88,7 +88,25 @@ POST /api/register
 ### Logout
 
 ```http
-POST /api/logout
+POST /api/v1/logout
+```
+
+### Get Current User
+
+```http
+GET /api/v1/user
+```
+
+**Response:**
+```json
+{
+  "id": 1,
+  "name": "User Name",
+  "email": "user@example.com",
+  "email_verified_at": "2025-05-28T12:00:00.000000Z",
+  "created_at": "2025-05-28T12:00:00.000000Z",
+  "updated_at": "2025-05-28T12:00:00.000000Z"
+}
 ```
 
 ## Foods API
@@ -96,7 +114,7 @@ POST /api/logout
 ### List Foods
 
 ```http
-GET /api/foods
+GET /api/v1/foods
 ```
 
 **Query Parameters:**
@@ -151,7 +169,7 @@ GET /api/foods
 ### Create Food
 
 ```http
-POST /api/foods
+POST /api/v1/foods
 ```
 
 **Request Body:**
@@ -173,13 +191,13 @@ POST /api/foods
 ### Get Food Details
 
 ```http
-GET /api/foods/{id}
+GET /api/v1/foods/{food}
 ```
 
 ### Update Food
 
 ```http
-PUT /api/foods/{id}
+PUT /api/v1/foods/{food}
 ```
 
 **Request Body:**
@@ -201,13 +219,13 @@ PUT /api/foods/{id}
 ### Delete Food
 
 ```http
-DELETE /api/foods/{id}
+DELETE /api/v1/foods/{food}
 ```
 
 ### Get Favorite Foods
 
 ```http
-GET /api/foods/favorites
+GET /api/v1/foods/favorites
 ```
 
 ## Meals API
@@ -215,13 +233,13 @@ GET /api/foods/favorites
 ### List Meals
 
 ```http
-GET /api/meals
+GET /api/v1/meals
 ```
 
 **Query Parameters:**
 - `start_date`: Start date for filtering (YYYY-MM-DD)
 - `end_date`: End date for filtering (YYYY-MM-DD)
-- `type`: Filter by meal type (breakfast, lunch, dinner, snack)
+- `type`: Filter by meal type (cafe_da_manha, almoco, lanche_da_tarde, jantar)
 - `sort_by`: Field to sort by (date, type, created_at)
 - `sort_direction`: Sort direction (asc, desc)
 - `per_page`: Number of records per page
@@ -229,55 +247,55 @@ GET /api/meals
 ### Create Meal
 
 ```http
-POST /api/meals
+POST /api/v1/meals
 ```
 
 **Request Body:**
 ```json
 {
-  "date": "2025-05-28",
-  "type": "breakfast",
-  "note": "Morning protein meal"
+  "meal_date": "2025-05-28",
+  "meal_type": "cafe_da_manha",
+  "notes": "Morning protein meal"
 }
 ```
 
 ### Get Meal Details
 
 ```http
-GET /api/meals/{id}
+GET /api/v1/meals/{meal}
 ```
 
 ### Update Meal
 
 ```http
-PUT /api/meals/{id}
+PUT /api/v1/meals/{meal}
 ```
 
 **Request Body:**
 ```json
 {
-  "date": "2025-05-28",
-  "type": "lunch",
-  "note": "Updated note"
+  "meal_date": "2025-05-28",
+  "meal_type": "almoco",
+  "notes": "Updated note"
 }
 ```
 
 ### Delete Meal
 
 ```http
-DELETE /api/meals/{id}
+DELETE /api/v1/meals/{meal}
 ```
 
 ### Get Today's Meals
 
 ```http
-GET /api/meals/today
+GET /api/v1/meals/today
 ```
 
 ### Get Meals by Date
 
 ```http
-GET /api/meals/date/{date}
+GET /api/v1/meals/date/{date}
 ```
 
 ## Meal Items API
@@ -285,7 +303,7 @@ GET /api/meals/date/{date}
 ### List Meal Items
 
 ```http
-GET /api/meal-items
+GET /api/v1/meal-items
 ```
 
 **Query Parameters:**
@@ -295,7 +313,7 @@ GET /api/meal-items
 ### Create Meal Item
 
 ```http
-POST /api/meal-items
+POST /api/v1/meal-items
 ```
 
 **Request Body:**
@@ -311,13 +329,13 @@ POST /api/meal-items
 ### Get Meal Item Details
 
 ```http
-GET /api/meal-items/{id}
+GET /api/v1/meal-items/{meal_item}
 ```
 
 ### Update Meal Item
 
 ```http
-PUT /api/meal-items/{id}
+PUT /api/v1/meal-items/{meal_item}
 ```
 
 **Request Body:**
@@ -331,7 +349,7 @@ PUT /api/meal-items/{id}
 ### Delete Meal Item
 
 ```http
-DELETE /api/meal-items/{id}
+DELETE /api/v1/meal-items/{meal_item}
 ```
 
 ## Diary API
@@ -339,7 +357,7 @@ DELETE /api/meal-items/{id}
 ### List Diary Entries
 
 ```http
-GET /api/diary
+GET /api/v1/diary
 ```
 
 **Query Parameters:**
@@ -351,8 +369,10 @@ GET /api/diary
 
 ### Create Diary Entry
 
+**Note:** `mood` is an integer from 1-5, and `sleep` is in minutes.
+
 ```http
-POST /api/diary
+POST /api/v1/diary
 ```
 
 **Request Body:**
@@ -361,20 +381,21 @@ POST /api/diary
   "date": "2025-05-28",
   "water": 1500,
   "notes": "Feeling good today",
-  "mood": "happy"
+  "mood": 4,
+  "sleep": 480
 }
 ```
 
 ### Get Diary Entry
 
 ```http
-GET /api/diary/{id}
+GET /api/v1/diary/{diary}
 ```
 
 ### Update Diary Entry
 
 ```http
-PUT /api/diary/{id}
+PUT /api/v1/diary/{diary}
 ```
 
 **Request Body:**
@@ -382,20 +403,21 @@ PUT /api/diary/{id}
 {
   "water": 2000,
   "notes": "Updated notes",
-  "mood": "energetic"
+  "mood": 5,
+  "sleep": 420
 }
 ```
 
 ### Delete Diary Entry
 
 ```http
-DELETE /api/diary/{id}
+DELETE /api/v1/diary/{diary}
 ```
 
 ### Get Diary by Date
 
 ```http
-GET /api/diary/date/{date}
+GET /api/v1/diary/date/{date}
 ```
 
 ## Recipes API
@@ -403,7 +425,7 @@ GET /api/diary/date/{date}
 ### List Recipes
 
 ```http
-GET /api/recipes
+GET /api/v1/recipes
 ```
 
 **Query Parameters:**
@@ -415,7 +437,7 @@ GET /api/recipes
 ### Create Recipe
 
 ```http
-POST /api/recipes
+POST /api/v1/recipes
 ```
 
 **Request Body:**
@@ -438,13 +460,13 @@ POST /api/recipes
 ### Get Recipe Details
 
 ```http
-GET /api/recipes/{id}
+GET /api/v1/recipes/{recipe}
 ```
 
 ### Update Recipe
 
 ```http
-PUT /api/recipes/{id}
+PUT /api/v1/recipes/{recipe}
 ```
 
 **Request Body:**
@@ -458,7 +480,7 @@ PUT /api/recipes/{id}
 ### Delete Recipe
 
 ```http
-DELETE /api/recipes/{id}
+DELETE /api/v1/recipes/{recipe}
 ```
 
 ## Measurements API
@@ -466,13 +488,13 @@ DELETE /api/recipes/{id}
 ### List Measurements
 
 ```http
-GET /api/measurements
+GET /api/v1/measurements
 ```
 
 **Query Parameters:**
 - `start_date`: Start date for filtering (YYYY-MM-DD)
 - `end_date`: End date for filtering (YYYY-MM-DD)
-- `type`: Filter by measurement type (glucose, weight, blood_pressure, other)
+- `type`: Filter by measurement type (weight, body_fat, lean_mass, arm, forearm, waist, hip, thigh, calf, bmr, body_water)
 - `sort_by`: Field to sort by (date, type, value, created_at)
 - `sort_direction`: Sort direction (asc, desc)
 - `per_page`: Number of records per page
@@ -480,31 +502,29 @@ GET /api/measurements
 ### Create Measurement
 
 ```http
-POST /api/measurements
+POST /api/v1/measurements
 ```
 
 **Request Body:**
 ```json
 {
   "date": "2025-05-28",
-  "time": "07:30",
-  "type": "glucose",
-  "value": 95,
-  "unit": "mg/dL",
-  "notes": "Fasting measurement"
+  "type": "weight",
+  "value": 75.5,
+  "notes": "Morning weight"
 }
 ```
 
 ### Get Measurement Details
 
 ```http
-GET /api/measurements/{id}
+GET /api/v1/measurements/{measurement}
 ```
 
 ### Update Measurement
 
 ```http
-PUT /api/measurements/{id}
+PUT /api/v1/measurements/{measurement}
 ```
 
 **Request Body:**
@@ -518,66 +538,71 @@ PUT /api/measurements/{id}
 ### Delete Measurement
 
 ```http
-DELETE /api/measurements/{id}
+DELETE /api/v1/measurements/{measurement}
 ```
 
 ### Get Latest Measurements
 
 ```http
-GET /api/measurements/latest
+GET /api/v1/measurements/latest
 ```
 
 ### Get Measurements by Type
 
 ```http
-GET /api/measurements/type/{type}
+GET /api/v1/measurements/type/{type}
 ```
 
 **Supported Types:**
-- `glucose`
 - `weight`
-- `blood_pressure`
-- `other`
+- `body_fat`
+- `lean_mass`
+- `arm`
+- `forearm`
+- `waist`
+- `hip`
+- `thigh`
+- `calf`
+- `bmr`
+- `body_water`
 
 ## Nutritional Goals API
 
 ### List Nutritional Goals
 
 ```http
-GET /api/nutritional-goals
+GET /api/v1/nutritional-goals
 ```
 
 ### Create Nutritional Goal
 
 ```http
-POST /api/nutritional-goals
+POST /api/v1/nutritional-goals
 ```
 
 **Request Body:**
 ```json
 {
-  "calories": 2200,
   "protein": 150,
-  "carbohydrate": 220,
+  "carbs": 220,
   "fat": 70,
   "fiber": 30,
+  "calories": 2200,
   "water": 2500,
-  "start_date": "2025-06-01",
-  "end_date": "2025-12-31",
-  "is_active": true
+  "objective": "weight loss"
 }
 ```
 
 ### Get Nutritional Goal Details
 
 ```http
-GET /api/nutritional-goals/{id}
+GET /api/v1/nutritional-goals/{nutritional_goal}
 ```
 
 ### Update Nutritional Goal
 
 ```http
-PUT /api/nutritional-goals/{id}
+PUT /api/v1/nutritional-goals/{nutritional_goal}
 ```
 
 **Request Body:**
@@ -585,20 +610,21 @@ PUT /api/nutritional-goals/{id}
 {
   "calories": 2000,
   "protein": 180,
-  "is_active": true
+  "carbs": 200,
+  "objective": "maintenance"
 }
 ```
 
 ### Delete Nutritional Goal
 
 ```http
-DELETE /api/nutritional-goals/{id}
+DELETE /api/v1/nutritional-goals/{nutritional_goal}
 ```
 
 ### Get Current Nutritional Goal
 
 ```http
-GET /api/nutritional-goals/current
+GET /api/v1/nutritional-goals/current
 ```
 
 ## User Profile API
@@ -606,27 +632,25 @@ GET /api/nutritional-goals/current
 ### Get User Profile
 
 ```http
-GET /api/profile
+GET /api/v1/profile
 ```
 
 ### Update User Profile
 
 ```http
-PUT /api/profile
+PUT /api/v1/profile
 ```
 
 **Request Body:**
 ```json
 {
-  "gender": "male",
-  "birth_date": "1990-01-15",
+  "weight": 75.5,
   "height": 180,
-  "weight": 75,
-  "goal_weight": 70,
+  "gender": "male",
+  "age": 35,
   "activity_level": "moderately_active",
-  "diet_type": "balanced",
-  "allergies": "nuts, shellfish",
-  "bio": "Fitness enthusiast working on improving my diet"
+  "basal_metabolic_rate": 1750,
+  "use_basal_metabolic_rate": true
 }
 ```
 
@@ -635,27 +659,37 @@ PUT /api/profile
 ### Get User Preferences
 
 ```http
-GET /api/preferences
+GET /api/v1/preferences
 ```
 
 ### Update User Preferences
 
 ```http
-PUT /api/preferences
+PUT /api/v1/preferences
 ```
 
 **Request Body:**
 ```json
 {
-  "theme": "dark",
-  "language": "pt",
-  "notifications_enabled": true,
-  "email_notifications": false,
-  "weekly_report": true,
-  "meal_reminders": true,
-  "water_reminders": true,
-  "measurement_reminders": false,
-  "display_units": "metric"
+  "glycemic_index_enabled": false,
+  "cholesterol_enabled": false,
+  "keto_diet_enabled": false,
+  "paleo_diet_enabled": false,
+  "low_fodmap_enabled": false,
+  "low_carb_enabled": false,
+  "meal_plan_evaluation_enabled": false,
+  "time_zone": "UTC-3",
+  "silent_mode_enabled": false,
+  "language": "Português",
+  "prioritize_taco_enabled": false,
+  "daily_log_enabled": true,
+  "photo_with_macros_enabled": false,
+  "auto_fasting_enabled": true,
+  "detailed_foods_enabled": false,
+  "show_dashboard_enabled": false,
+  "advanced_food_analysis_enabled": false,
+  "group_water_enabled": false,
+  "expanded_sections": {"diet_features": true}
 }
 ```
 
@@ -664,40 +698,45 @@ PUT /api/preferences
 ### List Reminders
 
 ```http
-GET /api/reminders
+GET /api/v1/reminders
 ```
 
 **Query Parameters:**
-- `type`: Filter by reminder type (meal, water, medication, measurement, other)
 - `active`: Filter by active status (boolean)
-- `sort_by`: Field to sort by (title, type, time, created_at)
+- `sort_by`: Field to sort by (name, start_time, created_at)
 - `sort_direction`: Sort direction (asc, desc)
 - `per_page`: Number of records per page
 
 ### Create Reminder
 
 ```http
-POST /api/reminders
+POST /api/v1/reminders
 ```
 
 **Request Body:**
 ```json
 {
-  "title": "Drink Water",
+  "name": "Drink Water",
   "description": "Regular water reminder",
-  "type": "water",
-  "time": "14:00",
-  "days": [0, 1, 2, 3, 4, 5, 6],
+  "reminder_type": "intervalo de tempo",
+  "interval_hours": 2,
+  "interval_minutes": 0,
+  "start_time": "08:00:00",
+  "end_time": "22:00:00",
+  "buttons_enabled": true,
+  "auto_command_enabled": false,
+  "auto_command": null,
   "active": true,
-  "repeat_type": "daily",
-  "details": [
+  "reminder_details": [
     {
-      "content": "Drink at least 250ml of water",
-      "order": 0
+      "button_text": "250ml",
+      "button_action": "/water 250",
+      "display_order": 0
     },
     {
-      "content": "Record in the water tracker",
-      "order": 1
+      "button_text": "500ml",
+      "button_action": "/water 500",
+      "display_order": 1
     }
   ]
 }
@@ -706,30 +745,32 @@ POST /api/reminders
 ### Get Reminder Details
 
 ```http
-GET /api/reminders/{id}
+GET /api/v1/reminders/{reminder}
 ```
 
 ### Update Reminder
 
 ```http
-PUT /api/reminders/{id}
+PUT /api/v1/reminders/{reminder}
 ```
 
 **Request Body:**
 ```json
 {
-  "title": "Updated Reminder",
-  "time": "15:30",
+  "name": "Updated Reminder",
+  "interval_hours": 3,
   "active": false,
-  "details": [
+  "reminder_details": [
     {
       "id": 1,
-      "content": "Updated content",
-      "order": 0
+      "button_text": "Updated button",
+      "button_action": "/water 300",
+      "display_order": 0
     },
     {
-      "content": "New step",
-      "order": 1
+      "button_text": "New button",
+      "button_action": "/water 750",
+      "display_order": 1
     }
   ]
 }
@@ -738,7 +779,7 @@ PUT /api/reminders/{id}
 ### Delete Reminder
 
 ```http
-DELETE /api/reminders/{id}
+DELETE /api/v1/reminders/{reminder}
 ```
 
 ## Reports API
@@ -746,13 +787,13 @@ DELETE /api/reminders/{id}
 ### Get Default Reports (Daily)
 
 ```http
-GET /api/reports
+GET /api/v1/reports
 ```
 
 ### Get Reports by Period
 
 ```http
-GET /api/reports/period/{period}
+GET /api/v1/reports/period/{period}
 ```
 
 **Supported Periods:**
@@ -763,7 +804,7 @@ GET /api/reports/period/{period}
 ### Get Custom Range Reports
 
 ```http
-GET /api/reports/custom
+GET /api/v1/reports/custom
 ```
 
 **Query Parameters:**
@@ -892,14 +933,14 @@ Cached responses include:
 - `X-Cache-Status`: `HIT` or `MISS`
 - `X-Cache-TTL`: Time to live in seconds
 
-### Cache Duration by Resource
+### Cache Duration by Endpoint
 
-- **User profiles**: 2 hours
-- **User preferences**: 2 hours  
-- **Foods**: 1 hour
-- **Meals**: 30 minutes
-- **Reports**: 15 minutes
-- **Measurements**: 30 minutes
+Based on the implemented middleware:
+- **GET /api/v1/foods/favorites**: 30 minutes
+- **GET /api/v1/foods**: 15 minutes
+- **GET /api/v1/foods/{food}**: 60 minutes
+- **GET /api/v1/profile**: 120 minutes (2 hours)
+- **GET /api/v1/preferences**: 120 minutes (2 hours)
 
 ### Cache Invalidation
 
@@ -907,6 +948,11 @@ Cache is automatically invalidated when:
 - Resources are created, updated, or deleted
 - Related resources are modified
 - User profile/preferences change
+
+The following endpoints trigger cache invalidation:
+- **POST/PUT/DELETE /api/v1/foods**: Invalidates 'foods' cache
+- **PUT /api/v1/profile**: Invalidates 'profile' and 'preferences' cache
+- **PUT /api/v1/preferences**: Invalidates 'preferences' cache
 
 ## Token Management
 
@@ -942,7 +988,7 @@ POST /api/v1/tokens/refresh
 
 #### Revoke Specific Token
 ```http
-DELETE /api/v1/tokens/{token_id}
+DELETE /api/v1/tokens/{token}
 ```
 
 #### Revoke All Other Tokens

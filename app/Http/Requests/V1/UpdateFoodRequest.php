@@ -14,7 +14,9 @@ class UpdateFoodRequest extends FormRequest
     public function authorize(): bool
     {
         $food = $this->route('food');
-        return $food && $food->user_id === $this->user()->id;
+        
+        // The food should be a model instance due to route model binding
+        return $food instanceof \App\Models\Food && $food->user_id === $this->user()->id;
     }
 
     /**

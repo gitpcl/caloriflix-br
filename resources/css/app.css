@@ -23,6 +23,19 @@
     --color-zinc-900: #171717;
     --color-zinc-950: #0a0a0a;
 
+    /* Caloriflix Green Color Palette */
+    --color-caloriflix-50: #f0fdf4;
+    --color-caloriflix-100: #dcfce7;
+    --color-caloriflix-200: #bbf7d0;
+    --color-caloriflix-300: #79f1b5;
+    --color-caloriflix-400: #4ade80;
+    --color-caloriflix-500: #22c55e;
+    --color-caloriflix-600: #16a34a;
+    --color-caloriflix-700: #15803d;
+    --color-caloriflix-800: #166534;
+    --color-caloriflix-900: #14532d;
+    --color-caloriflix-950: #052e16;
+
     --color-accent: var(--color-neutral-800);
     --color-accent-content: var(--color-neutral-800);
     --color-accent-foreground: var(--color-white);

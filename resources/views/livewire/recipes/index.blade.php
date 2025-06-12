@@ -36,7 +36,7 @@
     >
         <div 
             :class="{ 
-                'bg-green-50 border-green-500': notificationType === 'success',
+                'bg-caloriflix-50 border-caloriflix-500': notificationType === 'success',
                 'bg-red-50 border-red-500': notificationType === 'error',
                 'bg-blue-50 border-blue-500': notificationType === 'info'
             }"
@@ -46,7 +46,7 @@
                 <div class="flex items-start">
                     <div class="flex-shrink-0">
                         <template x-if="notificationType === 'success'">
-                            <svg class="h-6 w-6 text-green-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg class="h-6 w-6 text-caloriflix-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                         </template>
@@ -81,15 +81,15 @@
     
     <!-- Session Message -->
     @if (session()->has('message'))
-        <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded shadow">
+        <div class="bg-caloriflix-50 border-l-4 border-caloriflix-500 p-4 mb-6 rounded shadow">
             <div class="flex items-center">
                 <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <svg class="h-5 w-5 text-caloriflix-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                     </svg>
                 </div>
                 <div class="ml-3">
-                    <p class="text-sm text-green-700">{{ session('message') }}</p>
+                    <p class="text-sm text-caloriflix-700">{{ session('message') }}</p>
                 </div>
             </div>
         </div>
@@ -124,7 +124,7 @@
                         <input 
                             type="text" 
                             wire:model.live.debounce.300ms="search" 
-                            class="pl-10 px-2 pr-2 py-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white shadow-sm focus:border-green-300 focus:ring-green-300"
+                            class="pl-10 px-2 pr-2 py-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-white shadow-sm focus:border-caloriflix-300 focus:ring-caloriflix-300"
                             placeholder="Pesquisar receitas..."
                         >
                     </div>
@@ -145,7 +145,7 @@
                             <button 
                                 type="button" 
                                 wire:click="openCreateRecipeModal"
-                                class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-300 hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-caloriflix-300 hover:bg-caloriflix-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                             >
                                 <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -187,7 +187,7 @@
                                         </button>
                                         <button 
                                             wire:click="openRecipeViewModal({{ $recipe->id }})"
-                                            class="text-neutral-400 hover:text-green-500 focus:outline-none"
+                                            class="text-neutral-400 hover:text-caloriflix-500 focus:outline-none"
                                             title="Editar receita"
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -333,7 +333,7 @@
                                 </button>
                             </div>
                             <div class="flex items-center mt-3">
-                                <input type="radio" id="remember" class="h-4 w-4 text-green-600 focus:ring-green-500 border-neutral-300 rounded">
+                                <input type="radio" id="remember" class="h-4 w-4 text-caloriflix-600 focus:ring-caloriflix-500 border-neutral-300 rounded">
                                 <label for="remember" class="ml-2 block text-xs text-neutral-500">
                                     0mL usados recentemente
                                 </label>
@@ -370,7 +370,7 @@
                         <button 
                             type="button"
                             wire:click="addToMeal"
-                            class="w-full flex items-center justify-center px-4 py-2.5 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-sm"
+                            class="w-full flex items-center justify-center px-4 py-2.5 bg-caloriflix-600 text-white rounded-md hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 shadow-sm"
                         >
                             <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
@@ -446,7 +446,7 @@
                                     type="text" 
                                     id="name" 
                                     wire:model="form.name" 
-                                    class="block w-full p-2 pr-10 border-neutral-300 focus:ring-green-500 focus:border-green-500 rounded-md sm:text-sm"
+                                    class="block w-full p-2 pr-10 border-neutral-300 focus:ring-caloriflix-500 focus:border-caloriflix-500 rounded-md sm:text-sm"
                                 >
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                                     <span class="text-amber-600">🍲</span>
@@ -465,7 +465,7 @@
                                     type="number" 
                                     id="quantity" 
                                     wire:model="form.quantity" 
-                                    class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                    class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm"
                                 >
                                 <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 bg-neutral-50 text-neutral-500 sm:text-sm">
                                     g
@@ -477,7 +477,7 @@
                         <!-- Recently used options -->
                         <div class="mb-4">
                             <div class="flex items-center">
-                                <input type="radio" id="recent-1" name="recent" class="h-4 w-4 text-green-600 focus:ring-green-500 border-neutral-300 rounded">
+                                <input type="radio" id="recent-1" name="recent" class="h-4 w-4 text-caloriflix-600 focus:ring-caloriflix-500 border-neutral-300 rounded">
                                 <label for="recent-1" class="ml-2 block text-xs text-neutral-500">
                                     Qtd. usados recentemente
                                 </label>
@@ -499,7 +499,7 @@
                                         type="number" 
                                         id="protein" 
                                         wire:model="form.protein" 
-                                        class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                        class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm"
                                     >
                                     <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 bg-neutral-50 text-neutral-500 text-xs">
                                         gramas
@@ -516,7 +516,7 @@
                                         id="fat" 
                                         wire:model="form.fat" 
                                         step="0.1"
-                                        class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                        class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm"
                                     >
                                     <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 bg-neutral-50 text-neutral-500 text-xs">
                                         gramas
@@ -532,7 +532,7 @@
                                         type="number" 
                                         id="carbs" 
                                         wire:model="form.carbs" 
-                                        class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                        class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm"
                                     >
                                     <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 bg-neutral-50 text-neutral-500 text-xs">
                                         gramas
@@ -548,7 +548,7 @@
                                         type="number" 
                                         id="fiber" 
                                         wire:model="form.fiber" 
-                                        class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                        class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm"
                                     >
                                     <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 bg-neutral-50 text-neutral-500 text-xs">
                                         gramas
@@ -564,7 +564,7 @@
                                         type="number" 
                                         id="calories" 
                                         wire:model="form.calories" 
-                                        class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                        class="block w-full p-2 rounded-l-md border-neutral-300 focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm"
                                     >
                                     <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 bg-neutral-50 text-neutral-500 text-xs">
                                         kcal
@@ -581,7 +581,7 @@
                                     id="ingredients"
                                     wire:model="form.ingredients"
                                     rows="4"
-                                    class="block w-full p-2 rounded-md border-neutral-300 focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                                    class="block w-full p-2 rounded-md border-neutral-300 focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm"
                                     placeholder="Quo maxime cum irure"
                                 ></textarea>
                             </div>
@@ -619,7 +619,7 @@
                             <button 
                                 type="button"
                                 wire:click="updateRecipe"
-                                class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-sm"
+                                class="px-4 py-2 bg-caloriflix-600 text-white rounded-md hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 shadow-sm"
                             >
                                 Salvar Alterações
                             </button>
@@ -670,34 +670,34 @@
                     <div class="px-6 py-4 space-y-4">
                         <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-neutral-700 mb-1">Nome da receita</label>
-                            <input type="text" id="name" wire:model="name" class="w-full p-2 rounded-md border-neutral-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50" placeholder="Café da manhã, Almoço, Pré-treino, etc.">
+                            <input type="text" id="name" wire:model="name" class="w-full p-2 rounded-md border-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring focus:ring-caloriflix-500 focus:ring-opacity-50" placeholder="Café da manhã, Almoço, Pré-treino, etc.">
                             @error('name') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-4">
                             <label for="ingredients" class="block text-sm font-medium text-neutral-700 mb-1">Ingredientes</label>
-                            <textarea id="ingredients" wire:model="ingredients" rows="3" class="w-full p-2 rounded-md border-neutral-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50" placeholder="1 e 1/2 xícaras de chá de açúcar, 200g de farinha de trigo, 3 ovos, 1 colher de sopa de fermento em pó."></textarea>
+                            <textarea id="ingredients" wire:model="ingredients" rows="3" class="w-full p-2 rounded-md border-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring focus:ring-caloriflix-500 focus:ring-opacity-50" placeholder="1 e 1/2 xícaras de chá de açúcar, 200g de farinha de trigo, 3 ovos, 1 colher de sopa de fermento em pó."></textarea>
                             @error('ingredients') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                         <div class="flex flex-col sm:flex-row gap-4 mb-4">
                             <div class="w-full sm:w-1/3">
                                 <label for="preparation_time" class="block text-sm font-medium text-neutral-700 mb-1">Tempo de preparo (min)</label>
-                                <input type="number" id="preparation_time" wire:model="preparation_time" min="0" class="w-full p-2 rounded-md border-neutral-300 focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                <input type="number" id="preparation_time" wire:model="preparation_time" min="0" class="w-full p-2 rounded-md border-neutral-300 focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm">
                                 @error('preparation_time') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full sm:w-1/3">
                                 <label for="cooking_time" class="block text-sm font-medium text-neutral-700 mb-1">Tempo de cozimento (min)</label>
-                                <input type="number" id="cooking_time" wire:model="cooking_time" min="0" class="w-full p-2 rounded-md border-neutral-300 focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                <input type="number" id="cooking_time" wire:model="cooking_time" min="0" class="w-full p-2 rounded-md border-neutral-300 focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm">
                                 @error('cooking_time') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                             <div class="w-full sm:w-1/3">
                                 <label for="servings" class="block text-sm font-medium text-neutral-700 mb-1">Porções</label>
-                                <input type="number" id="servings" wire:model="servings" min="1" class="w-full p-2 rounded-md border-neutral-300 focus:ring-green-500 focus:border-green-500 sm:text-sm">
+                                <input type="number" id="servings" wire:model="servings" min="1" class="w-full p-2 rounded-md border-neutral-300 focus:ring-caloriflix-500 focus:border-caloriflix-500 sm:text-sm">
                                 @error('servings') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="mb-4">
                             <label for="instructions" class="block text-sm font-medium text-neutral-700 mb-1">Instruções</label>
-                            <textarea id="instructions" wire:model="instructions" rows="3" class="w-full p-2 rounded-md border-neutral-300 shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50" placeholder="Descreva o passo a passo da receita..."></textarea>
+                            <textarea id="instructions" wire:model="instructions" rows="3" class="w-full p-2 rounded-md border-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring focus:ring-caloriflix-500 focus:ring-opacity-50" placeholder="Descreva o passo a passo da receita..."></textarea>
                             @error('instructions') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                         </div>
                     </div>
@@ -706,13 +706,13 @@
                         <button
                             type="button"
                             @click="$wire.closeModals()"
-                            class="inline-flex justify-center rounded-md border border-neutral-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-neutral-700 hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm"
+                            class="inline-flex justify-center rounded-md border border-neutral-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-neutral-700 hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 sm:text-sm"
                         >
                             Cancelar
                         </button>
                         <button
                             type="submit"
-                            class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:text-sm"
+                            class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-caloriflix-600 text-base font-medium text-white hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 sm:text-sm"
                         >
                             Salvar receita
                         </button>

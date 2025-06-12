@@ -15,13 +15,13 @@
                 <flux:navlist.group class="grid space-y-1">         
                     <!-- Hoje Item -->
                     <a href="{{ route('today.index') }}" 
-                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('today.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('today.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
-                            <span class="mr-2 {{ request()->routeIs('today.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                            <span class="mr-2 {{ request()->routeIs('today.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
                             </span>
-                            <span class="{{ request()->routeIs('today.index') ? 'text-green-300' : '' }}">{{ __('Hoje') }}</span>
+                            <span class="{{ request()->routeIs('today.index') ? 'text-caloriflix-300' : '' }}">{{ __('Hoje') }}</span>
                         </div>
                     </a>
                     
@@ -33,10 +33,10 @@
                             class="flex w-full items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all group"
                         >
                             <div class="flex items-center">
-                                <span class="mr-2 {{ request()->routeIs('diary.index') || request()->routeIs('measurements.index') || request()->routeIs('reports.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                                <span class="mr-2 {{ request()->routeIs('diary.index') || request()->routeIs('measurements.index') || request()->routeIs('reports.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-bar-big-icon lucide-chart-bar-big"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><rect x="7" y="13" width="9" height="4" rx="1"/><rect x="7" y="5" width="12" height="4" rx="1"/></svg>
                                 </span>
-                                <span class="{{ request()->routeIs('diary.index') || request()->routeIs('measurements.index') || request()->routeIs('reports.index') ? 'text-green-300' : '' }}">{{ __('Relatórios') }}</span>
+                                <span class="{{ request()->routeIs('diary.index') || request()->routeIs('measurements.index') || request()->routeIs('reports.index') ? 'text-caloriflix-300' : '' }}">{{ __('Relatórios') }}</span>
                             </div>
                             <svg 
                                 fill="none" 
@@ -65,98 +65,98 @@
                             <!-- Relatórios Item -->
                             <a 
                                 href="{{ route('reports.index') }}" 
-                                class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reports.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                                class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reports.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                                 wire:navigate
                             >
-                                <span class="mr-2 {{ request()->routeIs('reports.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                                <span class="mr-2 {{ request()->routeIs('reports.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-flame-icon lucide-flame"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
                                 </span>
-                                <span class="{{ request()->routeIs('reports.index') ? 'text-green-300' : '' }}">{{ __('Relatórios') }}</span>
+                                <span class="{{ request()->routeIs('reports.index') ? 'text-caloriflix-300' : '' }}">{{ __('Relatórios') }}</span>
                             </a>
 
                             <!-- Diário Item -->
                             <a 
                                 href="{{ route('diary.index') }}" 
-                                class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('diary.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                                class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('diary.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                                 wire:navigate
                             >
-                                <span class="mr-2 {{ request()->routeIs('diary.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                                <span class="mr-2 {{ request()->routeIs('diary.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-icon lucide-book-open"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
                                 </span>
-                                <span class="{{ request()->routeIs('diary.index') ? 'text-green-300' : '' }}">{{ __('Diário') }}</span>
+                                <span class="{{ request()->routeIs('diary.index') ? 'text-caloriflix-300' : '' }}">{{ __('Diário') }}</span>
                             </a>
                             
                             <!-- Medidas Item -->
                             <a 
                                 href="{{ route('measurements.index') }}" 
-                                class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('measurements.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                                class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('measurements.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                                 wire:navigate
                             >
-                                <span class="mr-2 {{ request()->routeIs('measurements.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                                <span class="mr-2 {{ request()->routeIs('measurements.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-view-icon lucide-view"><path d="M21 17v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2"/><path d="M21 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/></svg>
                                 </span>
-                                <span class="{{ request()->routeIs('measurements.index') ? 'text-green-300' : '' }}">{{ __('Medidas') }}</span>
+                                <span class="{{ request()->routeIs('measurements.index') ? 'text-caloriflix-300' : '' }}">{{ __('Medidas') }}</span>
                             </a>
                         </div>
                     </div>
                     
                     <!-- Meus Alimentos Item -->
                     <a href="{{ route('foods.index') }}" 
-                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('foods.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('foods.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
-                            <span class="mr-2 {{ request()->routeIs('foods.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                            <span class="mr-2 {{ request()->routeIs('foods.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star-icon lucide-star"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
                             </span>
-                            <span class="{{ request()->routeIs('foods.index') ? 'text-green-300' : '' }}">{{ __('Meus Alimentos') }}</span>
+                            <span class="{{ request()->routeIs('foods.index') ? 'text-caloriflix-300' : '' }}">{{ __('Meus Alimentos') }}</span>
                         </div>
                     </a>
                     
                     <!-- Minhas Receitas Item -->
                     <a href="{{ route('recipes.index') }}" 
-                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('recipes.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('recipes.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
-                            <span class="mr-2 {{ request()->routeIs('recipes.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                            <span class="mr-2 {{ request()->routeIs('recipes.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cooking-pot-icon lucide-cooking-pot"><path d="M2 12h20"/><path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="m4 8 16-4"/><path d="m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8"/></svg>
                             </span>
-                            <span class="{{ request()->routeIs('recipes.index') ? 'text-green-300' : '' }}">{{ __('Minhas Receitas') }}</span>
+                            <span class="{{ request()->routeIs('recipes.index') ? 'text-caloriflix-300' : '' }}">{{ __('Minhas Receitas') }}</span>
                         </div>
                     </a>
                     
                     <!-- Metas e Perfil Item -->
                     <a href="{{ route('goals.index') }}" 
-                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('goals.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('goals.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
-                            <span class="mr-2 {{ request()->routeIs('goals.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                            <span class="mr-2 {{ request()->routeIs('goals.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-menu-icon lucide-square-menu"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h10"/></svg>
                             </span>
-                            <span class="{{ request()->routeIs('goals.index') ? 'text-green-300' : '' }}">{{ __('Metas e Perfil') }}</span>
+                            <span class="{{ request()->routeIs('goals.index') ? 'text-caloriflix-300' : '' }}">{{ __('Metas e Perfil') }}</span>
                         </div>
                     </a>
                     
                     <!-- Lembretes Item -->
                     <a href="{{ route('reminders.index') }}" 
-                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reminders.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reminders.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
-                            <span class="mr-2 {{ request()->routeIs('reminders.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                            <span class="mr-2 {{ request()->routeIs('reminders.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-timer-icon lucide-timer"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg>
                             </span>
-                            <span class="{{ request()->routeIs('reminders.index') ? 'text-green-300' : '' }}">{{ __('Lembretes') }}</span>
+                            <span class="{{ request()->routeIs('reminders.index') ? 'text-caloriflix-300' : '' }}">{{ __('Lembretes') }}</span>
                         </div>
                     </a>
                     
                     <!-- Preferências Item -->  
                     <a href="{{ route('preferences.index') }}" 
-                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('preferences.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                       class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('preferences.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
-                            <span class="mr-2 {{ request()->routeIs('preferences.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                            <span class="mr-2 {{ request()->routeIs('preferences.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
                             </span>
-                            <span class="{{ request()->routeIs('preferences.index') ? 'text-green-300' : '' }}">{{ __('Preferências') }}</span>
+                            <span class="{{ request()->routeIs('preferences.index') ? 'text-caloriflix-300' : '' }}">{{ __('Preferências') }}</span>
                         </div>
                     </a>
                 </flux:navlist.group>
@@ -263,128 +263,128 @@
             <div class="flex overflow-x-auto scrollbar-hide py-2 px-4 space-x-1 bottom-nav-scroll" style="scroll-behavior: auto;">
                 <!-- Home/Hoje -->
                 <a href="{{ route('today.index') }}" 
-                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('today.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('today.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
-                    <span class="mb-1 {{ request()->routeIs('today.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                    <span class="mb-1 {{ request()->routeIs('today.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                             <polyline points="9,22 9,12 15,12 15,22"/>
                         </svg>
                     </span>
-                    <span class="text-xs {{ request()->routeIs('today.index') ? 'text-green-300' : '' }}">
+                    <span class="text-xs {{ request()->routeIs('today.index') ? 'text-caloriflix-300' : '' }}">
                         {{ __('Hoje') }}
                     </span>
                 </a>
 
                 <!-- Reports/Relatórios -->
                 <a href="{{ route('reports.index') }}" 
-                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reports.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reports.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
-                    <span class="mb-1 {{ request()->routeIs('reports.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                    <span class="mb-1 {{ request()->routeIs('reports.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
                         </svg>
                     </span>
-                    <span class="text-xs {{ request()->routeIs('reports.index') ? 'text-green-300' : '' }}">
+                    <span class="text-xs {{ request()->routeIs('reports.index') ? 'text-caloriflix-300' : '' }}">
                         {{ __('Relatórios') }}
                     </span>
                 </a>
 
                 <!-- Diary/Diário -->
                 <a href="{{ route('diary.index') }}" 
-                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('diary.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('diary.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
-                    <span class="mb-1 {{ request()->routeIs('diary.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                    <span class="mb-1 {{ request()->routeIs('diary.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>
                         </svg>
                     </span>
-                    <span class="text-xs {{ request()->routeIs('diary.index') ? 'text-green-300' : '' }}">
+                    <span class="text-xs {{ request()->routeIs('diary.index') ? 'text-caloriflix-300' : '' }}">
                         {{ __('Diário') }}
                     </span>
                 </a>
 
                 <!-- Measurements/Medidas -->
                 <a href="{{ route('measurements.index') }}" 
-                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('measurements.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('measurements.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
-                    <span class="mb-1 {{ request()->routeIs('measurements.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                    <span class="mb-1 {{ request()->routeIs('measurements.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 17v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2"/><path d="M21 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2"/><circle cx="12" cy="12" r="1"/><path d="M18.944 12.33a1 1 0 0 0 0-.66 7.5 7.5 0 0 0-13.888 0 1 1 0 0 0 0 .66 7.5 7.5 0 0 0 13.888 0"/>
                         </svg>
                     </span>
-                    <span class="text-xs {{ request()->routeIs('measurements.index') ? 'text-green-300' : '' }}">
+                    <span class="text-xs {{ request()->routeIs('measurements.index') ? 'text-caloriflix-300' : '' }}">
                         {{ __('Medidas') }}
                     </span>
                 </a>
 
                 <!-- Foods/Alimentos -->
                 <a href="{{ route('foods.index') }}" 
-                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('foods.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('foods.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
-                    <span class="mb-1 {{ request()->routeIs('foods.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                    <span class="mb-1 {{ request()->routeIs('foods.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
                         </svg>
                     </span>
-                    <span class="text-xs {{ request()->routeIs('foods.index') ? 'text-green-300' : '' }}">
+                    <span class="text-xs {{ request()->routeIs('foods.index') ? 'text-caloriflix-300' : '' }}">
                         {{ __('Alimentos') }}
                     </span>
                 </a>
 
                 <!-- Recipes/Receitas -->
                 <a href="{{ route('recipes.index') }}" 
-                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('recipes.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('recipes.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
-                    <span class="mb-1 {{ request()->routeIs('recipes.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                    <span class="mb-1 {{ request()->routeIs('recipes.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M2 12h20"/><path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="m4 8 16-4"/><path d="m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8"/>
                         </svg>
                     </span>
-                    <span class="text-xs {{ request()->routeIs('recipes.index') ? 'text-green-300' : '' }}">
+                    <span class="text-xs {{ request()->routeIs('recipes.index') ? 'text-caloriflix-300' : '' }}">
                         {{ __('Receitas') }}
                     </span>
                 </a>
 
                 <!-- Goals/Metas -->
                 <a href="{{ route('goals.index') }}" 
-                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('goals.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('goals.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
-                    <span class="mb-1 {{ request()->routeIs('goals.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                    <span class="mb-1 {{ request()->routeIs('goals.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 8h10"/><path d="M7 12h10"/><path d="M7 16h10"/>
                         </svg>
                     </span>
-                    <span class="text-xs {{ request()->routeIs('goals.index') ? 'text-green-300' : '' }}">
+                    <span class="text-xs {{ request()->routeIs('goals.index') ? 'text-caloriflix-300' : '' }}">
                         {{ __('Metas') }}
                     </span>
                 </a>
 
                 <!-- Reminders/Lembretes -->
                 <a href="{{ route('reminders.index') }}" 
-                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reminders.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reminders.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
-                    <span class="mb-1 {{ request()->routeIs('reminders.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                    <span class="mb-1 {{ request()->routeIs('reminders.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/>
                         </svg>
                     </span>
-                    <span class="text-xs {{ request()->routeIs('reminders.index') ? 'text-green-300' : '' }}">
+                    <span class="text-xs {{ request()->routeIs('reminders.index') ? 'text-caloriflix-300' : '' }}">
                         {{ __('Lembretes') }}
                     </span>
                 </a>
 
                 <!-- Preferences/Preferências -->
                 <a href="{{ route('preferences.index') }}" 
-                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('preferences.index') ? 'bg-neutral-800 text-green-300' : '' }}"
+                   class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('preferences.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
-                    <span class="mb-1 {{ request()->routeIs('preferences.index') ? 'text-green-300' : 'text-neutral-200' }}">
+                    <span class="mb-1 {{ request()->routeIs('preferences.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
                             <circle cx="12" cy="12" r="3"/>
                         </svg>
                     </span>
-                    <span class="text-xs {{ request()->routeIs('preferences.index') ? 'text-green-300' : '' }}">
+                    <span class="text-xs {{ request()->routeIs('preferences.index') ? 'text-caloriflix-300' : '' }}">
                         {{ __('Preferências') }}
                     </span>
                 </a>

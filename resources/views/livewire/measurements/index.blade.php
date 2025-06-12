@@ -21,7 +21,7 @@
                 <div class="flex flex-wrap gap-2">
                     <button 
                         wire:click="filterByType(null)" 
-                        class="{{ is_null($selectedType) ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100' : 'bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-300' }} px-3 py-1 rounded-full text-sm font-medium"
+                        class="{{ is_null($selectedType) ? 'bg-caloriflix-100 text-caloriflix-800 dark:bg-caloriflix-800 dark:text-caloriflix-100' : 'bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-300' }} px-3 py-1 rounded-full text-sm font-medium"
                     >
                         Todos
                     </button>
@@ -29,7 +29,7 @@
                     @foreach ($measurementTypes as $key => $label)
                         <button 
                             wire:click="filterByType('{{ $key }}')" 
-                            class="{{ $selectedType === $key ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100' : 'bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-300' }} px-3 py-1 rounded-full text-sm font-medium"
+                            class="{{ $selectedType === $key ? 'bg-caloriflix-100 text-caloriflix-800 dark:bg-caloriflix-800 dark:text-caloriflix-100' : 'bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-300' }} px-3 py-1 rounded-full text-sm font-medium"
                         >
                             {{ $label }}
                         </button>
@@ -57,7 +57,7 @@
                                         <button 
                                             type="button" 
                                             wire:click="openAddModal('{{ $key }}')"
-                                            class="mt-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-300 hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                            class="mt-2 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-caloriflix-300 hover:bg-caloriflix-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                                         >
                                             <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -106,7 +106,7 @@
                                                 
                                                 <div class="text-center">
                                                     <h4 class="text-sm font-medium text-neutral-900 dark:text-neutral-100 mb-1">{{ $measurementTypes[$measurement->type] }}</h4>
-                                                    <div class="text-2xl font-bold text-green-600 dark:text-green-400">
+                                                    <div class="text-2xl font-bold text-caloriflix-600 dark:text-caloriflix-400">
                                                         {{ $measurement->value }} {{ $measurementUnits[$measurement->type] }}
                                                     </div>
                                                     @if($measurement->notes)
@@ -173,7 +173,7 @@
                                         <select 
                                             wire:model="type" 
                                             id="type" 
-                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                         >
                                             @foreach($measurementTypes as $key => $label)
                                                 <option value="{{ $key }}">{{ $label }}</option>
@@ -189,7 +189,7 @@
                                             step="0.01" 
                                             wire:model="value" 
                                             id="value" 
-                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             placeholder="Ex: 70.5"
                                         >
                                         @error('value') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
@@ -201,7 +201,7 @@
                                             wire:model="notes" 
                                             id="notes" 
                                             rows="2"
-                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             placeholder="Observações adicionais..."
                                         ></textarea>
                                         @error('notes') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
@@ -213,7 +213,7 @@
                                             type="date" 
                                             wire:model="date" 
                                             id="date" 
-                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                         >
                                         @error('date') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
@@ -224,14 +224,14 @@
                     <div class="bg-neutral-50 dark:bg-neutral-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button 
                             type="submit" 
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-300 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-caloriflix-300 text-base font-medium text-white hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 sm:ml-3 sm:w-auto sm:text-sm"
                         >
                             Salvar
                         </button>
                         <button 
                             type="button" 
                             wire:click="closeAddModal" 
-                            class="mt-3 w-full inline-flex justify-center rounded-md border border-neutral-300 dark:border-neutral-600 shadow-sm px-4 py-2 bg-white dark:bg-neutral-800 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            class="mt-3 w-full inline-flex justify-center rounded-md border border-neutral-300 dark:border-neutral-600 shadow-sm px-4 py-2 bg-white dark:bg-neutral-800 text-base font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                         >
                             Cancelar
                         </button>

@@ -28,7 +28,7 @@
                     <input 
                         type="text" 
                         wire:model.live.debounce.300ms="search" 
-                        class="pl-10 px-2 pr-2 py-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-green-300 focus:ring-green-300"
+                        class="pl-10 px-2 pr-2 py-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-caloriflix-300 focus:ring-caloriflix-300"
                         placeholder="Pesquisar entradas do diário..."
                     >
                 </div>
@@ -49,7 +49,7 @@
                         <button 
                             type="button" 
                             wire:click="openCreateModal"
-                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-300 hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-caloriflix-300 hover:bg-caloriflix-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="-ml-1 mr-2 h-5 w-5 lucide lucide-plus">
                                 <line x1="12" x2="12" y1="5" y2="19"/>
@@ -76,7 +76,7 @@
                                 <div class="flex space-x-2">
                                     <button 
                                         wire:click="edit({{ $diary->id }})"
-                                        class="text-gray-400 hover:text-green-500 focus:outline-none"
+                                        class="text-gray-400 hover:text-caloriflix-500 focus:outline-none"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 lucide lucide-pencil">
                                             <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
@@ -133,7 +133,7 @@
                                     <!-- Sleep Section -->
                                     <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 text-center">
                                         <h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tempo de Sono</h4>
-                                        <div class="text-2xl font-bold text-green-300 dark:text-green-400">
+                                        <div class="text-2xl font-bold text-caloriflix-300 dark:text-caloriflix-400">
                                             {{ $diary->sleep ? $diary->formatted_sleep : 'Não registrado' }}
                                         </div>
                                         @if($diary->sleep)
@@ -141,7 +141,7 @@
                                                 @if($diary->sleep < 420)
                                                     <span class="text-red-500">Abaixo do recomendado</span>
                                                 @elseif($diary->sleep >= 420 && $diary->sleep <= 540)
-                                                    <span class="text-green-500">Ideal</span>
+                                                    <span class="text-caloriflix-500">Ideal</span>
                                                 @else
                                                     <span class="text-blue-500">Acima do recomendado</span>
                                                 @endif
@@ -238,7 +238,7 @@
                                             type="date" 
                                             wire:model="date" 
                                             id="date" 
-                                            class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-green-300 focus:ring-green-300"
+                                            class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-caloriflix-300 focus:ring-caloriflix-300"
                                         >
                                         @error('date') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
@@ -251,7 +251,7 @@
                                                     <button 
                                                         type="button" 
                                                         wire:click="$set('mood', {{ $moodValue }})"
-                                                        class="p-2 {{ $mood == $moodValue ? 'bg-green-100 dark:bg-green-900 rounded-full ring-2 ring-green-500' : '' }} focus:outline-none"
+                                                        class="p-2 {{ $mood == $moodValue ? 'bg-caloriflix-100 dark:bg-caloriflix-900 rounded-full ring-2 ring-caloriflix-500' : '' }} focus:outline-none"
                                                     >
                                                         <span class="text-2xl">
                                                             @if($moodValue == 1) 😞
@@ -276,7 +276,7 @@
                                             id="water" 
                                             min="0"
                                             step="100"
-                                            class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-green-300 focus:ring-green-300"
+                                            class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-caloriflix-300 focus:ring-caloriflix-300"
                                             placeholder="Ex: 2000"
                                         >
                                         @error('water') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
@@ -290,7 +290,7 @@
                                             id="sleep" 
                                             min="0"
                                             step="15"
-                                            class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-green-300 focus:ring-green-300"
+                                            class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-caloriflix-300 focus:ring-caloriflix-300"
                                             placeholder="Ex: 480 (8 horas)"
                                         >
                                         @error('sleep') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
@@ -305,7 +305,7 @@
                                             wire:model="notes" 
                                             id="notes" 
                                             rows="4"
-                                            class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-green-300 focus:ring-green-300"
+                                            class="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 shadow-sm focus:border-caloriflix-300 focus:ring-caloriflix-300"
                                             placeholder="Como foi seu dia?"
                                         ></textarea>
                                         @error('notes') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
@@ -317,14 +317,14 @@
                     <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button 
                             type="submit" 
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-300 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-caloriflix-300 text-base font-medium text-white hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 sm:ml-3 sm:w-auto sm:text-sm"
                         >
                             {{ $isEditing ? 'Atualizar' : 'Salvar' }}
                         </button>
                         <button 
                             type="button" 
                             wire:click="closeModal"
-                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                         >
                             Cancelar
                         </button>

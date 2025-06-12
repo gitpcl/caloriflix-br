@@ -65,7 +65,7 @@
                 <!-- Selection Mode Toggle Button -->
                 <button 
                     wire:click="toggleSelectionMode" 
-                    class="px-3 py-1 text-xs {{ $selectionMode ? 'bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200' : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400' }} border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center"
+                    class="px-3 py-1 text-xs {{ $selectionMode ? 'bg-caloriflix-100 dark:bg-caloriflix-800 text-caloriflix-800 dark:text-caloriflix-200' : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400' }} border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -77,14 +77,14 @@
                 <div class="relative" x-data="{ open: @entangle('showFilterDropdown') }">
                     <button 
                         wire:click="toggleFilterDropdown"
-                        class="px-3 py-1 text-xs {{ $sourceFilter !== 'all' ? 'bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200' : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400' }} border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center"
+                        class="px-3 py-1 text-xs {{ $sourceFilter !== 'all' ? 'bg-caloriflix-100 dark:bg-caloriflix-800 text-caloriflix-800 dark:text-caloriflix-200' : 'bg-white dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400' }} border border-neutral-200 dark:border-neutral-600 rounded-md hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.414A1 1 0 013 6.707V4z" />
                         </svg>
                         Filtros
                         @if($sourceFilter !== 'all')
-                            <span class="ml-1 text-xs bg-green-500 text-white rounded-full px-1">1</span>
+                            <span class="ml-1 text-xs bg-caloriflix-500 text-white rounded-full px-1">1</span>
                         @endif
                     </button>
                     
@@ -107,10 +107,10 @@
                             
                             <button 
                                 wire:click="setSourceFilter('all')"
-                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'all' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'all' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
                                 @if($sourceFilter === 'all')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-caloriflix-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 @else
@@ -121,10 +121,10 @@
                             
                             <button 
                                 wire:click="setSourceFilter('manual')"
-                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'manual' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'manual' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
                                 @if($sourceFilter === 'manual')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-caloriflix-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 @else
@@ -135,10 +135,10 @@
                             
                             <button 
                                 wire:click="setSourceFilter('whatsapp')"
-                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'whatsapp' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sourceFilter === 'whatsapp' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
                                 @if($sourceFilter === 'whatsapp')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-caloriflix-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 @else
@@ -182,10 +182,10 @@
                             <!-- Sort by Name -->
                             <button 
                                 wire:click="setSortBy('name')"
-                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortBy === 'name' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortBy === 'name' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
                                 @if($sortBy === 'name')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-caloriflix-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 @else
@@ -197,10 +197,10 @@
                             <!-- Sort by Date -->
                             <button 
                                 wire:click="setSortBy('created_at')"
-                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortBy === 'created_at' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortBy === 'created_at' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
                                 @if($sortBy === 'created_at')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-caloriflix-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 @else
@@ -214,10 +214,10 @@
                             <!-- Sort Direction -->
                             <button 
                                 wire:click="setSortDirection('asc')"
-                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortDirection === 'asc' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortDirection === 'asc' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
                                 @if($sortDirection === 'asc')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-caloriflix-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 @else
@@ -231,10 +231,10 @@
                             
                             <button 
                                 wire:click="setSortDirection('desc')"
-                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortDirection === 'desc' ? 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-neutral-50 dark:hover:bg-neutral-700 flex items-center {{ $sortDirection === 'desc' ? 'text-caloriflix-600 dark:text-caloriflix-400 bg-caloriflix-50 dark:bg-caloriflix-900/20' : 'text-neutral-700 dark:text-neutral-300' }}"
                             >
                                 @if($sortDirection === 'desc')
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-caloriflix-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 @else
@@ -269,7 +269,7 @@
         <!-- Food List -->
         <div class="grid grid-cols-1 gap-4">
             @if (session()->has('message'))
-                <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800">
+                <div class="p-4 mb-4 text-sm text-caloriflix-700 bg-caloriflix-100 rounded-lg dark:bg-caloriflix-200 dark:text-caloriflix-800">
                     {{ session('message') }}
                 </div>
             @endif
@@ -285,15 +285,15 @@
                                         type="checkbox" 
                                         wire:model.live="selectedFoods" 
                                         value="{{ $food->id }}" 
-                                        class="h-4 w-4 text-green-600 border-neutral-300 dark:border-neutral-600 rounded focus:ring-green-500"
+                                        class="h-4 w-4 text-caloriflix-600 border-neutral-300 dark:border-neutral-600 rounded focus:ring-caloriflix-500"
                                     >
                                 </div>
                             @endif
                             
                             <!-- Food icon based on type -->
                             <div class="flex-shrink-0">
-                                <div class="bg-green-100 rounded p-2"><span class="text-xl">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils-icon lucide-utensils text-green-600"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
+                                <div class="bg-caloriflix-100 rounded p-2"><span class="text-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils-icon lucide-utensils text-caloriflix-600"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>
                                 </span></div>
                             </div>
                             
@@ -338,7 +338,7 @@
                         <button 
                             type="button" 
                             wire:click="openCreateFoodModal"
-                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-300 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-caloriflix-300 hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                         >
                             <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -405,7 +405,7 @@
                                             wire:model="name" 
                                             id="name" 
                                             placeholder="Arroz, Feijão, etc." 
-                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                         >
                                         @error('name') <span class="text-red-300 text-xs mt-1">{{ $message }}</span> @enderror
                                     </div>
@@ -417,7 +417,7 @@
                                                 type="text" 
                                                 wire:model="quantity" 
                                                 id="quantity" 
-                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             >
                                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
                                                 g
@@ -431,7 +431,7 @@
                                         <select 
                                             wire:model="unit" 
                                             id="unit" 
-                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                            class="mt-1 p-2 block w-full rounded-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                         >
                                             <option value="">Selecione uma unidade</option>
                                             <option value="gramas">Gramas</option>
@@ -452,7 +452,7 @@
                                                 step="0.01" 
                                                 wire:model="protein" 
                                                 id="protein" 
-                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             >
                                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
                                                 g
@@ -469,7 +469,7 @@
                                                 step="0.01" 
                                                 wire:model="fat" 
                                                 id="fat" 
-                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             >
                                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
                                                 g
@@ -486,7 +486,7 @@
                                                 step="0.01" 
                                                 wire:model="carbohydrate" 
                                                 id="carbohydrate" 
-                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             >
                                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
                                                 g
@@ -503,7 +503,7 @@
                                                 step="0.01" 
                                                 wire:model="calories" 
                                                 id="calories" 
-                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+                                                class="p-2 block w-full rounded-l-md border-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 shadow-sm focus:border-caloriflix-500 focus:ring-caloriflix-500"
                                             >
                                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 text-sm">
                                                 kcal
@@ -519,7 +519,7 @@
                     <div class="bg-neutral-50 dark:bg-neutral-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                         <button 
                             type="submit" 
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-caloriflix-600 text-base font-medium text-white hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 sm:ml-3 sm:w-auto sm:text-sm"
                         >
                             Salvar
                         </button>
@@ -617,7 +617,7 @@
                     
                     <!-- Used Recently Option -->
                     <div class="flex items-center justify-center mb-4">
-                        <input id="recently-used" type="checkbox" wire:model="recentlyUsed" class="h-4 w-4 text-green-600 border-neutral-300 rounded">
+                        <input id="recently-used" type="checkbox" wire:model="recentlyUsed" class="h-4 w-4 text-caloriflix-600 border-neutral-300 rounded">
                         <label for="recently-used" class="ml-2 block text-sm text-neutral-600 dark:text-neutral-400">OK, usados recentemente</label>
                     </div>
                     
@@ -632,7 +632,7 @@
                             <button 
                                 @click="open = !open" 
                                 type="button" 
-                                class="w-full flex items-center justify-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                class="w-full flex items-center justify-center px-4 py-2 bg-caloriflix-600 text-white rounded-md hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                             >
                                 <span>Adicionar em {{ $selectedMeal }}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
@@ -771,7 +771,7 @@
                                     <input 
                                         type="text" 
                                         wire:model="name" 
-                                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                     >
                                     <button type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-red-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -791,7 +791,7 @@
                                         type="number" 
                                         wire:model="quantity" 
                                         step="0.1"
-                                        class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                     >
                                     <span class="inline-flex items-center px-3 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">g</span>
                                 </div>
@@ -818,7 +818,7 @@
                                                 type="number" 
                                                 wire:model="protein"
                                                 step="0.1"
-                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                             >
                                             <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
                                         </div>
@@ -831,7 +831,7 @@
                                                 type="number" 
                                                 wire:model="fat"
                                                 step="0.1"
-                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                             >
                                             <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
                                         </div>
@@ -844,7 +844,7 @@
                                                 type="number" 
                                                 wire:model="carbohydrate"
                                                 step="0.1"
-                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                             >
                                             <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
                                         </div>
@@ -857,7 +857,7 @@
                                                 type="number" 
                                                 wire:model="fiber"
                                                 step="0.1"
-                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                             >
                                             <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">gramas</span>
                                         </div>
@@ -870,7 +870,7 @@
                                                 type="number" 
                                                 wire:model="calories"
                                                 step="1"
-                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                class="w-full border border-gray-300 rounded-l px-3 py-2 focus:outline-none focus:ring-caloriflix-500 focus:border-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                             >
                                             <span class="inline-flex items-center px-2 py-2 rounded-r border border-l-0 border-gray-300 bg-gray-50 text-gray-500 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">kcal</span>
                                         </div>
@@ -887,7 +887,7 @@
                                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0111 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
                                     </svg>
                                 </button>
-                                <button type="submit" class="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                <button type="submit" class="flex items-center px-4 py-2 bg-caloriflix-600 text-white rounded-md hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-caloriflix-500 sm:ml-3 sm:w-auto sm:text-sm">
                                     <span>Salvar</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />

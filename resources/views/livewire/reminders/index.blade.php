@@ -1,19 +1,19 @@
 <div>
     <div class="py-6 max-w-4xl mx-auto">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-semibold text-gray-800">Lembretes e comandos <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">novo</span></h1>
+            <h1 class="text-2xl font-semibold text-gray-800">Lembretes e comandos <span class="text-xs bg-caloriflix-100 text-caloriflix-800 px-2 py-1 rounded-full">novo</span></h1>
             
             <button 
                 wire:click="openCreateModal"
-                class="flex items-center justify-center gap-1 px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition"
+                class="flex items-center justify-center gap-1 px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition"
             >
                 <span>+</span> Personalizar lembrete
             </button>
         </div>
 
         <!-- Video assistance banner -->
-        <div class="bg-green-50 rounded-lg p-4 mb-6 text-center">
-            <p class="text-green-700">
+        <div class="bg-caloriflix-50 rounded-lg p-4 mb-6 text-center">
+            <p class="text-caloriflix-700">
                 Assista o nosso vídeo de como funciona a funcionalidade de lembretes →
             </p>
         </div>
@@ -52,7 +52,7 @@
                             <div>
                                 <button 
                                     type="button"
-                                    class="relative inline-flex items-center h-6 rounded-full w-11 {{ $reminder->active ? 'bg-green-600' : 'bg-gray-200' }}"
+                                    class="relative inline-flex items-center h-6 rounded-full w-11 {{ $reminder->active ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
                                     wire:click="toggleActive({{ $reminder->id }})"
                                 >
                                     <span class="sr-only">Toggle active</span>
@@ -72,7 +72,7 @@
             {{-- <div class="mt-4 flex justify-center">
                 <button 
                     wire:click="openCreateModal"
-                    class="flex items-center justify-center gap-1 px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition"
+                    class="flex items-center justify-center gap-1 px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition"
                 >
                     <span>+</span> Personalizar lembrete
                 </button>
@@ -109,7 +109,7 @@
                             <div class="flex items-center gap-2">
                                 <button 
                                     type="button"
-                                    class="relative inline-flex items-center h-6 rounded-full w-11 {{ $reminder->active ? 'bg-green-600' : 'bg-gray-200' }}"
+                                    class="relative inline-flex items-center h-6 rounded-full w-11 {{ $reminder->active ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
                                     wire:click="toggleActive({{ $reminder->id }})"
                                 >
                                     <span class="sr-only">Toggle active</span>
@@ -180,7 +180,7 @@
             {{-- <div class="mt-4 flex justify-center">
                 <button 
                     wire:click="openCreateModal"
-                    class="flex items-center justify-center gap-1 px-4 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition"
+                    class="flex items-center justify-center gap-1 px-4 py-2 bg-caloriflix-600 text-white text-sm rounded-md hover:bg-caloriflix-700 transition"
                 >
                     <span>+</span> Personalizar lembrete
                 </button>
@@ -189,7 +189,7 @@
 
         <!-- Suggestions Section -->
         <div>
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Sugestões <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">novo</span></h2>
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Sugestões <span class="text-xs bg-caloriflix-100 text-caloriflix-800 px-2 py-1 rounded-full">novo</span></h2>
             
             <div class="space-y-4">
                 <!-- Beber água -->
@@ -324,7 +324,7 @@
                         <button 
                             type="button"
                             wire:click="$set('reminderEnabled', {{ !$reminderEnabled ? 'true' : 'false' }})"
-                            class="relative inline-flex items-center h-6 rounded-full w-11 {{ $reminderEnabled ? 'bg-green-600' : 'bg-gray-200' }}"
+                            class="relative inline-flex items-center h-6 rounded-full w-11 {{ $reminderEnabled ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
                         >
                             <span class="sr-only">Toggle active</span>
                             <span class="{{ $reminderEnabled ? 'translate-x-6' : 'translate-x-1' }} inline-block w-4 h-4 transform bg-white rounded-full transition"></span>
@@ -341,7 +341,7 @@
                                 type="text" 
                                 id="name" 
                                 wire:model="name" 
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                 placeholder="Nome do lembrete"
                             >
                             @error('name') <span class="text-xs text-red-500">{{ $message }}</span> @enderror
@@ -354,7 +354,7 @@
                                 id="description" 
                                 wire:model="description" 
                                 rows="3" 
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                 placeholder="Descrição do lembrete"
                             ></textarea>
                         </div>
@@ -365,7 +365,7 @@
                             <select 
                                 id="reminderType" 
                                 wire:model="reminderType"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                             >
                                 <option value="intervalo de tempo">Intervalo de tempo</option>
                                 <option value="horário específico">Horário específico</option>
@@ -381,7 +381,7 @@
                                         type="number" 
                                         wire:model="intervalHours"
                                         min="0" 
-                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                     >
                                     <span class="ml-2 text-gray-500">horas</span>
                                 </div>
@@ -391,7 +391,7 @@
                                         wire:model="intervalMinutes"
                                         min="0" 
                                         max="59" 
-                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                     >
                                     <span class="ml-2 text-gray-500">minutos</span>
                                 </div>
@@ -410,7 +410,7 @@
                                         type="time" 
                                         id="startTime" 
                                         wire:model="startTime" 
-                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                     >
                                 </div>
                                 <div>
@@ -419,7 +419,7 @@
                                         type="time" 
                                         id="endTime" 
                                         wire:model="endTime" 
-                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                        class="block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-caloriflix-500 focus:border-transparent"
                                     >
                                 </div>
                             </div>
@@ -430,7 +430,7 @@
                             <button 
                                 type="button"
                                 wire:click="$set('buttonsEnabled', {{ !$buttonsEnabled ? 'true' : 'false' }})"
-                                class="relative inline-flex items-center h-6 rounded-full w-11 {{ $buttonsEnabled ? 'bg-green-600' : 'bg-gray-200' }}"
+                                class="relative inline-flex items-center h-6 rounded-full w-11 {{ $buttonsEnabled ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
                             >
                                 <span class="sr-only">Toggle buttons</span>
                                 <span class="{{ $buttonsEnabled ? 'translate-x-6' : 'translate-x-1' }} inline-block w-4 h-4 transform bg-white rounded-full transition"></span>
@@ -443,12 +443,12 @@
                             <button 
                                 type="button"
                                 wire:click="$set('autoCommandEnabled', {{ !$autoCommandEnabled ? 'true' : 'false' }})"
-                                class="relative inline-flex items-center h-6 rounded-full w-11 {{ $autoCommandEnabled ? 'bg-green-600' : 'bg-gray-200' }}"
+                                class="relative inline-flex items-center h-6 rounded-full w-11 {{ $autoCommandEnabled ? 'bg-caloriflix-600' : 'bg-gray-200' }}"
                             >
                                 <span class="sr-only">Toggle auto command</span>
                                 <span class="{{ $autoCommandEnabled ? 'translate-x-6' : 'translate-x-1' }} inline-block w-4 h-4 transform bg-white rounded-full transition"></span>
                             </button>
-                            <span class="ml-2 text-sm text-gray-700">Executar comando automaticamente <span class="text-xs bg-green-100 text-green-800 px-2 py-0.5 rounded">novo</span></span>
+                            <span class="ml-2 text-sm text-gray-700">Executar comando automaticamente <span class="text-xs bg-caloriflix-100 text-caloriflix-800 px-2 py-0.5 rounded">novo</span></span>
                         </div>
 
                     </div>
@@ -459,14 +459,14 @@
                             <button 
                                 type="button"
                                 wire:click="testReminder"
-                                class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                             >
                                 Testar
                             </button>
                             <button 
                                 type="button"
                                 @click="$wire.closeModal()"
-                                class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -475,7 +475,7 @@
                         </div>
                         <button 
                             type="submit"
-                            class="inline-flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            class="inline-flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-caloriflix-600 hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                         >
                             {{ $isEditing ? 'Salvar alterações' : 'Criar lembrete' }}
                         </button>

@@ -44,7 +44,7 @@
                     <div class="relative">
                         <select 
                             wire:model.live="timeZone" 
-                            class="bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg w-full appearance-none focus:outline-none focus:ring-2 focus:ring-green-500"
+                            class="bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg w-full appearance-none focus:outline-none focus:ring-2 focus:ring-caloriflix-500"
                         >
                             <option value="UTC-3">UTC-3 São Paulo, Brasil</option>
                             <option value="UTC-5">UTC-5 New York, Estados Unidos</option>
@@ -68,7 +68,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="silentModeEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
 
@@ -82,7 +82,7 @@
                     <div class="relative">
                         <select 
                             wire:model.live="language" 
-                            class="bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg w-full appearance-none focus:outline-none focus:ring-2 focus:ring-green-500"
+                            class="bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded-lg w-full appearance-none focus:outline-none focus:ring-2 focus:ring-caloriflix-500"
                         >
                             <option value="Português">Português</option>
                             <option value="English">English</option>
@@ -106,7 +106,7 @@
                         <p class="text-gray-500 text-sm mr-4">Priorize informações nutricionais da tabela TACO ao invés da base de dados geral.</p>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" wire:model.live="prioritizeTacoEnabled" class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                         </label>
                     </div>
                     <div class="mt-2">
@@ -127,7 +127,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="dailyLogEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
 
@@ -139,7 +139,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="photoWithMacrosEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
 
@@ -151,7 +151,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="autoFastingEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
                 
@@ -162,7 +162,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
-                        <span class="ml-1 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-medium">novo✨</span>
+                        <span class="ml-1 bg-caloriflix-100 text-caloriflix-800 text-xs px-2 py-0.5 rounded-full font-medium">novo✨</span>
                     </a>
                 </div>
 
@@ -174,7 +174,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="detailedFoodsEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
 
@@ -186,7 +186,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="showDashboardEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
 
@@ -194,14 +194,14 @@
                 <div>
                     <div class="flex items-center flex-wrap mb-1">
                         <h3 class="text-base font-medium mr-2">Análise avançada de alimentos</h3>
-                        <span class="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-medium mr-1">novo✨</span>
+                        <span class="bg-caloriflix-100 text-caloriflix-800 text-xs px-2 py-0.5 rounded-full font-medium mr-1">novo✨</span>
                         <span class="bg-purple-100 text-purple-800 text-xs px-2 py-0.5 rounded-full font-medium">beta 🔔</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <p class="text-gray-500 text-sm mr-4">Obtenha resultados mais precisos com análise de fotos. Esta opção pode levar mais tempo, mas oferece maior precisão.</p>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" wire:model.live="advancedFoodAnalysisEnabled" class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                         </label>
                     </div>
                 </div>
@@ -210,13 +210,13 @@
                 <div>
                     <div class="flex items-center mb-1">
                         <h3 class="text-base font-medium mr-2">Agrupar água</h3>
-                        <span class="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-medium">novo✨</span>
+                        <span class="bg-caloriflix-100 text-caloriflix-800 text-xs px-2 py-0.5 rounded-full font-medium">novo✨</span>
                     </div>
                     <div class="flex items-center justify-between">
                         <p class="text-gray-500 text-sm mr-4">Ao ativar essa funcionalidade a água irá aparecer apenas o somatório total do dia, ao invés de aparecer nas refeições.</p>
                         <label class="relative inline-flex items-center cursor-pointer">
                             <input type="checkbox" wire:model.live="groupWaterEnabled" class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                         </label>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                 <div>
                     <div class="flex items-center">
                         <h2 class="text-lg font-semibold mr-2">Avaliações</h2>
-                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">novo✨</span>
+                        <span class="bg-caloriflix-100 text-caloriflix-800 text-xs px-2 py-1 rounded-full font-medium">novo✨</span>
                     </div>
                     <p class="text-gray-500 text-sm">Receba avaliações da IA sobre suas refeições</p>
                 </div>
@@ -263,7 +263,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="glycemicIndexEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
                 
@@ -275,7 +275,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="cholesterolEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
                 
@@ -287,7 +287,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="ketoDietEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
                 
@@ -299,7 +299,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="paleoDietEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
                 
@@ -308,13 +308,13 @@
                     <div>
                         <div class="flex items-center mb-1">
                             <h3 class="text-base font-medium mr-2">Low-FODMAP</h3>
-                            <span class="bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-medium">novo✨</span>
+                            <span class="bg-caloriflix-100 text-caloriflix-800 text-xs px-2 py-0.5 rounded-full font-medium">novo✨</span>
                         </div>
                         <p class="text-gray-500 text-sm">Avalia os alimentos registrados e fornece feedback sobre sua adequação à dieta Low-FODMAP.</p>
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="lowFodmapEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
                 
@@ -326,7 +326,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="lowCarbEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div>
                 
@@ -341,7 +341,7 @@
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" wire:model.live="mealPlanEvaluationEnabled" class="sr-only peer">
-                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-caloriflix-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-caloriflix-600"></div>
                     </label>
                 </div> --}}
             </div>
@@ -417,7 +417,7 @@
                 <!-- Subscription Information Content -->
                 <div>
                     <h3 class="text-lg font-semibold mb-2">Status da assinatura</h3>
-                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Ativa</span>
+                    <span class="bg-caloriflix-100 text-caloriflix-800 px-3 py-1 rounded-full text-sm font-medium">Ativa</span>
                 </div>
                 
                 <div>
@@ -458,15 +458,15 @@
     {{-- <div class="mb-4 bg-white rounded-lg overflow-hidden shadow">
         <div class="p-4 flex items-center justify-between cursor-pointer">
             <div class="flex items-center" wire:click="toggleSection('api_integration')">
-                <div class="bg-green-100 p-2 rounded-full mr-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="bg-caloriflix-100 p-2 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-caloriflix-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                     </svg>
                 </div>
                 <div>
                     <div class="flex items-center">
                         <h2 class="text-lg font-semibold mr-2">Integração com API</h2>
-                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">novo✨</span>
+                        <span class="bg-caloriflix-100 text-caloriflix-800 text-xs px-2 py-1 rounded-full font-medium">novo✨</span>
                     </div>
                     <p class="text-gray-500 text-sm">Integre seu app com o dieta.ai.</p>
                 </div>

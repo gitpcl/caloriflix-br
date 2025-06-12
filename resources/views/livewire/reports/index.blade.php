@@ -34,7 +34,7 @@
                     <button 
                         wire:click="changePeriodType('custom')"
                         type="button" 
-                        class="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 {{ $period_type === 'custom' ? 'bg-green-100 text-green-700 border-green-300' : '' }}"
+                        class="relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10 {{ $period_type === 'custom' ? 'bg-caloriflix-100 text-caloriflix-700 border-caloriflix-300' : '' }}"
                         id="personalizado-button"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1 lucide lucide-calendar">
@@ -85,7 +85,7 @@
                                         type="datetime-local" 
                                         id="start_date"
                                         wire:model="custom_start_date"
-                                        class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-green-500 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-caloriflix-500 focus:ring-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                         placeholder="05/22/2025, 03:20 AM"
                                     />
                                 </div>
@@ -97,7 +97,7 @@
                                         type="datetime-local" 
                                         id="end_date"
                                         wire:model="custom_end_date"
-                                        class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-green-500 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                        class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-caloriflix-500 focus:ring-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                         placeholder="05/23/2025, 03:20 AM"
                                     />
                                 </div>
@@ -110,28 +110,28 @@
                                 <button 
                                     wire:click="setQuickPeriod('24h')"
                                     type="button" 
-                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-caloriflix-500 hover:bg-caloriflix-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                                 >
                                     24H
                                 </button>
                                 <button 
                                     wire:click="setQuickPeriod('3d')"
                                     type="button" 
-                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                                 >
                                     3D
                                 </button>
                                 <button 
                                     wire:click="setQuickPeriod('7d')"
                                     type="button" 
-                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                                 >
                                     7D
                                 </button>
                                 <button 
                                     wire:click="setQuickPeriod('1m')"
                                     type="button" 
-                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                    class="flex-1 inline-flex items-center justify-center px-3 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                                 >
                                     1M
                                 </button>
@@ -152,7 +152,7 @@
                                             wire:model="relative_amount"
                                             min="1"
                                             max="365"
-                                            class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-green-500 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                            class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-caloriflix-500 focus:ring-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                         />
                                     </div>
                                     <div class="flex-1">
@@ -162,7 +162,7 @@
                                         <select 
                                             id="relative_unit"
                                             wire:model="relative_unit"
-                                            class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-green-500 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                            class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-caloriflix-500 focus:ring-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                         >
                                             <option value="days">Dias</option>
                                             <option value="weeks">Semanas</option>
@@ -188,7 +188,7 @@
                                 <button 
                                     wire:click="closeCustomModal"
                                     type="button" 
-                                    class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                    class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                                 >
                                     Cancelar
                                 </button>
@@ -243,7 +243,7 @@
                                     min="1"
                                     max="5000"
                                     step="50"
-                                    class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-green-500 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                    class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-caloriflix-500 focus:ring-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 />
                                 @error('water_amount') 
                                     <span class="text-red-500 text-xs mt-1">{{ $message }}</span> 
@@ -259,7 +259,7 @@
                                     type="date" 
                                     id="water_date"
                                     wire:model="water_date"
-                                    class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-green-500 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                    class="block w-full rounded-lg border border-gray-300 px-3 py-2.5 text-sm text-gray-900 focus:border-caloriflix-500 focus:ring-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                 />
                                 @error('water_date') 
                                     <span class="text-red-500 text-xs mt-1">{{ $message }}</span> 
@@ -309,14 +309,14 @@
                             <button 
                                 wire:click="closeWaterModal"
                                 type="button" 
-                                class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-600"
+                                class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-600"
                             >
                                 Cancelar
                             </button>
                             <button 
                                 wire:click="addWaterEntry"
                                 type="button" 
-                                class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-caloriflix-600 hover:bg-caloriflix-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-caloriflix-500"
                             >
                                 Adicionar
                             </button>
@@ -340,7 +340,7 @@
                         <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Proteína</div>
                         <div class="mt-1 flex items-baseline justify-between">
                             <div class="text-2xl font-semibold text-gray-900 dark:text-white">{{ $nutrient_macros['protein'] }}g</div>
-                            <div class="inline-flex items-baseline rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 dark:bg-green-800/20 dark:text-green-500">
+                            <div class="inline-flex items-baseline rounded-full bg-caloriflix-100 px-2.5 py-0.5 text-sm font-medium text-caloriflix-800 dark:bg-caloriflix-800/20 dark:text-caloriflix-500">
                                 {{ $this->getProteinPercentage() }}%
                             </div>
                         </div>
@@ -374,7 +374,7 @@
                         <div class="text-sm font-medium text-gray-500 dark:text-zinc-400">Gordura</div>
                         <div class="mt-1 flex items-baseline justify-between">
                             <div class="text-2xl font-semibold text-gray-900 dark:text-white">{{ $nutrient_macros['fat'] }}g</div>
-                            <div class="inline-flex items-baseline rounded-full bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 dark:bg-green-800/20 dark:text-green-500">
+                            <div class="inline-flex items-baseline rounded-full bg-caloriflix-100 px-2.5 py-0.5 text-sm font-medium text-caloriflix-800 dark:bg-caloriflix-800/20 dark:text-caloriflix-500">
                                 {{ $this->getFatPercentage() }}%
                             </div>
                         </div>
@@ -414,7 +414,7 @@
                         Não há refeições registradas para o período selecionado. Comece adicionando suas refeições para ver os dados nutricionais.
                     </p>
                     <div class="mt-6">
-                        <a href="{{ route('meals.index') }}" class="inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus:outline-2 focus:outline-offset-2 focus:outline-green-600">
+                        <a href="{{ route('meals.index') }}" class="inline-flex items-center rounded-md bg-caloriflix-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-caloriflix-500 focus:outline-2 focus:outline-offset-2 focus:outline-caloriflix-600">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="-ml-0.5 mr-1.5 h-5 w-5 lucide lucide-plus">
                                 <line x1="12" x2="12" y1="5" y2="19"/>
 <line x1="5" x2="19" y1="12" y2="12"/>
@@ -430,7 +430,7 @@
     <!-- Water consumption section -->
     <div class="mt-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between">
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Consumo de Água <span class="ml-1 inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 dark:bg-green-500/10 dark:text-green-400 dark:ring-green-500/20">novo</span></h2>
+            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Consumo de Água <span class="ml-1 inline-flex items-center rounded-md bg-caloriflix-50 px-2 py-1 text-xs font-medium text-caloriflix-700 ring-1 ring-inset ring-caloriflix-600/20 dark:bg-caloriflix-500/10 dark:text-caloriflix-400 dark:ring-caloriflix-500/20">novo</span></h2>
         </div>
         
         @if($water_consumption > 0)
@@ -463,7 +463,7 @@
                             @endif
                         </div>
                         
-                        <div class=" bg-green-50 p-2 rounded-md text-green-500 cursor-pointer animate-pulse" wire:click="openWaterModal">
+                        <div class=" bg-caloriflix-50 p-2 rounded-md text-caloriflix-500 cursor-pointer animate-pulse" wire:click="openWaterModal">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-glass-water-icon lucide-glass-water"><path d="M5.116 4.104A1 1 0 0 1 6.11 3h11.78a1 1 0 0 1 .994 1.105L17.19 20.21A2 2 0 0 1 15.2 22H8.8a2 2 0 0 1-2-1.79z"/><path d="M6 12a5 5 0 0 1 6 0 5 5 0 0 0 6 0"/></svg>
                         </div>
                     </div>
@@ -476,7 +476,7 @@
                                     $dailyGoal = 2000; // 2L daily goal
                                     $percentage = min(100, ($water_consumption / $dailyGoal) * 100);
                                     $status = $percentage >= 100 ? 'Excelente' : ($percentage >= 75 ? 'Bom' : ($percentage >= 50 ? 'Regular' : 'Baixo'));
-                                    $statusColor = $percentage >= 100 ? 'text-green-600' : ($percentage >= 75 ? 'text-green-600' : ($percentage >= 50 ? 'text-yellow-600' : 'text-red-600'));
+                                    $statusColor = $percentage >= 100 ? 'text-caloriflix-600' : ($percentage >= 75 ? 'text-caloriflix-600' : ($percentage >= 50 ? 'text-yellow-600' : 'text-red-600'));
                                 @endphp
                                 <span class="text-sm font-medium {{ $statusColor }}">{{ $status }}</span>
                                 <span class="inline-flex h-4 w-4 items-center justify-center rounded-full bg-gray-200 text-xs font-semibold text-gray-800 dark:bg-gray-700 dark:text-gray-300" title="Meta diária: {{ number_format($dailyGoal) }}ml">?</span>
@@ -490,7 +490,7 @@
                                 <div class="text-gray-900 dark:text-white font-medium">{{ number_format($percentage, 1) }}%</div>
                             </div>
                             <div class="mt-2 h-2 rounded-full bg-gray-200 dark:bg-gray-600">
-                                <div class="h-2 rounded-full bg-green-500 transition-all duration-300" style="width: {{ $percentage }}%"></div>
+                                <div class="h-2 rounded-full bg-caloriflix-500 transition-all duration-300" style="width: {{ $percentage }}%"></div>
                             </div>
                         </div>
                     </div>
@@ -511,7 +511,7 @@
                     <div class="mt-6">
                         <button 
                             wire:click="openWaterModal"
-                            class="inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus:outline-2 focus:outline-offset-2 focus:outline-green-600"
+                            class="inline-flex items-center rounded-md bg-caloriflix-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-caloriflix-500 focus:outline-2 focus:outline-offset-2 focus:outline-caloriflix-600"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="-ml-0.5 mr-1.5 h-5 w-5 lucide lucide-plus">
                                 <line x1="12" x2="12" y1="5" y2="19"/>
