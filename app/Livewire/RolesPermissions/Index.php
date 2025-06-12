@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Livewire\Attributes\Title;
 
-#[Title('Roles & Permissions')]
+#[Title('Papéis e Permissões')]
 class Index extends Component
 {
     public $roles;
@@ -21,8 +21,8 @@ class Index extends Component
     ];
 
     protected $messages = [
-        'newPermissionName.required' => 'Permission name is required.',
-        'newPermissionName.unique' => 'This permission already exists.',
+        'newPermissionName.required' => 'O nome da permissão é obrigatório.',
+        'newPermissionName.unique' => 'Esta permissão já existe.',
     ];
 
     public function mount()
@@ -54,7 +54,7 @@ class Index extends Component
         $this->newPermissionName = '';
         $this->loadRolesAndPermissions();
 
-        session()->flash('message', 'Permission created successfully.');
+        session()->flash('message', 'Permissão criada com sucesso.');
     }
 
     public function togglePermission($roleId, $permissionId)
@@ -77,14 +77,14 @@ class Index extends Component
         
         // Check if permission is assigned to any roles
         if ($permission->roles()->count() > 0) {
-            session()->flash('error', 'Cannot delete permission that is assigned to roles.');
+            session()->flash('error', 'Não é possível excluir uma permissão que está atribuída a papéis.');
             return;
         }
 
         $permission->delete();
         $this->loadRolesAndPermissions();
         
-        session()->flash('message', 'Permission deleted successfully.');
+        session()->flash('message', 'Permissão excluída com sucesso.');
     }
 
     public function render()

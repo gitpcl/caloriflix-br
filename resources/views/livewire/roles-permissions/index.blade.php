@@ -13,30 +13,30 @@
     @endif
 
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Roles & Permissions Management</h1>
-        <p class="text-gray-600 dark:text-gray-400">Manage system roles and their permissions</p>
+        <h1 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">Gestão de Papéis e Permissões</h1>
+        <p class="text-neutral-600 dark:text-neutral-400">Gerencie os papéis e permissões do sistema</p>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {{-- Roles Column --}}
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Roles</h2>
+        <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4 text-neutral-900 dark:text-neutral-100">Papéis</h2>
 
             <div class="space-y-4">
                 @foreach($roles as $role)
-                    <div class="border dark:border-gray-700 rounded-lg">
+                    <div class="border dark:border-neutral-700 rounded-lg">
                         {{-- Accordion Header --}}
                         <button
                             wire:click="toggleAccordion({{ $role->id }})"
-                            class="w-full px-4 py-3 text-left flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                            class="w-full px-4 py-3 text-left flex justify-between items-center hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-colors"
                         >
-                            <span class="font-medium text-gray-900 dark:text-gray-100">
+                            <span class="font-medium text-neutral-900 dark:text-neutral-100">
                                 {{ ucfirst($role->name) }}
-                                <span class="text-sm text-gray-500 dark:text-gray-400 ml-2">
-                                    ({{ $role->permissions->count() }} permissions)
+                                <span class="text-sm text-neutral-500 dark:text-neutral-400 ml-2">
+                                    ({{ $role->permissions->count() }} permissões)
                                 </span>
                             </span>
-                            <svg class="w-5 h-5 text-gray-500 transition-transform {{ in_array($role->id, $openAccordions) ? 'rotate-180' : '' }}"
+                            <svg class="w-5 h-5 text-neutral-500 transition-transform {{ in_array($role->id, $openAccordions) ? 'rotate-180' : '' }}"
                                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
@@ -44,17 +44,17 @@
 
                         {{-- Accordion Content --}}
                         @if(in_array($role->id, $openAccordions))
-                            <div class="px-4 py-3 border-t dark:border-gray-700">
+                            <div class="px-4 py-3 border-t dark:border-neutral-700">
                                 <div class="grid grid-cols-1 gap-2 max-h-96 overflow-y-auto">
                                     @foreach($permissions as $permission)
-                                        <label class="flex items-center space-x-3 hover:bg-gray-50 dark:hover:bg-gray-700 p-2 rounded cursor-pointer">
+                                        <label class="flex items-center space-x-3 hover:bg-neutral-50 dark:hover:bg-neutral-700 p-2 rounded cursor-pointer">
                                             <input
                                                 type="checkbox"
                                                 wire:click="togglePermission({{ $role->id }}, {{ $permission->id }})"
                                                 {{ $role->hasPermissionTo($permission) ? 'checked' : '' }}
-                                                class="form-checkbox h-4 w-4 text-blue-600 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
+                                                class="form-checkbox h-4 w-4 text-caloriflix-600 rounded focus:ring-caloriflix-500 dark:focus:ring-caloriflix-600 dark:focus:ring-offset-neutral-800"
                                             >
-                                            <span class="text-sm text-gray-700 dark:text-gray-300">{{ $permission->name }}</span>
+                                            <span class="text-sm text-neutral-700 dark:text-neutral-300">{{ $permission->name }}</span>
                                         </label>
                                     @endforeach
                                 </div>
@@ -66,8 +66,8 @@
         </div>
 
         {{-- Permissions Column --}}
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
-            <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Permissions</h2>
+        <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold mb-4 text-neutral-900 dark:text-neutral-100">Permissões</h2>
 
             {{-- Create New Permission --}}
             <div class="mb-6">
@@ -75,14 +75,14 @@
                     <input
                         type="text"
                         wire:model="newPermissionName"
-                        placeholder="Enter permission name (e.g., users.export)"
-                        class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-100"
+                        placeholder="Digite o nome da permissão (ex: usuarios.exportar)"
+                        class="flex-1 px-4 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg focus:ring-2 focus:ring-caloriflix-500 dark:bg-neutral-700 dark:text-neutral-100"
                     >
                     <button
                         type="submit"
                         class="px-4 py-2 bg-caloriflix-300 text-black rounded-lg hover:bg-caloriflix-400 transition-colors"
                     >
-                        Add Permission
+                        Adicionar Permissão
                     </button>
                 </form>
                 @error('newPermissionName')
@@ -93,11 +93,11 @@
             {{-- Permissions List --}}
             <div class="space-y-2 max-h-[600px] overflow-y-auto">
                 @forelse($permissions as $permission)
-                    <div class="flex justify-between items-center p-3 border dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                        <span class="text-sm text-gray-700 dark:text-gray-300">{{ $permission->name }}</span>
+                    <div class="flex justify-between items-center p-3 border dark:border-neutral-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-700">
+                        <span class="text-sm text-neutral-700 dark:text-neutral-300">{{ $permission->name }}</span>
                         <button
                             wire:click="deletePermission({{ $permission->id }})"
-                            wire:confirm="Are you sure you want to delete this permission?"
+                            wire:confirm="Tem certeza que deseja excluir esta permissão?"
                             class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
                         >
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,7 +106,7 @@
                         </button>
                     </div>
                 @empty
-                    <p class="text-gray-500 dark:text-gray-400 text-center py-4">No permissions created yet.</p>
+                    <p class="text-neutral-500 dark:text-neutral-400 text-center py-4">Nenhuma permissão criada ainda.</p>
                 @endforelse
             </div>
         </div>

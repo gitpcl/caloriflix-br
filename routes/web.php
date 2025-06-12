@@ -56,6 +56,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/roles-permissions', App\Livewire\RolesPermissions\Index::class)
         ->middleware('superadmin')
         ->name('roles-permissions.index');
+
+    // Users Management route (SuperAdmin only)
+    Route::get('/users', App\Livewire\Users\Index::class)
+        ->middleware('superadmin')
+        ->name('users.index');
 });
 
 require __DIR__.'/auth.php';
