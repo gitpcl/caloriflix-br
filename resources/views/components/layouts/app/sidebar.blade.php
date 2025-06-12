@@ -7,14 +7,14 @@
         <flux:sidebar sticky stashable class="hidden lg:flex border-r border-neutral-800 bg-neutral-900 text-white">
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-            <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
+            <a href="{{ route('today.index') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
                 <x-app-logo />
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group class="grid space-y-1">         
+                <flux:navlist.group class="grid space-y-1">
                     <!-- Hoje Item -->
-                    <a href="{{ route('today.index') }}" 
+                    <a href="{{ route('today.index') }}"
                        class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('today.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
@@ -24,12 +24,12 @@
                             <span class="{{ request()->routeIs('today.index') ? 'text-caloriflix-300' : '' }}">{{ __('Hoje') }}</span>
                         </div>
                     </a>
-                    
+
                     <!-- Alpine.js Accordion for Relatórios -->
                     <div x-data="{ open: {{ request()->routeIs('diary.index') || request()->routeIs('measurements.index') || request()->routeIs('reports.index') ? 'true' : 'false' }} }" class="relative">
                         <!-- Accordion Header -->
-                        <button 
-                            @click="open = !open" 
+                        <button
+                            @click="open = !open"
                             class="flex w-full items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all group"
                         >
                             <div class="flex items-center">
@@ -38,33 +38,33 @@
                                 </span>
                                 <span class="{{ request()->routeIs('diary.index') || request()->routeIs('measurements.index') || request()->routeIs('reports.index') ? 'text-caloriflix-300' : '' }}">{{ __('Relatórios') }}</span>
                             </div>
-                            <svg 
-                                fill="none" 
-                                height="16" 
-                                viewBox="0 0 16 16" 
-                                width="16" 
+                            <svg
+                                fill="none"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                width="16"
                                 xmlns="http://www.w3.org/2000/svg"
-                                class="transition-transform duration-200" 
+                                class="transition-transform duration-200"
                                 :class="open ? 'rotate-180' : ''"
                             >
                                 <path d="M4 7L8 11L12 7" stroke="#C4C4CC" stroke-linecap="square" stroke-linejoin="round" stroke-width="1.5"></path>
                             </svg>
                         </button>
-                        
+
                         <!-- Accordion Content -->
-                        <div 
-                            x-show="open" 
-                            x-transition:enter="transition ease-out duration-100" 
-                            x-transition:enter-start="transform opacity-0 scale-95" 
-                            x-transition:enter-end="transform opacity-100 scale-100" 
-                            x-transition:leave="transition ease-in duration-75" 
-                            x-transition:leave-start="transform opacity-100 scale-100" 
-                            x-transition:leave-end="transform opacity-0 scale-95" 
+                        <div
+                            x-show="open"
+                            x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="transform opacity-0 scale-95"
+                            x-transition:enter-end="transform opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave-start="transform opacity-100 scale-100"
+                            x-transition:leave-end="transform opacity-0 scale-95"
                             class="ml-6 mt-1 space-y-1"
                         >
                             <!-- Relatórios Item -->
-                            <a 
-                                href="{{ route('reports.index') }}" 
+                            <a
+                                href="{{ route('reports.index') }}"
                                 class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reports.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                                 wire:navigate
                             >
@@ -75,8 +75,8 @@
                             </a>
 
                             <!-- Diário Item -->
-                            <a 
-                                href="{{ route('diary.index') }}" 
+                            <a
+                                href="{{ route('diary.index') }}"
                                 class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('diary.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                                 wire:navigate
                             >
@@ -85,10 +85,10 @@
                                 </span>
                                 <span class="{{ request()->routeIs('diary.index') ? 'text-caloriflix-300' : '' }}">{{ __('Diário') }}</span>
                             </a>
-                            
+
                             <!-- Medidas Item -->
-                            <a 
-                                href="{{ route('measurements.index') }}" 
+                            <a
+                                href="{{ route('measurements.index') }}"
                                 class="flex items-center rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('measurements.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                                 wire:navigate
                             >
@@ -99,9 +99,9 @@
                             </a>
                         </div>
                     </div>
-                    
+
                     <!-- Meus Alimentos Item -->
-                    <a href="{{ route('foods.index') }}" 
+                    <a href="{{ route('foods.index') }}"
                        class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('foods.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
@@ -111,9 +111,9 @@
                             <span class="{{ request()->routeIs('foods.index') ? 'text-caloriflix-300' : '' }}">{{ __('Meus Alimentos') }}</span>
                         </div>
                     </a>
-                    
+
                     <!-- Minhas Receitas Item -->
-                    <a href="{{ route('recipes.index') }}" 
+                    <a href="{{ route('recipes.index') }}"
                        class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('recipes.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
@@ -123,9 +123,9 @@
                             <span class="{{ request()->routeIs('recipes.index') ? 'text-caloriflix-300' : '' }}">{{ __('Minhas Receitas') }}</span>
                         </div>
                     </a>
-                    
+
                     <!-- Metas e Perfil Item -->
-                    <a href="{{ route('goals.index') }}" 
+                    <a href="{{ route('goals.index') }}"
                        class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('goals.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
@@ -135,9 +135,9 @@
                             <span class="{{ request()->routeIs('goals.index') ? 'text-caloriflix-300' : '' }}">{{ __('Metas e Perfil') }}</span>
                         </div>
                     </a>
-                    
+
                     <!-- Lembretes Item -->
-                    <a href="{{ route('reminders.index') }}" 
+                    <a href="{{ route('reminders.index') }}"
                        class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reminders.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
@@ -147,9 +147,9 @@
                             <span class="{{ request()->routeIs('reminders.index') ? 'text-caloriflix-300' : '' }}">{{ __('Lembretes') }}</span>
                         </div>
                     </a>
-                    
-                    <!-- Preferências Item -->  
-                    <a href="{{ route('preferences.index') }}" 
+
+                    <!-- Preferências Item -->
+                    <a href="{{ route('preferences.index') }}"
                        class="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('preferences.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                        wire:navigate>
                         <div class="flex items-center">
@@ -176,7 +176,7 @@
 
             <!-- Desktop User Menu -->
             <div class="relative" x-data="{ open: false }">
-                <button 
+                <button
                     @click="open = !open"
                     class="flex w-full items-center justify-between rounded-[10px] px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all"
                 >
@@ -191,13 +191,13 @@
                             <span class="text-xs text-neutral-400 truncate">{{ auth()->user()->email }}</span>
                         </div>
                     </div>
-                    <svg 
-                        fill="none" 
-                        height="16" 
-                        viewBox="0 0 16 16" 
-                        width="16" 
+                    <svg
+                        fill="none"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        width="16"
                         xmlns="http://www.w3.org/2000/svg"
-                        class="transition-transform duration-200 text-neutral-400" 
+                        class="transition-transform duration-200 text-neutral-400"
                         :class="open ? 'rotate-180' : ''"
                     >
                         <path d="M4 7L8 11L12 7" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="1.5"></path>
@@ -205,22 +205,22 @@
                 </button>
 
                 <!-- Dropdown Menu -->
-                <div 
-                    x-show="open" 
+                <div
+                    x-show="open"
                     @click.away="open = false"
-                    x-transition:enter="transition ease-out duration-100" 
-                    x-transition:enter-start="transform opacity-0 scale-95" 
-                    x-transition:enter-end="transform opacity-100 scale-100" 
-                    x-transition:leave="transition ease-in duration-75" 
-                    x-transition:leave-start="transform opacity-100 scale-100" 
+                    x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="transform opacity-0 scale-95"
+                    x-transition:enter-end="transform opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-75"
+                    x-transition:leave-start="transform opacity-100 scale-100"
                     x-transition:leave-end="transform opacity-0 scale-95"
                     class="absolute bottom-full left-0 w-full mb-2 bg-neutral-900 border border-neutral-800 rounded-[10px] shadow-lg z-50"
                     style="display: none;"
                 >
                     <div class="py-2">
                         <!-- Settings -->
-                        <a 
-                            href="{{ route('settings.profile') }}" 
+                        <a
+                            href="{{ route('settings.profile') }}"
                             class="flex items-center rounded-[10px] mx-2 px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all"
                             wire:navigate
                         >
@@ -239,8 +239,8 @@
                         <!-- Logout -->
                         <form method="POST" action="{{ route('logout') }}" class="w-full">
                             @csrf
-                            <button 
-                                type="submit" 
+                            <button
+                                type="submit"
                                 class="flex items-center rounded-[10px] mx-2 px-3 py-2 text-sm font-medium text-neutral-300 hover:bg-red-900/20 hover:text-red-400 transition-all w-full text-left"
                             >
                                 <span class="mr-2 text-neutral-200">
@@ -262,7 +262,7 @@
         <nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-neutral-900 border-t border-neutral-800 z-50">
             <div class="flex overflow-x-auto scrollbar-hide py-2 px-4 space-x-1 bottom-nav-scroll" style="scroll-behavior: auto;">
                 <!-- Home/Hoje -->
-                <a href="{{ route('today.index') }}" 
+                <a href="{{ route('today.index') }}"
                    class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('today.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
                     <span class="mb-1 {{ request()->routeIs('today.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
@@ -277,7 +277,7 @@
                 </a>
 
                 <!-- Reports/Relatórios -->
-                <a href="{{ route('reports.index') }}" 
+                <a href="{{ route('reports.index') }}"
                    class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reports.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
                     <span class="mb-1 {{ request()->routeIs('reports.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
@@ -291,7 +291,7 @@
                 </a>
 
                 <!-- Diary/Diário -->
-                <a href="{{ route('diary.index') }}" 
+                <a href="{{ route('diary.index') }}"
                    class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('diary.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
                     <span class="mb-1 {{ request()->routeIs('diary.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
@@ -305,7 +305,7 @@
                 </a>
 
                 <!-- Measurements/Medidas -->
-                <a href="{{ route('measurements.index') }}" 
+                <a href="{{ route('measurements.index') }}"
                    class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('measurements.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
                     <span class="mb-1 {{ request()->routeIs('measurements.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
@@ -319,7 +319,7 @@
                 </a>
 
                 <!-- Foods/Alimentos -->
-                <a href="{{ route('foods.index') }}" 
+                <a href="{{ route('foods.index') }}"
                    class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('foods.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
                     <span class="mb-1 {{ request()->routeIs('foods.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
@@ -333,7 +333,7 @@
                 </a>
 
                 <!-- Recipes/Receitas -->
-                <a href="{{ route('recipes.index') }}" 
+                <a href="{{ route('recipes.index') }}"
                    class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('recipes.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
                     <span class="mb-1 {{ request()->routeIs('recipes.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
@@ -347,7 +347,7 @@
                 </a>
 
                 <!-- Goals/Metas -->
-                <a href="{{ route('goals.index') }}" 
+                <a href="{{ route('goals.index') }}"
                    class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('goals.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
                     <span class="mb-1 {{ request()->routeIs('goals.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
@@ -361,7 +361,7 @@
                 </a>
 
                 <!-- Reminders/Lembretes -->
-                <a href="{{ route('reminders.index') }}" 
+                <a href="{{ route('reminders.index') }}"
                    class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('reminders.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
                     <span class="mb-1 {{ request()->routeIs('reminders.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
@@ -375,7 +375,7 @@
                 </a>
 
                 <!-- Preferences/Preferências -->
-                <a href="{{ route('preferences.index') }}" 
+                <a href="{{ route('preferences.index') }}"
                    class="flex flex-col items-center justify-center rounded-[10px] px-3 py-2 min-w-[70px] text-sm font-medium text-neutral-300 hover:bg-neutral-800 hover:text-white transition-all {{ request()->routeIs('preferences.index') ? 'bg-neutral-800 text-caloriflix-300' : '' }}"
                    wire:navigate>
                     <span class="mb-1 {{ request()->routeIs('preferences.index') ? 'text-caloriflix-300' : 'text-neutral-200' }}">
@@ -409,11 +409,11 @@
         {{ $slot }}
 
         @fluxScripts
-        
+
         <script>
             // Preserve bottom navigation scroll position - Immediate version
             let bottomNavScrollPosition = parseInt(sessionStorage.getItem('bottomNavScrollLeft')) || 0;
-            
+
             function saveScrollPosition() {
                 const bottomNav = document.querySelector('.bottom-nav-scroll');
                 if (bottomNav) {
@@ -421,19 +421,19 @@
                     sessionStorage.setItem('bottomNavScrollLeft', bottomNavScrollPosition);
                 }
             }
-            
+
             function restoreScrollPosition() {
                 const bottomNav = document.querySelector('.bottom-nav-scroll');
                 if (bottomNav && bottomNavScrollPosition > 0) {
                     bottomNav.scrollLeft = bottomNavScrollPosition;
                 }
             }
-            
+
             // Immediately restore on script load
             document.addEventListener('DOMContentLoaded', function() {
                 restoreScrollPosition();
             });
-            
+
             // Also try immediately when the element is available
             function tryRestoreImmediate() {
                 const bottomNav = document.querySelector('.bottom-nav-scroll');
@@ -441,13 +441,13 @@
                     if (bottomNavScrollPosition > 0) {
                         bottomNav.scrollLeft = bottomNavScrollPosition;
                     }
-                    
+
                     // Save scroll position when scrolling
                     bottomNav.addEventListener('scroll', function() {
                         bottomNavScrollPosition = this.scrollLeft;
                         sessionStorage.setItem('bottomNavScrollLeft', this.scrollLeft);
                     });
-                    
+
                     // Save scroll position before navigation
                     const navLinks = bottomNav.querySelectorAll('a, button');
                     navLinks.forEach(link => {
@@ -460,15 +460,15 @@
                     setTimeout(tryRestoreImmediate, 10);
                 }
             }
-            
+
             // Start trying immediately
             tryRestoreImmediate();
-            
+
             // Handle Livewire navigation events
             document.addEventListener('livewire:navigating', function() {
                 saveScrollPosition();
             });
-            
+
             document.addEventListener('livewire:navigated', function() {
                 // Restore immediately without delay
                 restoreScrollPosition();
