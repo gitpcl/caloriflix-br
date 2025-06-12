@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Models\Food;
+use App\Http\Resources\V1\FoodResource;
+use App\Http\Requests\V1\StoreFoodRequest;
+use App\Http\Requests\V1\UpdateFoodRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class FoodController extends BaseController
 {
@@ -17,21 +19,21 @@ class FoodController extends BaseController
      */
     public function index(Request $request): JsonResponse
     {
-        $query = Food::query()->where('user_id', request()->user()->id);
+        $query = Food::forUser($request->user()->id);
         
         // Apply search filter if provided
-        if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%');
+        if ($request->filled('search')) {
+            $query->search($request->search);
         }
         
         // Apply source filter if provided
         if ($request->has('source') && in_array($request->source, ['manual', 'whatsapp'])) {
-            $query->where('source', $request->source);
+            $query->bySource($request->source);
         }
         
         // Apply favorite filter
-        if ($request->has('favorite') && $request->favorite) {
-            $query->where('is_favorite', true);
+        if ($request->boolean('favorite')) {
+            $query->favorites();
         }
         
         // Apply sorting
@@ -43,36 +45,22 @@ class FoodController extends BaseController
         
         $foods = $query->paginate($request->get('per_page', 15));
         
-        return $this->sendResponse($foods, 'Foods retrieved successfully');
+        return $this->sendResponse(
+            FoodResource::collection($foods)->response()->getData(true),
+            'Foods retrieved successfully'
+        );
     }
 
     /**
      * Store a newly created food.
      *
-     * @param Request $request
+     * @param StoreFoodRequest $request
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreFoodRequest $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'quantity' => 'required|numeric|min:0',
-            'unit' => 'required|string|max:50',
-            'protein' => 'required|numeric|min:0',
-            'fat' => 'required|numeric|min:0',
-            'carbohydrate' => 'required|numeric|min:0',
-            'fiber' => 'nullable|numeric|min:0',
-            'calories' => 'required|numeric|min:0',
-            'barcode' => 'nullable|string|max:100',
-            'is_favorite' => 'nullable|boolean',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors(), 422);
-        }
-
         $food = Food::create([
-            'user_id' => request()->user()->id,
+            'user_id' => $request->user()->id,
             'name' => $request->name,
             'quantity' => $request->quantity,
             'unit' => $request->unit,
@@ -86,7 +74,7 @@ class FoodController extends BaseController
             'source' => 'manual',
         ]);
 
-        return $this->sendResponse($food, 'Food created successfully');
+        return $this->sendCreated(new FoodResource($food), 'Food created successfully');
     }
 
     /**
@@ -107,17 +95,17 @@ class FoodController extends BaseController
             return $this->sendError('Forbidden.', [], 403);
         }
 
-        return $this->sendResponse($food, 'Food retrieved successfully');
+        return $this->sendResponse(new FoodResource($food), 'Food retrieved successfully');
     }
 
     /**
      * Update the specified food.
      *
-     * @param Request $request
+     * @param UpdateFoodRequest $request
      * @param int $id
      * @return JsonResponse
      */
-    public function update(Request $request, $id): JsonResponse
+    public function update(UpdateFoodRequest $request, $id): JsonResponse
     {
         $food = Food::find($id);
 
@@ -125,30 +113,13 @@ class FoodController extends BaseController
             return $this->sendError('Food not found.');
         }
 
-        if ($food->user_id !== request()->user()->id) {
+        if ($food->user_id !== $request->user()->id) {
             return $this->sendError('Forbidden.', [], 403);
         }
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'sometimes|required|string|max:255',
-            'quantity' => 'sometimes|required|numeric|min:0',
-            'unit' => 'sometimes|required|string|max:50',
-            'protein' => 'sometimes|required|numeric|min:0',
-            'fat' => 'sometimes|required|numeric|min:0',
-            'carbohydrate' => 'sometimes|required|numeric|min:0',
-            'fiber' => 'nullable|numeric|min:0',
-            'calories' => 'sometimes|required|numeric|min:0',
-            'barcode' => 'nullable|string|max:100',
-            'is_favorite' => 'nullable|boolean',
-        ]);
+        $food->update($request->validated());
 
-        if ($validator->fails()) {
-            return $this->sendError('Validation Error.', $validator->errors(), 422);
-        }
-
-        $food->update($request->all());
-
-        return $this->sendResponse($food, 'Food updated successfully');
+        return $this->sendResponse(new FoodResource($food), 'Food updated successfully');
     }
 
     /**
@@ -171,7 +142,7 @@ class FoodController extends BaseController
 
         $food->delete();
 
-        return $this->sendResponse(null, 'Food deleted successfully');
+        return $this->sendNoContent('Food deleted successfully');
     }
 
     /**
@@ -181,11 +152,11 @@ class FoodController extends BaseController
      */
     public function favorites(): JsonResponse
     {
-        $favorites = Food::where('user_id', request()->user()->id)
-            ->where('is_favorite', true)
+        $favorites = Food::forUser(request()->user()->id)
+            ->favorites()
             ->orderBy('name')
             ->get();
 
-        return $this->sendResponse($favorites, 'Favorite foods retrieved successfully');
+        return $this->sendResponse(FoodResource::collection($favorites), 'Favorite foods retrieved successfully');
     }
 }

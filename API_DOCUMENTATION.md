@@ -854,11 +854,244 @@ Common HTTP status codes:
 
 ## Rate Limiting
 
-The API implements rate limiting to prevent abuse. Current limits are:
-- 60 requests per minute for authenticated users
-- 5 requests per minute for unauthenticated endpoints
+The API implements tiered rate limiting to prevent abuse and ensure fair usage:
 
-Rate limit headers are included in all responses:
+### Rate Limits by Endpoint Type
+
+- **Authentication endpoints**: 5 requests per minute per IP
+- **Authenticated general endpoints**: 100 requests per minute per user
+- **Report endpoints**: 10 requests per minute per user (resource intensive)
+- **Public endpoints**: 20 requests per minute per IP
+
+### Rate Limit Headers
+
+All responses include rate limiting headers:
 - `X-RateLimit-Limit`: Maximum number of requests per minute
 - `X-RateLimit-Remaining`: Number of requests remaining in the current window
 - `X-RateLimit-Reset`: Time when the rate limit window resets (Unix timestamp)
+
+### Rate Limit Response
+
+When rate limits are exceeded (HTTP 429):
+```json
+{
+  "success": false,
+  "message": "Too many requests.",
+  "error": "Rate limit exceeded. Please try again later.",
+  "retry_after": 60
+}
+```
+
+## Response Caching
+
+The API implements intelligent caching to improve performance:
+
+### Cache Headers
+
+Cached responses include:
+- `X-Cache-Status`: `HIT` or `MISS`
+- `X-Cache-TTL`: Time to live in seconds
+
+### Cache Duration by Resource
+
+- **User profiles**: 2 hours
+- **User preferences**: 2 hours  
+- **Foods**: 1 hour
+- **Meals**: 30 minutes
+- **Reports**: 15 minutes
+- **Measurements**: 30 minutes
+
+### Cache Invalidation
+
+Cache is automatically invalidated when:
+- Resources are created, updated, or deleted
+- Related resources are modified
+- User profile/preferences change
+
+## Token Management
+
+### Token Expiration
+
+All API tokens expire after 7 days by default. This can be configured per token.
+
+### Token Management Endpoints
+
+#### List Active Tokens
+```http
+GET /api/v1/tokens
+```
+
+#### Create New Token
+```http
+POST /api/v1/tokens
+```
+
+**Request Body:**
+```json
+{
+  "name": "Mobile App Token",
+  "abilities": ["read", "write"],
+  "expires_in_days": 30
+}
+```
+
+#### Refresh Current Token
+```http
+POST /api/v1/tokens/refresh
+```
+
+#### Revoke Specific Token
+```http
+DELETE /api/v1/tokens/{token_id}
+```
+
+#### Revoke All Other Tokens
+```http
+DELETE /api/v1/tokens/revoke-all
+```
+
+## API Security Enhancements
+
+### CORS Configuration
+
+The API includes secure CORS settings:
+- Restricted to specific allowed origins
+- Credentials support enabled for authenticated requests
+- Exposed headers include rate limit information
+
+### Input Validation
+
+All endpoints use comprehensive validation:
+- **Form Request classes** for structured validation
+- **Custom validation messages** for better user experience
+- **Type-safe validation** with proper casting
+- **File and data size limits** to prevent abuse
+
+### Error Handling
+
+Consistent error responses across all endpoints:
+
+#### Validation Errors (422)
+```json
+{
+  "success": false,
+  "message": "Validation Error.",
+  "errors": {
+    "field_name": ["Error message"]
+  }
+}
+```
+
+#### Authentication Errors (401)
+```json
+{
+  "success": false,
+  "message": "Unauthenticated.",
+  "error": "Please log in to access this resource."
+}
+```
+
+#### Resource Not Found (404)
+```json
+{
+  "success": false,
+  "message": "Resource not found.",
+  "error": "Food not found."
+}
+```
+
+#### Server Errors (500)
+```json
+{
+  "success": false,
+  "message": "Server Error.",
+  "error": "Internal server error."
+}
+```
+
+## Performance Optimizations
+
+### Database Query Optimization
+
+- **Query scopes** for reusable query logic
+- **Eager loading** to prevent N+1 problems
+- **Optimized indexes** for frequently queried fields
+- **Pagination** for large datasets
+
+### Response Format
+
+All API responses follow a consistent structure:
+
+#### Successful Response
+```json
+{
+  "success": true,
+  "data": { ... },
+  "message": "Operation successful"
+}
+```
+
+#### Paginated Response
+```json
+{
+  "success": true,
+  "data": [...],
+  "message": "Data retrieved successfully",
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 5,
+    "per_page": 15,
+    "to": 15,
+    "total": 72
+  },
+  "links": {
+    "first": "...",
+    "last": "...",
+    "prev": null,
+    "next": "..."
+  }
+}
+```
+
+## API Testing
+
+The API includes comprehensive test coverage:
+
+- **Authentication tests** for login/logout flows
+- **Validation tests** for all input scenarios
+- **Rate limiting tests** to verify throttling
+- **Exception handling tests** for error scenarios
+- **Token management tests** for security features
+- **Integration tests** for complete workflows
+
+Run tests with:
+```bash
+php artisan test --testsuite=Feature
+```
+
+## Best Practices for API Usage
+
+### Authentication
+1. Store tokens securely (never in local storage)
+2. Use HTTPS in production
+3. Implement token refresh logic
+4. Handle 401 responses gracefully
+
+### Rate Limiting
+1. Implement exponential backoff on 429 responses
+2. Monitor rate limit headers
+3. Cache responses when appropriate
+4. Use pagination for large datasets
+
+### Error Handling
+1. Always check the `success` field
+2. Display user-friendly error messages
+3. Log detailed errors for debugging
+4. Implement proper retry logic
+
+### Performance
+1. Use pagination parameters
+2. Filter data at the API level
+3. Cache static/semi-static data
+4. Minimize unnecessary API calls

@@ -18,8 +18,15 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'cache.response' => \App\Http\Middleware\CacheResponse::class,
+            'cache.invalidate' => \App\Http\Middleware\InvalidateCache::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->render(function (Throwable $e, $request) {
+            if ($request->is('api/*') || $request->wantsJson()) {
+                return app(\App\Exceptions\ApiHandler::class)->render($request, $e);
+            }
+        });
     })->create();

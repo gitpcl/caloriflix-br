@@ -14,28 +14,55 @@ use App\Http\Controllers\API\V1\UserProfileController;
 use App\Http\Controllers\API\V1\UserPreferenceController;
 use App\Http\Controllers\API\V1\ReminderController;
 use App\Http\Controllers\API\V1\ReportController;
+use App\Http\Controllers\API\V1\TokenController;
 
-// Public routes
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/register', [AuthController::class, 'register']);
+// Public routes with rate limiting
+Route::middleware('throttle:auth')->group(function () {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+});
 
-// Protected routes
-Route::middleware('auth:sanctum')->group(function () {
+// Protected routes with authenticated rate limiting
+Route::middleware(['auth:sanctum', 'throttle:authenticated'])->group(function () {
     // User
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
     Route::post('/logout', [AuthController::class, 'logout']);
     
+    // Token management
+    Route::prefix('tokens')->group(function () {
+        Route::get('/', [TokenController::class, 'index'])->name('api.tokens.index');
+        Route::post('/', [TokenController::class, 'store'])->name('api.tokens.store');
+        Route::post('/refresh', [TokenController::class, 'refresh'])->name('api.tokens.refresh');
+        Route::delete('/revoke-all', [TokenController::class, 'revokeAll'])->name('api.tokens.revoke-all');
+        Route::delete('/{token}', [TokenController::class, 'destroy'])->name('api.tokens.destroy');
+    });
+    
     // Foods
-    Route::get('/foods/favorites', [FoodController::class, 'favorites'])->name('api.foods.favorites');
-    Route::apiResource('foods', FoodController::class)->names([
-        'index' => 'api.foods.index',
-        'store' => 'api.foods.store',
-        'show' => 'api.foods.show',
-        'update' => 'api.foods.update',
-        'destroy' => 'api.foods.destroy',
-    ]);
+    Route::get('/foods/favorites', [FoodController::class, 'favorites'])
+        ->middleware('cache.response:30')
+        ->name('api.foods.favorites');
+    
+    Route::get('/foods', [FoodController::class, 'index'])
+        ->middleware('cache.response:15')
+        ->name('api.foods.index');
+    
+    Route::get('/foods/{food}', [FoodController::class, 'show'])
+        ->middleware('cache.response:60')
+        ->name('api.foods.show');
+    
+    Route::post('/foods', [FoodController::class, 'store'])
+        ->middleware('cache.invalidate:foods')
+        ->name('api.foods.store');
+    
+    Route::put('/foods/{food}', [FoodController::class, 'update'])
+        ->middleware('cache.invalidate:foods')
+        ->name('api.foods.update');
+    
+    Route::delete('/foods/{food}', [FoodController::class, 'destroy'])
+        ->middleware('cache.invalidate:foods')
+        ->name('api.foods.destroy');
     
     // Meals
     Route::apiResource('meals', MealController::class)->names([
@@ -98,12 +125,20 @@ Route::middleware('auth:sanctum')->group(function () {
     ]);
     
     // User Profile
-    Route::get('/profile', [UserProfileController::class, 'show'])->name('api.profile.show');
-    Route::put('/profile', [UserProfileController::class, 'update'])->name('api.profile.update');
+    Route::get('/profile', [UserProfileController::class, 'show'])
+        ->middleware('cache.response:120')
+        ->name('api.profile.show');
+    Route::put('/profile', [UserProfileController::class, 'update'])
+        ->middleware('cache.invalidate:profile,preferences')
+        ->name('api.profile.update');
     
     // User Preferences
-    Route::get('/preferences', [UserPreferenceController::class, 'show'])->name('api.preferences.show');
-    Route::put('/preferences', [UserPreferenceController::class, 'update'])->name('api.preferences.update');
+    Route::get('/preferences', [UserPreferenceController::class, 'show'])
+        ->middleware('cache.response:120')
+        ->name('api.preferences.show');
+    Route::put('/preferences', [UserPreferenceController::class, 'update'])
+        ->middleware('cache.invalidate:preferences')
+        ->name('api.preferences.update');
     
     // Reminders
     Route::apiResource('reminders', ReminderController::class)->names([
@@ -114,8 +149,10 @@ Route::middleware('auth:sanctum')->group(function () {
         'destroy' => 'api.reminders.destroy',
     ]);
     
-    // Reports
-    Route::get('/reports', [ReportController::class, 'index'])->name('api.reports.index');
-    Route::get('/reports/period/{period}', [ReportController::class, 'byPeriod'])->name('api.reports.by-period');
-    Route::get('/reports/custom', [ReportController::class, 'customRange'])->name('api.reports.custom-range');
+    // Reports (with stricter rate limiting)
+    Route::middleware('throttle:reports')->group(function () {
+        Route::get('/reports', [ReportController::class, 'index'])->name('api.reports.index');
+        Route::get('/reports/period/{period}', [ReportController::class, 'byPeriod'])->name('api.reports.by-period');
+        Route::get('/reports/custom', [ReportController::class, 'customRange'])->name('api.reports.custom-range');
+    });
 });
