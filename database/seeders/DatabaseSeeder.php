@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($users as $user) {
             $user = User::create($user);
-            $user->assignRole('admin');
+            // $user->assignRole('admin');
         }
     }
 }
